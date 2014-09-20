@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <id>mySensors</id>
+    <name>mySensors</name>
+    <description>Plugin pour gerer des équipements mySensors</description>
+    <icon>fa fa-tablet</icon>
+    <licence>AGPL</licence>
+    <author>CONSELIO SA</author>
+    <installation>Aucune</installation>
+    <require>1.10</require>
+    <version>1.2</version>
+    <category>automation protocol</category>
+</info>
+
