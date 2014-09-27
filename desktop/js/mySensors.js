@@ -67,13 +67,13 @@ function addCmdToTable(_cmd) {
 			tr += '<span class="cmdAttr" data-l1key="id"></span>';
         tr += '</td>';
         tr += '<td>';
-			tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}"></td>';
+			tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom du capteur}}"></td>';
         tr += '<td>';
 			tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="margin-bottom : 5px;" />';
 			tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>';
         tr += '</td>';
         tr += '<td>';
-			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensor" style="height : 33px;" ' + disabled + ' placeholder="{{Sensor}}"></textarea>';
+			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensor" style="height : 33px;" ' + disabled + ' placeholder="{{Capteur}}"></textarea>';
         tr += '</td>';
         tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}"></td>';
         tr += '<td>';
@@ -117,7 +117,7 @@ function addCmdToTable(_cmd) {
         tr += '</td>';
         tr += '<td>';
         tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="action" disabled style="margin-bottom : 5px;" />';
-		tr += '<span>{{Commande}}:<select class="cmdAttr" data-l1key="configuration" data-l2key="cmdCommande">';
+		tr += '<span>{{Message}}:<select class="cmdAttr" data-l1key="configuration" data-l2key="cmdCommande">';
 			$.each(mySensorDico['C'],function(item, index){ 
 				tr += '<option value="' + index + '">' + item + '</option>';
 			})
@@ -126,15 +126,15 @@ function addCmdToTable(_cmd) {
         //tr += '<input class="cmdAttr" data-l1key="configuration" data-l2key="virtualAction" value="1" style="display:none;" >';
         tr += '</td>';
          tr += '<td>';
-			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensor" style="height : 33px;" ' + disabled + ' placeholder="{{Sensor}}"></textarea><br/>';
+			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensor" style="height : 33px;" ' + disabled + ' placeholder="{{N° Actionneur}}"></textarea><br/>';
         
-			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="request" style="height : 33px;" ' + disabled + ' placeholder="{{#titre#}}"></textarea>';
+			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="request" style="height : 33px;" ' + disabled + ' placeholder="{{Valeur}}"></textarea>';
         tr += '</td>';
         tr += '<td></td>';
         tr += '<td>';
         tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/> {{Afficher}}<br/></span>';
-        tr += '<span>{{Type}}:<select class="cmdAttr" data-l1key="configuration" data-l2key="cmdtype">';
-			$.each(mySensorDico['V'],function(item, index){ 
+        tr += '<span>{{Type de donnée}}:<select class="cmdAttr" data-l1key="configuration" data-l2key="cmdtype">';
+			$.each(mySensorDico['A'],function(item, index){ 
 				tr += '<option value="' + index + '">' + item + '</option>';
 			})
 		tr +='</select></span>';

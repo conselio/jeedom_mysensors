@@ -44,43 +44,6 @@ const C_REQ							= 2;
 const C_INTERNAL					= 3;
 const C_STREAM						= 4;
 
-const V_TEMP						= 0;
-const V_HUM							= 1;
-const V_LIGHT						= 2;
-const V_DIMMER						= 3;
-const V_PRESSURE					= 4;
-const V_FORECAST					= 5;
-const V_RAIN						= 6;
-const V_RAINRATE					= 7;
-const V_WIND						= 8;
-const V_GUST						= 9;
-const V_DIRECTION					= 10;
-const V_UV							= 11;
-const V_WEIGHT						= 12;
-const V_DISTANCE					= 13;
-const V_IMPEDANCE					= 14;
-const V_ARMED						= 15;
-const V_TRIPPED						= 16;
-const V_WATT						= 17;
-const V_KWH							= 18;
-const V_SCENE_ON					= 19;
-const V_SCENE_OFF					= 20;
-const V_HEATER						= 21;
-const V_HEATER_SW					= 22;
-const V_LIGHT_LEVEL					= 23;
-const V_VAR1						= 24;
-const V_VAR2						= 25;
-const V_VAR3						= 26;
-const V_VAR4						= 27;
-const V_VAR5						= 28;
-const V_UP							= 29;
-const V_DOWN						= 30;
-const V_STOP						= 31;
-const V_IR_SEND						= 32;
-const V_IR_RECEIVE					= 33;
-const V_FLOW						= 34;
-const V_VOLUME						= 35;
-const V_LOCK_STATUS					= 36;
 
 const I_BATTERY_LEVEL				= 0;
 const I_TIME						= 1;
@@ -97,29 +60,7 @@ const I_SKETCH_NAME					= 11;
 const I_SKETCH_VERSION				= 12;
 const I_REBOOT						= 13;
 
-const S_DOOR						= 0;
-const S_MOTION						= 1;
-const S_SMOKE						= 2;
-const S_LIGHT						= 3;
-const S_DIMMER						= 4;
-const S_COVER						= 5;
-const S_TEMP						= 6;
-const S_HUM							= 7;
-const S_BARO						= 8;
-const S_WIND						= 9;
-const S_RAIN						= 10;
-const S_UV							= 11;
-const S_WEIGHT						= 12;
-const S_POWER						= 13;
-const S_HEATER						= 14;
-const S_DISTANCE					= 15;
-const S_LIGHT_LEVEL					= 16;
-const S_ARDUINO_NODE				= 17;
-const S_ARDUINO_REPEATER_NODE		= 18;
-const  S_LOCK						= 19;
-const  S_IR							= 20;
-const  S_WATER						= 21;
-const  S_AIR_QUALITY				= 22;
+
 
 const ST_FIRMWARE_CONFIG_REQUEST	= 0;
 const ST_FIRMWARE_CONFIG_RESPONSE	= 1;
@@ -228,12 +169,6 @@ function saveSensor(sender, sensor, type) {
 	  }
 	});
 
-		/*
-		http.get(url, function(res) {
-	  console.log("Got response saveSensor: " + res.statusCode);
-	}).on('error', function(e) {
-	  console.log("Got error: " + e.message);
-	});*/
 	
 
 }
@@ -244,12 +179,15 @@ function saveValue(sender, sensor, type, payload) {
 	console.log("Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
 
 	
-		url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
+	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
 
 			console.log(url);
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 		console.log("Got response Value: " + response.statusCode);
+	  }else{
+	  
+	  	console.log('SaveValue Error : '  + error );
 	  }
 	});
 	
@@ -257,17 +195,18 @@ function saveValue(sender, sensor, type, payload) {
 
 }
 
-function saveBatteryLevel(sender, payload, db) {
-	/*var cn = "BatteryLevel-" + sender.toString();
-	db.createCollection(cn, function(err, c) { 
-		c.save({
-			'timestamp': new Date().getTime(),
-			'value': payload
-		}, function(err, result) {
-			if (err)
-				console.log("Error writing battery level to database");
-		});
-	});*/
+function saveBatteryLevel(sender, payload ) {
+
+
+	console.log("Save BatteryLevel : " + "Value-" + sender.toString() + "-" + payload );
+
+		url = urlJeedom + "&messagetype=saveBatteryLevel&type=mySensors&id="+sender.toString()+"&value="+payload;
+
+		request(url, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+		console.log("Got response saveSketchName: " + response.statusCode);
+	  }
+	});
 }
 
 function saveSketchName(sender, payload) {
@@ -453,6 +392,7 @@ function rfReceived(data, db, gw) {
 
 	var db = null;
 
+	//pour la connexion avec Jeedom => Node
 	var pathsocket = '/tmp/mysensor.sock';
 	fs.unlink(pathsocket, function () {
 	  var server = net.createServer(function(c) {

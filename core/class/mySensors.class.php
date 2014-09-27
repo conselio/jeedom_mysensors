@@ -41,50 +41,52 @@ class mySensors extends eqLogic {
 	public static $_dico = 
 			array(
 			'C' => array( 
-				'C_PRESENTATION'=> 0,
-				'C_SET'=> 1,
-				'C_REQ'=> 2,
-				'C_INTERNAL'=> 3,
-				'C_STREAM'=> 4,
+				'PRESENTATION'=> 0,
+				'PARAMETRAGE'=> 1,
+				'INTERNE'=> 3,
+				'OTA'=> 4,
 				),
-			'V' => array( 
-				'V_TEMP'=> 0,
-				'V_HUM'=> 1,
-				'V_LIGHT'=> 2,
-				'V_DIMMER'=> 3,
-				'V_PRESSURE'=> 4,
+			'U' => array( // Unité
+				'C°'=> 0, //Temperature
+				'%'=> 1, //Humidité
+				'Relais'=> 2,
+				'Variateur'=> 3,
+				'hPA'=> 4, //Pression admospherique
 				'V_FORECAST'=> 5,
-				'V_RAIN'=> 6,
-				'V_RAINRATE'=> 7,
-				'V_WIND'=> 8,
-				'V_GUST'=> 9,
-				'V_DIRECTION'=> 10,
-				'V_UV'=> 11,
-				'V_WEIGHT'=> 12,
-				'V_DISTANCE'=> 13,
+				'mm'=> 6, //Niveau d'eau en milli-metre
+				'%'=> 7, //Taux de pluie
+				'KMh'=> 8, //Vitesse du vent
+				'GUST'=> 9, //Raffale
+				'DIRECTION'=> 10, //Direction du vent
+				'UV'=> 11,
+				'Kg'=> 12,
+				'cm'=> 13,
 				'V_IMPEDANCE'=> 14,
 				'V_ARMED'=> 15,
-				'V_TRIPPED'=> 16,
-				'V_WATT'=> 17,
-				'V_KWH'=> 18,
+				'Entrée'=> 16,
+				'WATT'=> 17,
+				'KWH'=> 18,
 				'V_SCENE_ON'=> 19,
 				'V_SCENE_OFF'=> 20,
-				'V_HEATER'=> 21,
-				'V_HEATER_SW'=> 22,
-				'V_LIGHT_LEVEL'=> 23,
-				'V_VAR1'=> 24,
-				'V_VAR2'=> 25,
-				'V_VAR3'=> 26,
-				'V_VAR4'=> 27,
-				'V_VAR5'=> 28,
+				'Radiateur'=> 21,
+				'Radiateur ON/OFF'=> 22,
+				'%'=> 23, // Niveau lumiere
+				'VAR1'=> 24,
+				'VAR2'=> 25,
+				'VAR3'=> 26,
+				'VAR4'=> 27,
+				'VAR5'=> 28,
 				'V_UP'=> 29,
 				'V_DOWN'=> 30,
 				'V_STOP'=> 31,
-				'V_IR_SEND'=> 32,
-				'V_IR_RECEIVE'=> 33,
+				'IR_SEND'=> 32,
+				'IR_RECEIVE'=> 33,
 				'V_FLOW'=> 34,
-				'V_VOLUME'=> 35,
+				'M²'=> 35, // volume
 				'V_LOCK_STATUS'=> 36,
+				'V_DUST_LEVEL'=> 37,
+				'V'=> 38, //Volt (tension)
+				'A'=> 39, //Ampere (intensité)
 				),
 			'I' => array( 
 				'I_BATTERY_LEVEL'=> 0,
@@ -102,30 +104,56 @@ class mySensors extends eqLogic {
 				'I_SKETCH_VERSION'=> 12,
 				'I_REBOOT'=> 13,
 			 ),
-			'S' => array( 
-				'S_DOOR'=> 0,
-				'S_MOTION'=> 1,
-				'S_SMOKE'=> 2,
-				'S_LIGHT'=> 3,
-				'S_DIMMER'=> 4,
+			'N' => array( // Type de Capteur / Actionneur
+				'Entrée'=> 0,
+				'Mouvement'=> 1,
+				'Fumé'=> 2,
+				'Relais'=> 3,
+				'Variateur'=> 4,
 				'S_COVER'=> 5,
-				'S_TEMP'=> 6,
-				'S_HUM'=> 7,
-				'S_BARO'=> 8,
-				'S_WIND'=> 9,
-				'S_RAIN'=> 10,
-				'S_UV'=> 11,
-				'S_WEIGHT'=> 12,
-				'S_POWER'=> 13,
-				'S_HEATER'=> 14,
-				'S_DISTANCE'=> 15,
-				'S_LIGHT_LEVEL'=> 16,
+				'Temperature'=> 6,
+				'Humidité'=> 7,
+				'Pression'=> 8,
+				'Anémomètre'=> 9,
+				'Pluie'=> 10,
+				'UV'=> 11,
+				'Poids'=> 12,
+				'Energie'=> 13,
+				'Chauffage'=> 14,
+				'Distance'=> 15,
+				'Niveau Lumiere'=> 16,
 				'S_ARDUINO_NODE'=> 17,
-				'S_ARDUINO_REPEATER_NODE'=> 18,
+				'Repeteur'=> 18,
 				'S_LOCK'=> 19,
 				'S_IR'=> 20,
-				'S_WATER'=> 21,
-				'S_AIR_QUALITY'=> 22
+				'Eau'=> 21,
+				'Qualité Air'=> 22
+			 ),
+			'A' => array( // Actionneur
+				'Relais'=> 2,
+				'Variateur'=> 3,
+				'V_FORECAST'=> 5,
+				'DIRECTION'=> 10, //Direction du vent
+				'UV'=> 11,
+				'V_IMPEDANCE'=> 14,
+				'V_ARMED'=> 15,
+				'Entrée'=> 16,
+				'SCENE_ON'=> 19,
+				'SCENE_OFF'=> 20,
+				'Radiateur'=> 21,
+				'Radiateur ON/OFF'=> 22,
+				'VAR1'=> 24,
+				'VAR2'=> 25,
+				'VAR3'=> 26,
+				'VAR4'=> 27,
+				'VAR5'=> 28,
+				'V_UP'=> 29,
+				'V_DOWN'=> 30,
+				'V_STOP'=> 31,
+				'IR_SEND'=> 32,
+				'V_FLOW'=> 34,
+				'V_LOCK_STATUS'=> 36,
+				'V_DUST_LEVEL'=> 37,
 				)
 			);
 
@@ -282,6 +310,25 @@ class mySensors extends eqLogic {
 	
 	}
 	
+	public static function saveBatteryLevel() {
+
+		$nodeid = init('id');
+		$value = init('value');
+		
+		//recherche dans tous les eqlogic 
+		foreach( self::byType( 'mySensors' ) as $elogic) {
+		
+			//si le nodeid est le meme
+			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
+				if ( $elogic->getConfiguration('BatteryLevel', '') != $value ) {
+					$elogic->setConfiguration('BatteryLevel',$value);
+					$elogic->save();
+				}
+			}
+		}
+	
+	}
+	
 	public static function saveSketchNameEvent() {
 	
 		$nodeid = init('id');
@@ -368,12 +415,18 @@ class mySensors extends eqLogic {
 			$mysCmd->setType('info');
 			$mysCmd->setSubType('numeric');
 			
-			$name = array_search($value, self::$_dico['S']);
+			$name = array_search($value, self::$_dico['N']);
 			if ($name == false )
 				$name = 'UNKNOWN';
 
 				
 			$mysCmd->setName( $name . " " . $sensor );
+			$unite = array_search($value, self::$_dico['U']);
+			if ($unite == false )
+				$unite = 'Unite';
+			//log::add('mySensors', 'info', $value);
+			//log::add('mySensors', 'info', $unite);
+			$mysCmd->setUnite( $unite );
 			$mysCmd->save();
 		}
 		
@@ -390,6 +443,7 @@ class mySensors extends eqLogic {
 			case 'saveSketchName' : self::saveSketchNameEvent(); break;
 			case 'saveSketchVersion' : self::saveSketchVersion(); break;
 			case 'saveSensor' : self::saveSensor(); break;
+			case 'saveBatteryLevel' : self::saveBatteryLevel(); break;
 		
 		}
 		
