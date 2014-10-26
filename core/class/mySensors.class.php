@@ -181,8 +181,9 @@ class mySensors extends eqLogic {
 		}
 
 		$url = 'http://127.0.0.1/jeedom/core/api/jeeApi.php?api=' . config::byKey('api');
-		
-        $cmd = 'nice -n 19 node /usr/share/nginx/www/jeedom/plugins/mySensors/node/mysensors.js ' . $url . ' ' . $usbGateway;
+	
+	$sensor_path = realpath(dirname(__FILE__) . '/../../node');	
+        $cmd = 'nice -n 19 node ' . $sensor_path . '/mysensors.js ' . $url . ' ' . $usbGateway;
 		
         log::add('mySensors', 'info', 'Lancement démon mySensors : ' . $cmd);
         $result = exec('nohup ' . $cmd . ' >> ' . log::getPathToLog('mySensors') . ' 2>&1 &');
