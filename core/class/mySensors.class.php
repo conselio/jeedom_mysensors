@@ -162,7 +162,7 @@ class mySensors extends eqLogic {
 	public static function cron() {
         
         if (config::byKey('externalDeamon', 'mySensors', 0) != 2) {
-		$usbGateway = config::byKey('usbGateway', 'mySensors', '');
+		$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors', ''));
 		if ($usbGateway != '' && file_exists( $usbGateway )) {
             		if (!self::deamonRunning()) {
                 		self::runDeamon();
