@@ -38,10 +38,43 @@ if (!isConnect()) {
             </div>
         </div>
         
-        <div class="form-group">
-            <label class="col-md-2 control-label">Port USB de la gateway mySensors (Ex: /dev/ttyACM0)</label>
-            <div class="col-md-4">
-               <input type="text" class="configKey form-control" data-l1key="usbGateway" />
+<div id="div_local" class="form-group">
+            <label class="col-lg-4 control-label">Port Gateway (Local) :</label>
+            <div class="col-lg-4">
+                <select id="select_port" class="configKey form-control" data-l1key="usbGateway">
+                    <option value="">Aucun</option>
+                    <?php
+                    foreach (jeedom::getUsbMapping() as $name => $value) {
+                        echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
+                    }
+					echo '<option value="serie">Modem Série</option>';
+                    ?>
+                </select>
+				
+				<input id="port_serie" class="configKey form-control" data-l1key="modem_serie_addr" style="margin-top:5px;display:none" placeholder="Renseigner le port série (ex : /dev/ttyS0)"/>
+				<script>
+				$( "#select_port" ).change(function() {
+					$( "#select_port option:selected" ).each(function() {
+						if($( this ).val() == "serie"){
+						 $("#port_serie").show();
+						}
+						else{
+							$("#port_serie").hide();
+							}
+						});
+					
+				});
+				$( "#select_mode" ).change(function() {
+					$( "#select_mode option:selected" ).each(function() {
+						if($( this ).val() == "0" || $( this ).val() == "1"){
+						 $("#div_local").show();
+						}
+						else{
+							$("#div_local").hide();
+							}
+						});
+				});
+			</script>
             </div>
         </div>
     </fieldset>
