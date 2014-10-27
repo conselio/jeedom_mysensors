@@ -162,7 +162,13 @@ class mySensors extends eqLogic {
 	public static function cron() {
         
         if (config::byKey('externalDeamon', 'mySensors', 0) != 2) {
-		$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors', ''));
+		$modem_serie_addr = config::byKey('usbGateway', 'mySensors');
+		if($modem_serie_addr == "serie") {
+			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
+		} else {
+			$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
+		}
+		$port = jeedom::getUsbMapping(config::byKey('port', 'teleinfo'));
 		if ($usbGateway != '' && file_exists( $usbGateway )) {
             		if (!self::deamonRunning()) {
                 		self::runDeamon();
@@ -177,7 +183,12 @@ class mySensors extends eqLogic {
 	public static function runDeamon() {
         log::add('mySensors', 'info', 'Lancement du démon mySensors');
         
-		$usbGateway = config::byKey('usbGateway', 'mySensors', '');
+		$modem_serie_addr = config::byKey('usbGateway', 'mySensors');
+		if($modem_serie_addr == "serie") {
+			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
+		} else {
+			$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
+		}
 		if ($usbGateway == '' ) {
 			throw new Exception(__('Le port : ', __FILE__) . $port . __(' n\'éxiste pas', __FILE__));
 		}
