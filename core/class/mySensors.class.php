@@ -161,14 +161,16 @@ class mySensors extends eqLogic {
 
 	public static function cron() {
         
-	$usbGateway = config::byKey('usbGateway', 'mySensors', '');
-        if ($usbGateway != '' && file_exists( $usbGateway )) {
-            if (!self::deamonRunning()) {
-                self::runDeamon();
-            }
-            message::removeAll('mySensors', 'noMySensorsPort');
-        } else {
-            log::add('mySensors', 'error', __('Le port du mySensors est vide ou n\'éxiste pas', __FILE__), 'noMySensorsPort');
+        if (config::byKey('externalDeamon', 'mySensors', 0) != 2) {
+		$usbGateway = config::byKey('usbGateway', 'mySensors', '');
+		if ($usbGateway != '' && file_exists( $usbGateway )) {
+            		if (!self::deamonRunning()) {
+                		self::runDeamon();
+            		}
+            	message::removeAll('mySensors', 'noMySensorsPort');
+        	} else {
+            		log::add('mySensors', 'error', __('Le port du mySensors est vide ou n\'éxiste pas', __FILE__), 'noMySensorsPort');
+        	}
         }
     }
 	
