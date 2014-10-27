@@ -28,6 +28,17 @@ if (!isConnect()) {
 <form class="form-horizontal">
     <fieldset>
         <div class="form-group">
+            <label class="col-lg-4 control-label">Mode : </label>
+            <div class="col-lg-4">
+				<select class="configKey form-control" id="select_mode" data-l1key="externalDeamon">
+                    <option value="0">Local</option>
+                    <option value="2">Gateway sur un Jeedom Esclave</option>
+					<option value="1">Jeedom Esclave (Envoyer les données sur le jeedom Master)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
             <label class="col-md-2 control-label">Port USB de la gateway mySensors (Ex: /dev/ttyACM0)</label>
             <div class="col-md-4">
                <input type="text" class="configKey form-control" data-l1key="usbGateway" />
