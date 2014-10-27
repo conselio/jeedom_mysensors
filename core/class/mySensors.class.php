@@ -179,8 +179,12 @@ class mySensors extends eqLogic {
 		if ($usbGateway == '' ) {
 			throw new Exception(__('Le port : ', __FILE__) . $port . __(' n\'éxiste pas', __FILE__));
 		}
-
-		$url = 'http://127.0.0.1/jeedom/core/api/jeeApi.php?api=' . config::byKey('api');
+		
+		if (config::byKey('jeeNetwork::mode') == 'slave') { //Je suis l'esclave
+			$url  = 'http://' . config::byKey('jeeNetwork::master::ip') . '/jeedom/core/api/jeeApi.php?api=' . config::byKey('jeeNetwork::master::apikey');
+		} else {
+			$url = 'http://127.0.0.1/jeedom/core/api/jeeApi.php?api=' . config::byKey('api');
+		}
 	
 	$sensor_path = realpath(dirname(__FILE__) . '/../../node');	
         $cmd = 'nice -n 19 node ' . $sensor_path . '/mysensors.js ' . $url . ' ' . $usbGateway;
