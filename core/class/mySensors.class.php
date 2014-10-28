@@ -168,7 +168,7 @@ class mySensors extends eqLogic {
 		} else {
 			$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
 		}
-		$port = jeedom::getUsbMapping(config::byKey('port', 'teleinfo'));
+
 		if ($usbGateway != '' && file_exists( $usbGateway )) {
             		if (!self::deamonRunning()) {
                 		self::runDeamon();
