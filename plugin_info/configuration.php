@@ -44,7 +44,7 @@ if (!isConnect()) {
                         <select id="select_slave" class="configKey form-control" data-l1key="jeeSlave">
                     <option value="">Aucun</option>
                     <?php
-                    foreach (jeeNetwork::byPlugin('mysensors') as $name => $value) {
+                    foreach (jeeNetwork::byPlugin('mySensors') as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
                     }
                     ?>
