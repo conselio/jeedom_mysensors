@@ -38,6 +38,20 @@ if (!isConnect()) {
             </div>
         </div>
         
+        <div id="div_local" class="form-group">
+            <label class="col-lg-4 control-label">Esclave Jeedom :</label>
+            <div class="col-lg-4">
+                        <select id="select_port" class="configKey form-control" data-l1key="jeeSlave">
+                    <option value="">Aucun</option>
+                    <?php
+                    foreach (jeeNetwork::byPlugin('mysensors') as $name => $value) {
+                        echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
+                    }
+                    ?>
+                </select>
+                    </div>
+        </div>
+        
 <div id="div_local" class="form-group">
             <label class="col-lg-4 control-label">Port Gateway (Local) :</label>
             <div class="col-lg-4">
