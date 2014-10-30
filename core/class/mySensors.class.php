@@ -288,7 +288,10 @@ class mySensors extends eqLogic {
 	
 	
 	public static function sendToController( $destination, $sensor, $command, $acknowledge, $type, $payload ) {
-
+		if (config::byKey('externalDeamon', 'mySensors', 0) == 1) {
+			$jeeNetwork = jeeNetwork::byId(config::byKey('esclave', 'mySensors'));
+			log::add('mySensors', 'info', $jeeNetwork->getI);
+		}
 		$msg = $destination . ";" . $sensor . ";" . $command . ";" . $acknowledge . ";" .$type . ";" . $payload;
 		$fp = fsockopen("unix:///tmp/mysensor.sock", -1, $errno, $errstr);
 		   if (!$fp) {
