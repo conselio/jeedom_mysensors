@@ -158,7 +158,7 @@ function saveProtocol(sender, payload, db) {
 
 function saveSensor(sender, sensor, type) {
 
-	console.log(Date().getTime() + " | info | Save saveSensor : " + "Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
+	console.log("30-10-2014 10:24:05 | info | Save saveSensor : " + "Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
 
 	url = urlJeedom + "&messagetype=saveSensor&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+type;
 
@@ -176,15 +176,15 @@ function saveSensor(sender, sensor, type) {
 function saveValue(sender, sensor, type, payload) {
 
 
-	console.log(Date().getTime() + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
+	console.log("30-10-2014 10:24:05 | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
 
 	
 	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
 
-			console.log(Date().getTime() + " | info | " + url);
+			console.log("30-10-2014 10:24:05 | info | " + url);
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date().getTime() + " | info | Got response Value: " + response.statusCode);
+		console.log("30-10-2014 10:24:05 | info | Got response Value: " + response.statusCode);
 	  }else{
 	  
 	  	console.log('SaveValue Error : '  + error );
