@@ -289,7 +289,7 @@ class mySensors extends eqLogic {
 	
 	public static function sendToController( $destination, $sensor, $command, $acknowledge, $type, $payload ) {
 		if (config::byKey('externalDeamon', 'mySensors', 0) == 2) {
-			$jeeSlave = jeeNetwork::byId(config::byKey('esclave', 'mySensors'));
+			$jeeSlave = jeeNetwork::byId(config::byKey('jeeSlave', 'mySensors'));
 			$urlNode = getIpFromString($jeeNetwork->getIp());
 		} else {
 			$urlNode = "127.0.0.1";
