@@ -16,14 +16,20 @@ var request = require('request');
 const gwType = 'Serial';
 
 var urlJeedom = '';
-var gwUSBPort = '';
+var gwPort = '';
+
+//const gwType = 'Ethernet';
+const gwAddress = '';
+//const gwPort
 
 // print process.argv
 process.argv.forEach(function(val, index, array) {
   
 	switch ( index ) {
 		case 2 : urlJeedom = val; break;
-		case 3 : gwUSBPort = val; break;
+		case 3 : gwPort = val; break;
+		case 4 : gwType = val; break;
+		case 5 : gwAddress = val; break;
 	}
   
 });
@@ -419,14 +425,29 @@ function rfReceived(data, db, gw) {
 	  });
 	});
 	
-	if (gwType == 'Serial') {
+	if (gwType == 'Ethernet') {
+		gw = require('net').Socket();
+		gw.connect(gwPort, gwAddress);
+		gw.setEncoding('ascii');
+		gw.on('connect', function() {
+			console.log('connected to ethernet gateway at ' + gwAddress + ":" + gwPort);
+		}).on('data', function(rd) {
+			appendData(rd.toString(), db, gw);
+		}).on('end', function() {
+			console.log('disconnected from gateway');
+		}).on('error', function() {
+			console.log('connection error - trying to reconnect');
+			gw.connect(gwPort, gwAddress);
+			gw.setEncoding('ascii');
+		});
+	} else if (gwType == 'Serial') {
 	
 		var serialPort = require("serialport");
 		var SerialPort = require('serialport').SerialPort;
-		gw = new SerialPort(gwUSBPort, { baudrate: gwBaud });
+		gw = new SerialPort(gwPort, { baudrate: gwBaud });
      	gw.open();
 		gw.on('open', function() {
-			console.log('connected to serial gateway at ' + gwUSBPort);
+			console.log('connected to serial gateway at ' + gwPort);
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
 		}).on('end', function() {
