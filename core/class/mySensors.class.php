@@ -289,18 +289,22 @@ class mySensors extends eqLogic {
 	
 	public static function sendToController( $destination, $sensor, $command, $acknowledge, $type, $payload ) {
 		if (config::byKey('externalDeamon', 'mySensors', 0) == 1) {
-			$jeeNetwork = jeeNetwork::byId(config::byKey('esclave', 'mySensors'));
-			log::add('mySensors', 'info', $jeeNetwork->getI);
-		}
-		$msg = $destination . ";" . $sensor . ";" . $command . ";" . $acknowledge . ";" .$type . ";" . $payload;
-		$fp = fsockopen("unix:///tmp/mysensor.sock", -1, $errno, $errstr);
-		   if (!$fp) {
-		   echo "ERROR: $errno - $errstr<br />\n";
+			$jeeSlave = jeeNetwork::byId(config::byKey('esclave', 'mySensors'));
+			$urlNode = getIpFromString($jeeNetwork->getIp());
 		} else {
-	
-		   fwrite($fp, $msg);
-		   fclose($fp);
+			$urlNode = "127.0.0.1";
 		}
+		log::add('mySensors', 'info', $ipSlave);
+		$msg = $destination . ";" . $sensor . ";" . $command . ";" . $acknowledge . ";" .$type . ";" . $payload;
+		log::add('mySensors', 'info', $msg);
+	//	$fp = fsockopen("unix:///tmp/mysensor.sock", -1, $errno, $errstr);
+	//	   if (!$fp) {
+	//	   echo "ERROR: $errno - $errstr<br />\n";
+	//	} else {
+	
+	//	   fwrite($fp, $msg);
+	//	   fclose($fp);
+	//	}
 
 	}
 	
