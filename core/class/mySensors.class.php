@@ -294,7 +294,7 @@ class mySensors extends eqLogic {
 		} else {
 			$urlNode = "127.0.0.1";
 		}
-		log::add('mySensors', 'info', $ipSlave);
+		log::add('mySensors', 'info', $urlNode);
 		$msg = $destination . ";" . $sensor . ";" . $command . ";" . $acknowledge . ";" .$type . ";" . $payload;
 		log::add('mySensors', 'info', $msg);
 	//	$fp = fsockopen("unix:///tmp/mysensor.sock", -1, $errno, $errstr);
