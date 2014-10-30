@@ -71,9 +71,11 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 					$( "#select_port option:selected" ).each(function() {
 						if($( this ).val() == "serie"){
 						 $("#port_serie").show();
+						 $("#port_slave").hide();
 						}
 						else{
 							$("#port_serie").hide();
+							$("#port_slave").show();
 							}
 						});
 					
