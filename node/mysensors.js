@@ -419,8 +419,7 @@ function rfReceived(data, db, gw) {
 		});
 
 	  });
-	  server.listen(pathsocket, function(e) {
-		fs.chmodSync(pathsocket, '777');
+	  server.listen(8019, function(e) {
 		console.log('server bound on %s', pathsocket);
 	  });
 	});
