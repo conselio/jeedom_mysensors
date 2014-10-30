@@ -297,14 +297,14 @@ class mySensors extends eqLogic {
 		log::add('mySensors', 'info', $urlNode);
 		$msg = $destination . ";" . $sensor . ";" . $command . ";" . $acknowledge . ";" .$type . ";" . $payload;
 		log::add('mySensors', 'info', $msg);
-	//	$fp = fsockopen("unix:///tmp/mysensor.sock", -1, $errno, $errstr);
-	//	   if (!$fp) {
-	//	   echo "ERROR: $errno - $errstr<br />\n";
-	//	} else {
+		$fp = fsockopen($urlNode, 8019, $errno, $errstr);
+		   if (!$fp) {
+		   echo "ERROR: $errno - $errstr<br />\n";
+		} else {
 	
-	//	   fwrite($fp, $msg);
-	//	   fclose($fp);
-	//	}
+		   fwrite($fp, $msg);
+		   fclose($fp);
+		}
 
 	}
 	
