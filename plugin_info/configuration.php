@@ -53,7 +53,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
         </div>
         
 <div id="div_local" class="form-group">
-            <label class="col-lg-4 control-label">Port Gateway (Local) :</label>
+            <label class="col-lg-4 control-label">Port Gateway :</label>
             <div class="col-lg-4">
                 <select id="select_port" class="configKey form-control" data-l1key="usbGateway">
                     <option value="">Aucun</option>
@@ -61,22 +61,30 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
                     foreach (jeedom::getUsbMapping() as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
                     }
-					echo '<option value="serie">Modem Série</option>';
+					echo '<option value="serie">Modem Série</option<option value="network">Network Gateway</option>>';
                     ?>
                 </select>
 				
 				<input id="port_serie" class="configKey form-control" data-l1key="modem_serie_addr" style="margin-top:5px;display:none" placeholder="Renseigner le port série (ex : /dev/ttyS0)"/>
+				<input id="network_address" class="configKey form-control" data-l1key="modem_serie_addr" style="margin-top:5px;display:none" placeholder="Renseigner l'e port série'adresse de la gateway (ex : 192.168.1.1:5003"/>
 				<script>
 				$( "#select_port" ).change(function() {
 					$( "#select_port option:selected" ).each(function() {
 						if($( this ).val() == "serie"){
 						 $("#port_serie").show();
 						 $("#port_slave").hide();
+						 $("#network_address").hide();
 						}
-						else{
+						else if($( this ).val() == "network"){
+							$("#port_serie").hide();
+							$("#port_slave").hide();
+							$("#network_address").show();
+							}
+						else {
 							$("#port_serie").hide();
 							$("#port_slave").show();
-							}
+							$("#network_address").hide();
+						}
 						});
 					
 				});
