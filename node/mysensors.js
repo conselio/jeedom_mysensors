@@ -172,7 +172,7 @@ function saveSensor(sender, sensor, type) {
 		
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log("Got response saveSensor: " + response.statusCode);
+		console.log(Date() + " | info | Got response saveSensor: " + response.statusCode);
 	  }
 	});
 
@@ -194,7 +194,7 @@ function saveValue(sender, sensor, type, payload) {
 		console.log(Date() + " info | Got response Value: " + response.statusCode);
 	  }else{
 	  
-	  	console.log('SaveValue Error : '  + error );
+	  	console.log(Date() + ' | info | SaveValue Error : '  + error );
 	  }
 	});
 	
@@ -205,26 +205,26 @@ function saveValue(sender, sensor, type, payload) {
 function saveBatteryLevel(sender, payload ) {
 
 
-	console.log("Save BatteryLevel : " + "Value-" + sender.toString() + "-" + payload );
+	console.log(Date() + " | info | Save BatteryLevel : " + "Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveBatteryLevel&type=mySensors&id="+sender.toString()+"&value="+payload;
 
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log("Got response saveSketchName: " + response.statusCode);
+		console.log(Date() + " | info | Got response saveSketchName: " + response.statusCode);
 	  }
 	});
 }
 
 function saveSketchName(sender, payload) {
 
-	console.log("Save saveSketchName : " + "Value-" + sender.toString() + "-" + payload );
+	console.log(Date() + " | info | Save saveSketchName : " + "Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveSketchName&type=mySensors&id="+sender.toString()+"&value="+payload;
 
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log("Got response saveSketchName: " + response.statusCode);
+		console.log(Date() + " | info | Got response saveSketchName: " + response.statusCode);
 	  }
 	});
 	
@@ -232,13 +232,13 @@ function saveSketchName(sender, payload) {
 
 function saveSketchVersion(sender, payload ) {
 
-	console.log("Save saveSketchVersion : " + "Value-" + sender.toString() + "-" + payload );
+	console.log(Date() + " | info | Save saveSketchVersion : " + "Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveSketchVersion&type=mySensors&id="+sender.toString()+"&value="+payload;
 
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log("Got response saveSketchVersion: " + response.statusCode);
+		console.log(Date() + " | info | Got response saveSketchVersion: " + response.statusCode);
 	  }
 	});
 }
@@ -404,18 +404,18 @@ function rfReceived(data, db, gw) {
 	fs.unlink(pathsocket, function () {
 	  var server = net.createServer(function(c) {
 
-		console.log('server connected');
+		console.log(Date() + ' | info | server connected');
 
 		c.on('error', function(e) {
-		  console.log('Error server disconnected');
+		  console.log(Date() + ' | error | Error server disconnected');
 		});
 		
 		c.on('close', function() {
-		  console.log(Date() + ' | server disconnected');
+		  console.log(Date() + ' | error | server disconnected');
 		});
 
 		c.on('data', function(data) {
-			console.log('Response: "' + data + '"');
+			console.log(Date() + ' | info | Response: "' + data + '"');
 			gw.write(data.toString() + '\n');
 		});
 
@@ -430,13 +430,13 @@ function rfReceived(data, db, gw) {
 		gw.connect(gwPort, gwAddress);
 		gw.setEncoding('ascii');
 		gw.on('connect', function() {
-			console.log('connected to ethernet gateway at ' + gwAddress + ":" + gwPort);
+			console.log(Date() + ' | info | connected to ethernet gateway at ' + gwAddress + ":" + gwPort);
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
 		}).on('end', function() {
-			console.log('disconnected from gateway');
+			console.log(Date() + ' | error | disconnected from gateway');
 		}).on('error', function() {
-			console.log('connection error - trying to reconnect');
+			console.log(Date() + ' | error | connection error - trying to reconnect');
 			gw.connect(gwPort, gwAddress);
 			gw.setEncoding('ascii');
 		});
@@ -447,13 +447,13 @@ function rfReceived(data, db, gw) {
 		gw = new SerialPort(gwPort, { baudrate: gwBaud });
      	gw.open();
 		gw.on('open', function() {
-			console.log('connected to serial gateway at ' + gwPort);
+			console.log(Date() + ' | info | connected to serial gateway at ' + gwPort);
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
 		}).on('end', function() {
-			console.log('disconnected from gateway');
+			console.log(Date() + ' | error | disconnected from gateway');
 		}).on('error', function() {
-			console.log('connection error - trying to reconnect');
+			console.log(Date() + ' | error | connection error - trying to reconnect');
 			gw.open();
 		});
 	} 
