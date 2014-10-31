@@ -182,7 +182,7 @@ function saveSensor(sender, sensor, type) {
 function saveValue(sender, sensor, type, payload) {
 
 
-	console.log(new Date.toFormat(DD-MM-YYYY HH24:MI:SS) + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
+	console.log(new Date.toFormat(DD-MM-YYYY HH:MI:SS) + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
 
 	
 	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
@@ -420,7 +420,7 @@ function rfReceived(data, db, gw) {
 
 	  });
 	  server.listen(8019, function(e) {
-		console.log(new Date.toFormat(DD-MM-YYYY HH24:MI:SS) + ' | info | server bound on %s', pathsocket);
+		console.log(new Date.toFormat(DD-MM-YYYY HH:MI:SS) + ' | info | server bound on %s', pathsocket);
 	  });
 	});
 	
