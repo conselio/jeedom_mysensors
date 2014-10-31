@@ -61,7 +61,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
                     foreach (jeedom::getUsbMapping() as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
                     }
-					echo '<option value="serie">Modem Série</option<option value="network">Network Gateway</option>>';
+					echo '<option value="serie">Modem Série</option><option value="network">Network Gateway</option>';
                     ?>
                 </select>
 				
