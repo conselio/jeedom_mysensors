@@ -12,7 +12,7 @@
 var net = require('net');
 var fs = require('fs');
 var request = require('request');
-require("console-stamp")(console, "HH:MM:ss");
+
 
 const gwType = 'Serial';
 
@@ -421,7 +421,7 @@ function rfReceived(data, db, gw) {
 
 	  });
 	  server.listen(8019, function(e) {
-		console.log(new Date.toString(now) + ' | info | server bound on %s', pathsocket);
+		console.log(new Date.toString(now) + ' | info | server bound on 8019');
 	  });
 	});
 	
