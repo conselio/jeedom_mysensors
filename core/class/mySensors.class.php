@@ -192,15 +192,17 @@ class mySensors extends eqLogic {
 		
 		if($modem_serie_addr == "network") {
 			$gateMode = "Network";
+			$netAd = explode(":",config::byKey('gateway_addr', 'mySensors'));
+			$usbGateway = $netAd[0];
+			$gatePort = $netAd[1];	
 		} else {
 			$gateMode = "Serial";
+			$gatePort = "";	
 		}
 		
 		if ($usbGateway == '' ) {
 			throw new Exception(__('Le port : ', __FILE__) . $port . __(' n\'éxiste pas', __FILE__));
 		}
-		
-		$gatePort = "";
 		
 		if (config::byKey('jeeNetwork::mode') == 'slave') { //Je suis l'esclave
 			$url  = 'http://' . config::byKey('jeeNetwork::master::ip') . '/core/api/jeeApi.php?api=' . config::byKey('jeeNetwork::master::apikey');
