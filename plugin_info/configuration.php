@@ -38,7 +38,7 @@ if (!isConnect()) {
             </div>
         </div>
         
-        <div class="form-group">
+        <div id="div_slave" class="form-group">
             <label class="col-lg-4 control-label">Esclave Jeedom :</label>
             <div class="col-lg-4">
                         <select id="select_slave" class="configKey form-control" data-l1key="jeeSlave">
@@ -72,17 +72,17 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 					$( "#select_port option:selected" ).each(function() {
 						if($( this ).val() == "serie"){
 						 $("#port_serie").show();
-						 $("#port_slave").hide();
+						 
 						 $("#network_address").hide();
 						}
 						else if($( this ).val() == "network"){
 							$("#port_serie").hide();
-							$("#port_slave").hide();
+							
 							$("#network_address").show();
 							}
 						else {
 							$("#port_serie").hide();
-							$("#port_slave").show();
+							
 							$("#network_address").hide();
 						}
 						});
@@ -92,11 +92,11 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 					$( "#select_mode option:selected" ).each(function() {
 						if($( this ).val() == "0" || $( this ).val() == "1"){
 						 $("#div_local").show();
-						 $("#select_slave").hide();
+						 $("#div_slave").hide();
 						}
 						else{
 							$("#div_local").hide();
-							$("#select_slave").show();
+							$("#div_slave").show();
 							}
 						});
 				});
