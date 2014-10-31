@@ -12,6 +12,7 @@
 var net = require('net');
 var fs = require('fs');
 var request = require('request');
+require("console-stamp")(console, "HH:MM:ss");
 
 const gwType = 'Serial';
 
