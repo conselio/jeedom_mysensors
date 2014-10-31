@@ -183,15 +183,15 @@ function saveSensor(sender, sensor, type) {
 function saveValue(sender, sensor, type, payload) {
 
 
-	console.log(new Date.toString(now) + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
+	console.log(Date() + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
 
 	
 	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
 
-			console.log(new Date.toString(now) + " | info | " + url);
+			console.log(Date() + " | info | " + url);
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(new Date.toString(now) + " info | Got response Value: " + response.statusCode);
+		console.log(Date() + " info | Got response Value: " + response.statusCode);
 	  }else{
 	  
 	  	console.log('SaveValue Error : '  + error );
@@ -411,7 +411,7 @@ function rfReceived(data, db, gw) {
 		});
 		
 		c.on('close', function() {
-		  console.log(new Date.toString() + ' | server disconnected');
+		  console.log(Date() + ' | server disconnected');
 		});
 
 		c.on('data', function(data) {
@@ -421,7 +421,7 @@ function rfReceived(data, db, gw) {
 
 	  });
 	  server.listen(8019, function(e) {
-		console.log(new Date.toString() + ' | info | server bound on 8019');
+		console.log(Date() + ' | info | server bound on 8019');
 	  });
 	});
 	
