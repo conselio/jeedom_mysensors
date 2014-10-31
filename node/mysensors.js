@@ -410,7 +410,7 @@ function rfReceived(data, db, gw) {
 		});
 		
 		c.on('close', function() {
-		  console.log('server disconnected');
+		  console.log(new Date.toString() + ' | server disconnected');
 		});
 
 		c.on('data', function(data) {
