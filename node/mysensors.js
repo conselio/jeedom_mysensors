@@ -421,7 +421,7 @@ function rfReceived(data, db, gw) {
 
 	  });
 	  server.listen(8019, function(e) {
-		console.log(new Date.toString(now) + ' | info | server bound on 8019');
+		console.log(new Date.toString() + ' | info | server bound on 8019');
 	  });
 	});
 	
