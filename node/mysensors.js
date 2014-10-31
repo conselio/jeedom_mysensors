@@ -182,15 +182,15 @@ function saveSensor(sender, sensor, type) {
 function saveValue(sender, sensor, type, payload) {
 
 
-	console.log(new Date.toString() + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
+	console.log(new Date.toString(now) + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
 
 	
 	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
 
-			console.log("30-10-2014 10:24:05 | info | " + url);
+			console.log(new Date.toString(now) + " | info | " + url);
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log("30-10-2014 10:24:05 | info | Got response Value: " + response.statusCode);
+		console.log(new Date.toString(now) + " info | Got response Value: " + response.statusCode);
 	  }else{
 	  
 	  	console.log('SaveValue Error : '  + error );
@@ -420,7 +420,7 @@ function rfReceived(data, db, gw) {
 
 	  });
 	  server.listen(8019, function(e) {
-		console.log(new Date.toString() + ' | info | server bound on %s', pathsocket);
+		console.log(new Date.toString(now) + ' | info | server bound on %s', pathsocket);
 	  });
 	});
 	
