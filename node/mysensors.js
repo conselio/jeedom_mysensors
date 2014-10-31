@@ -165,7 +165,7 @@ function saveProtocol(sender, payload, db) {
 
 function saveSensor(sender, sensor, type) {
 
-	console.log("30-10-2014 10:24:05 | info | Save saveSensor : " + "Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
+	console.log(Date() + " | info | Save saveSensor : " + "Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
 
 	url = urlJeedom + "&messagetype=saveSensor&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+type;
 
