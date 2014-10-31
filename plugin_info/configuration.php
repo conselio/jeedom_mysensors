@@ -72,29 +72,26 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 					$( "#select_port option:selected" ).each(function() {
 						if($( this ).val() == "serie"){
 						 $("#port_serie").show();
-						 $("#select_slave").hide();
 						 $("#network_address").hide();
 						}
 						else if($( this ).val() == "network"){
 							$("#port_serie").hide();
-							$("#select_slave").hide();
 							$("#network_address").show();
 							}
 						else {
 							$("#port_serie").hide();
-							$("#select_slave").show();
 							$("#network_address").hide();
 						}
 						});
-					
-				});
 				$( "#select_mode" ).change(function() {
 					$( "#select_mode option:selected" ).each(function() {
 						if($( this ).val() == "0" || $( this ).val() == "1"){
 						 $("#div_local").show();
+						  $("#select_slave").hide();
 						}
 						else{
 							$("#div_local").hide();
+							$("#select_slave").show();
 							}
 						});
 				});
