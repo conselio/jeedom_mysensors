@@ -92,11 +92,11 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 					$( "#select_mode option:selected" ).each(function() {
 						if($( this ).val() == "0" || $( this ).val() == "1"){
 						 $("#div_local").show();
-						 $("#port_slave").hide();
+						 $("#select_slave").hide();
 						}
 						else{
 							$("#div_local").hide();
-							$("#port_slave").show();
+							$("#select_slave").show();
 							}
 						});
 				});
