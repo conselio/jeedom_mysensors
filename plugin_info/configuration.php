@@ -28,9 +28,79 @@ if (!isConnect()) {
 <form class="form-horizontal">
     <fieldset>
         <div class="form-group">
-            <label class="col-md-2 control-label">Port USB de la gateway mySensors (Ex: /dev/ttyACM0)</label>
-            <div class="col-md-4">
-               <input type="text" class="configKey form-control" data-l1key="usbGateway" />
+            <label class="col-lg-4 control-label">Mode : </label>
+            <div class="col-lg-4">
+				<select class="configKey form-control" id="select_mode" data-l1key="externalDeamon">
+                    <option value="0">Local</option>
+                    <option value="2">Gateway sur un Jeedom Esclave</option>
+					<option value="1">Jeedom Esclave (Envoyer les données sur le jeedom Master)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="div_slave" class="form-group">
+            <label class="col-lg-4 control-label">Esclave Jeedom :</label>
+            <div class="col-lg-4">
+                        <select id="select_slave" class="configKey form-control" data-l1key="jeeSlave">
+                    <option value="">Aucun</option>
+                    <?php
+                    foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
+echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . ' (' . $jeeNetwork->getId(). ')</option>';
+}
+                    ?>
+                </select>
+                    </div>
+        </div>
+        
+<div id="div_local" class="form-group">
+            <label class="col-lg-4 control-label">Port Gateway :</label>
+            <div class="col-lg-4">
+                <select id="select_port" class="configKey form-control" data-l1key="usbGateway">
+                    <option value="">Aucun</option>
+                    <?php
+                    foreach (jeedom::getUsbMapping() as $name => $value) {
+                        echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
+                    }
+					echo '<option value="serie">Modem Série</option><option value="network">Network Gateway</option>';
+                    ?>
+                </select>
+				
+				<input id="port_serie" class="configKey form-control" data-l1key="modem_serie_addr" style="margin-top:5px;display:none" placeholder="Renseigner le port série (ex : /dev/ttyS0)"/>
+				<input id="network_address" class="configKey form-control" data-l1key="gateway_addr" style="margin-top:5px;display:none" placeholder="Renseigner l'e port série'adresse de la gateway (ex : 192.168.1.1:5003"/>
+				<script>
+				$( "#select_port" ).change(function() {
+					$( "#select_port option:selected" ).each(function() {
+						if($( this ).val() == "serie"){
+						 $("#port_serie").show();
+						 
+						 $("#network_address").hide();
+						}
+						else if($( this ).val() == "network"){
+							$("#port_serie").hide();
+							
+							$("#network_address").show();
+							}
+						else {
+							$("#port_serie").hide();
+							
+							$("#network_address").hide();
+						}
+						});
+					
+				});
+				$( "#select_mode" ).change(function() {
+					$( "#select_mode option:selected" ).each(function() {
+						if($( this ).val() == "0" || $( this ).val() == "1"){
+						 $("#div_local").show();
+						 $("#div_slave").hide();
+						}
+						else{
+							$("#div_local").hide();
+							$("#div_slave").show();
+							}
+						});
+				});
+			</script>
             </div>
         </div>
     </fieldset>

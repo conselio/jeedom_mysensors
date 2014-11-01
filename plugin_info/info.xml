@@ -7,8 +7,9 @@
     <licence>AGPL</licence>
     <author>CONSELIO SA</author>
     <installation>Aucune</installation>
-    <require>1.10</require>
-    <version>1.3</version>
+    <require>1.126</require>
+    <version>1.4</version>
     <category>automation protocol</category>
+    <allowRemote>1</allowRemote>
 </info>
 

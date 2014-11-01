@@ -161,28 +161,57 @@ class mySensors extends eqLogic {
 
 	public static function cron() {
         
-	$usbGateway = config::byKey('usbGateway', 'mySensors', '');
-        if ($usbGateway != '' && file_exists( $usbGateway )) {
-            if (!self::deamonRunning()) {
-                self::runDeamon();
-            }
-            message::removeAll('mySensors', 'noMySensorsPort');
-        } else {
-            log::add('mySensors', 'error', __('Le port du mySensors est vide ou n\'éxiste pas', __FILE__), 'noMySensorsPort');
+        if (config::byKey('externalDeamon', 'mySensors', 0) != 2) {
+		$modem_serie_addr = config::byKey('usbGateway', 'mySensors');
+		if($modem_serie_addr == "serie") {
+			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
+		} else {
+			$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
+		}
+
+		if ($usbGateway != '' && file_exists( $usbGateway )) {
+            		if (!self::deamonRunning()) {
+                		self::runDeamon();
+            		}
+            	message::removeAll('mySensors', 'noMySensorsPort');
+        	} else {
+            		log::add('mySensors', 'error', __('Le port du mySensors est vide ou n\'éxiste pas', __FILE__), 'noMySensorsPort');
+        	}
         }
     }
 	
 	public static function runDeamon() {
         log::add('mySensors', 'info', 'Lancement du démon mySensors');
         
-		$usbGateway = config::byKey('usbGateway', 'mySensors', '');
+		$modem_serie_addr = config::byKey('usbGateway', 'mySensors');
+		if($modem_serie_addr == "serie") {
+			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
+		} else {
+			$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
+		}
+		
+		if($modem_serie_addr == "network") {
+			$gateMode = "Network";
+			$netAd = explode(":",config::byKey('gateway_addr', 'mySensors'));
+			$usbGateway = $netAd[0];
+			$gatePort = $netAd[1];	
+		} else {
+			$gateMode = "Serial";
+			$gatePort = "";	
+		}
+		
 		if ($usbGateway == '' ) {
 			throw new Exception(__('Le port : ', __FILE__) . $port . __(' n\'éxiste pas', __FILE__));
 		}
-
-		$url = 'http://127.0.0.1/jeedom/core/api/jeeApi.php?api=' . config::byKey('api');
 		
-        $cmd = 'nice -n 19 node /usr/share/nginx/www/jeedom/plugins/mySensors/node/mysensors.js ' . $url . ' ' . $usbGateway;
+		if (config::byKey('jeeNetwork::mode') == 'slave') { //Je suis l'esclave
+			$url  = 'http://' . config::byKey('jeeNetwork::master::ip') . '/core/api/jeeApi.php?api=' . config::byKey('jeeNetwork::master::apikey');
+		} else {
+			$url = 'http://127.0.0.1/jeedom/core/api/jeeApi.php?api=' . config::byKey('api');
+		}
+	
+	$sensor_path = realpath(dirname(__FILE__) . '/../../node');	
+        $cmd = 'nice -n 19 node ' . $sensor_path . '/mysensors.js ' . $url . ' ' . $usbGateway . ' ' . $gateMode . ' ' . $gatePort;
 		
         log::add('mySensors', 'info', 'Lancement démon mySensors : ' . $cmd);
         $result = exec('nohup ' . $cmd . ' >> ' . log::getPathToLog('mySensors') . ' 2>&1 &');
@@ -270,9 +299,16 @@ class mySensors extends eqLogic {
 	
 	
 	public static function sendToController( $destination, $sensor, $command, $acknowledge, $type, $payload ) {
-
+		if (config::byKey('externalDeamon', 'mySensors', 0) == 2) {
+			$jeeSlave = jeeNetwork::byId(config::byKey('jeeSlave', 'mySensors'));
+			$urlNode = getIpFromString($jeeSlave->getIp());
+		} else {
+			$urlNode = "127.0.0.1";
+		}
+		log::add('mySensors', 'info', $urlNode);
 		$msg = $destination . ";" . $sensor . ";" . $command . ";" . $acknowledge . ";" .$type . ";" . $payload;
-		$fp = fsockopen("unix:///tmp/mysensor.sock", -1, $errno, $errstr);
+		log::add('mySensors', 'info', $msg);
+		$fp = fsockopen($urlNode, 8019, $errno, $errstr);
 		   if (!$fp) {
 		   echo "ERROR: $errno - $errstr<br />\n";
 		} else {
