@@ -207,7 +207,13 @@ class mySensors extends eqLogic {
 		if (config::byKey('jeeNetwork::mode') == 'slave') { //Je suis l'esclave
 			$url  = 'http://' . config::byKey('jeeNetwork::master::ip') . '/core/api/jeeApi.php?api=' . config::byKey('jeeNetwork::master::apikey');
 		} else {
-			$url = 'http://127.0.0.1/jeedom/core/api/jeeApi.php?api=' . config::byKey('api');
+			if (stripos(config::byKey('internalAddr'), 'jeedom') !== FALSE) {
+				//on est pas sur une Mini
+				$jeeurl = "http://127.0.0.1/jeedom";
+			} else {
+				$jeeurl = "http://127.0.0.1";
+			}
+			$url = $jeeurl . '/core/api/jeeApi.php?api=' . config::byKey('api');
 		}
 	
 	$sensor_path = realpath(dirname(__FILE__) . '/../../node');	
