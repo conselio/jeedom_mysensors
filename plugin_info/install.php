@@ -28,10 +28,8 @@
 */
 
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
-if (!isConnect()) {
-    die();
-}
 
+/*
 function install() {
     if (mySensors::deamonRunning()) {
         mySensors::stopDeamon();
@@ -46,6 +44,35 @@ function update() {
 
 function remove() {
     if (mySensors::deamonRunning()) {
+        mySensors::stopDeamon();
+    }
+}
+
+*/
+
+function mySensors_install() {
+    $cron = cron::byClassAndFunction('mySensors', 'pull');
+    if (is_object($cron)) {
+        $cron->remove();
+    }
+}
+
+function mySensors_update() {
+    $cron = cron::byClassAndFunction('mySensors', 'pull');
+    if (is_object($cron)) {
+        $cron->remove();
+    }
+    if (method_exists('mySensors', 'stopDeamon')) {
+        mySensors::stopDeamon();
+    }
+}
+
+function mySensors_remove() {
+    $cron = cron::byClassAndFunction('mySensors', 'pull');
+    if (is_object($cron)) {
+        $cron->remove();
+    }
+    if (method_exists('mySensors', 'stopDeamon')) {
         mySensors::stopDeamon();
     }
 }
