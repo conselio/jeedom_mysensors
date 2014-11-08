@@ -383,7 +383,6 @@ class mySensors extends eqLogic {
 			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
 				if ( $elogic->getConfiguration('SketchName', '') != $value ) {
 					$elogic->setConfiguration('SketchName',$value);
-					$elogic->setName($value.' '.$nodeid);
 					$elogic->save();
 				}
 			}
