@@ -104,9 +104,9 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     </div>
                 </div>
               	<div class="form-group">
-                    <label class="col-md-2 control-label">{{Lib mySensors}}</label>
+                    <label class="col-md-2 control-label">{{Version de Librairie}}</label>
                     <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LibVersion" placeholder="Lib mySensors"/ readonly=true>
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LibVersion" placeholder="LibVersion"/ readonly=true>
                     </div>
                 </div>				
             </fieldset> 
