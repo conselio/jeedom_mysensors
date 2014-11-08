@@ -409,7 +409,7 @@ class mySensors extends eqLogic {
 	
 		$nodeid = init('id');
 		$value = init('value');
-		
+		log::add('mySensors', 'info', 'Enregistrement version de Lib');
 		//recherche dans tous les eqlogic 
 		foreach( self::byType( 'mySensors' ) as $elogic) {
 		
@@ -417,6 +417,7 @@ class mySensors extends eqLogic {
 			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
 				$elogic->setConfiguration('LibVersion',$value);
 				$elogic->save();
+				log::add('mySensors', 'info', 'Enregistrement OK');
 			}
 		}
 	}	
