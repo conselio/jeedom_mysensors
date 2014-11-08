@@ -97,6 +97,12 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchVersion" placeholder="SketchVersion"/>
                     </div>
                 </div>
+              	<div class="form-group">
+                    <label class="col-md-2 control-label">{{BatteryLevel}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="BatteryLevel" placeholder="BatteryLevel"/>
+                    </div>
+                </div>
 				
             </fieldset> 
         </form>
