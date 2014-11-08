@@ -82,25 +82,25 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 		<div class="form-group">
                     <label class="col-md-2 control-label">{{NODE ID}}</label>
                     <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/>
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
                     </div>
                 </div>
               	<div class="form-group">
                     <label class="col-md-2 control-label">{{Nom du Sketch}}</label>
                     <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchName" placeholder="SketchName"/>
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchName" placeholder="SketchName"/ readonly=true>
                     </div>
                 </div>
               	<div class="form-group">
                     <label class="col-md-2 control-label">{{Version Sketch}}</label>
                     <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchVersion" placeholder="SketchVersion"/>
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchVersion" placeholder="SketchVersion"/ readonly=true>
                     </div>
                 </div>
               	<div class="form-group">
                     <label class="col-md-2 control-label">{{BatteryLevel}}</label>
                     <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="BatteryLevel" placeholder="BatteryLevel"/>
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="BatteryLevel" placeholder="BatteryLevel"/ readonly=true>
                     </div>
                 </div>
 				
