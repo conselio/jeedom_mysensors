@@ -79,10 +79,22 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>
                     </div>
                 </div>
-				<div class="form-group">
+		<div class="form-group">
                     <label class="col-md-2 control-label">{{NODE ID}}</label>
                     <div class="col-md-3">
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/>
+                    </div>
+                </div>
+              	<div class="form-group">
+                    <label class="col-md-2 control-label">{{Nom du Sketch}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchName" placeholder="SketchName"/>
+                    </div>
+                </div>
+              	<div class="form-group">
+                    <label class="col-md-2 control-label">{{Version Sketch}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchVersion" placeholder="SketchVersion"/>
                     </div>
                 </div>
 				
