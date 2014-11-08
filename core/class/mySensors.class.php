@@ -501,6 +501,7 @@ class mySensors extends eqLogic {
 			case 'saveValue' : self::saveValue(); break;
 			case 'saveSketchName' : self::saveSketchNameEvent(); break;
 			case 'saveSketchVersion' : self::saveSketchVersion(); break;
+			case 'saveLibVersion' : self::saveLibVersion(); break;
 			case 'saveSensor' : self::saveSensor(); break;
 			case 'saveBatteryLevel' : self::saveBatteryLevel(); break;
 		
