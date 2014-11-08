@@ -406,6 +406,22 @@ class mySensors extends eqLogic {
 		}
 	}
 	
+	public static function saveLibVersion() {
+	
+		$nodeid = init('id');
+		$value = init('value');
+		
+		//recherche dans tous les eqlogic 
+		foreach( self::byType( 'mySensors' ) as $elogic) {
+		
+			//si le nodeid est le meme
+			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
+				$elogic->setConfiguration('LibVersion',$value);
+				$elogic->save();
+			}
+		}
+	}	
+	
 	public static function saveSensor() {
 	
 	
