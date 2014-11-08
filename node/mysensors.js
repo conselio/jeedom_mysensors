@@ -251,7 +251,7 @@ function saveLibVersion(sender, payload ) {
 
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date() + " | info | Got response saveSketchVersion: " + response.statusCode);
+		console.log(Date() + " | info | Got response saveLibVersion: " + response.statusCode);
 	  }
 	});
 }
