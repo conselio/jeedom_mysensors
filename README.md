@@ -15,12 +15,15 @@ Add date and info level in nodejs logs
 
 Add variable path for nodejs (so custom installations not in /ush/share/nginx/www... will work)
 
-
-*** Todo : ***
+1.5 In progress
 
 Add SketchName as an information on equipment page
 
 Add SketchVersion as an information on equipment page
+
+
+*** Todo : ***
+
 
 Add BatteryLevel as an information on equipment
 
@@ -28,4 +31,7 @@ Add related commands to some type of informations :
 
 - relay : S_LIGHT
 - dimmer : S_DIMMER
+
+Use LogicalID for register node and search them
+
 Save mySensors library version from presentation
