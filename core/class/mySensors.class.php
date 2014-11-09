@@ -383,6 +383,8 @@ class mySensors extends eqLogic {
 			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
 				if ( $elogic->getConfiguration('SketchName', '') != $value ) {
 					$elogic->setConfiguration('SketchName',$value);
+					//si le sketch n'est pas encore enregistré sur le node, alors on set le nom avec le sketch
+					$elogic->setName($value.''.$nodeid);					
 					$elogic->save();
 				}
 			}
@@ -400,8 +402,6 @@ class mySensors extends eqLogic {
 			//si le nodeid est le meme
 			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
 				$elogic->setConfiguration('SketchVersion',$value);
-				//si le sketch n'est pas encore enregistré sur le node, alors on set le nom avec le sketch
-				//$mys->setName($value.''.$nodeid);
 				$elogic->save();
 			}
 		}
