@@ -375,12 +375,14 @@ class mySensors extends eqLogic {
 	
 		$nodeid = init('id');
 		$value = init('value');
+		$allreadyexist = false;
 		
 		//recherche dans tous les eqlogic 
 		foreach( self::byType( 'mySensors' ) as $elogic) {
 		
 			//si le nodeid est le meme
 			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
+				$allreadyexist = true;
 				if ( $elogic->getConfiguration('SketchName', '') != $value ) {
 					$elogic->setConfiguration('SketchName',$value);
 					//si le sketch n'est pas encore enregistré sur le node, alors on set le nom avec le sketch
@@ -388,6 +390,17 @@ class mySensors extends eqLogic {
 					$elogic->save();
 				}
 			}
+		}
+		
+		if ( !$allreadyexist ) {
+				$mys = new mySensors();
+				$mys->setEqType_name('mySensors');
+				$mys->setConfiguration('nodeid', $nodeid);
+				$mys->setConfiguration('SketchName',$value);
+				$mys->setName($value.'-'.$nodeid);
+				$mys->setIsEnable(true);
+				$mys->save();
+				$first_eqlogic = $mys->getId();
 		}
 	}
 
