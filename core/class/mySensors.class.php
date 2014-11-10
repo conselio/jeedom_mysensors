@@ -380,7 +380,7 @@ class mySensors extends eqLogic {
 				$mysCmd->setSubType('numeric');
 				$mysCmd->setName( 'Batterie' );
 				$mysCmd->setUnite( '%' );
-				$cmdlogic->setConfiguration('BatteryLevel',$value);
+				$mysCmd->setConfiguration('BatteryLevel',$value);
 				$mysCmd->save();
 				$mysCmd->event($value);
 			}				
@@ -449,7 +449,7 @@ class mySensors extends eqLogic {
 		$cmdId = $name.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) {
-			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmId);
+			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
 				$cmdlogic->setConfiguration('sensorType', $value);
 				$cmdlogic->save();
