@@ -359,10 +359,31 @@ class mySensors extends eqLogic {
 		
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
-				if ( $elogic->getConfiguration('BatteryLevel', '') != $value ) {
-					$elogic->setConfiguration('BatteryLevel',$value);
-					$elogic->save();
+			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'BatteryLevel');
+			if (is_object($cmdlogic)) {
+				if ( cmdlogic->getConfiguration('value') != $value ) {
+					$cmdlogic->setConfiguration('sensorType',$value);
+					$cmdlogic->save();
+					$cmdlogic->event($value);
 				}
+			}
+			else {
+				$mysCmd = new mySensorsCmd();
+				$mysCmd->setCache('enable', 0);
+				$mysCmd->setEventOnly(0);
+				$mysCmd->setConfiguration('sensorType', '0');
+				$mysCmd->setConfiguration('sensor', '0');
+				$mysCmd->setEqLogic_id($elogic->getId());
+				$mysCmd->setEqType('mySensors');
+				$mysCmd->setLogicalId('BatteryLevel');
+				$mysCmd->setType('info');
+				$mysCmd->setSubType('numeric');
+				$mysCmd->setName( 'Batterie' );
+				$mysCmd->setUnite( '%' );
+				$cmdlogic->setConfiguration('BatteryLevel',$value);
+				$mysCmd->save();
+				$mysCmd->event($value);
+			}				
 		}
 	
 	}
