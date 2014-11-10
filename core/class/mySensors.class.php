@@ -330,26 +330,17 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$sensor = init('sensor');
 		$value = init('value');
+		$cmdId = 'Sensor'.$sensor;
 		
-		
-		//recherche dans tous les eqlogic 
-		foreach( self::byType( 'mySensors' ) as $elogic) {
-		
-			//si le nodeid est le meme
-			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
-
-				foreach( mySensorsCmd::byEqLogicId($elogic->getId()) as $cmd ) {
-					//on cherche la commande par son sensor
-					if ( $cmd->getType() =='info' && $cmd->getConfiguration( 'sensor' ) == $sensor ) {
-						$cmd->setConfiguration('value', $value);
-						$cmd->save();
-						$cmd->event($value);
-						
-					}
-				}
+		$elogic = self::byLogicalId($nodeid, 'mySensors');
+		if (is_object($elogic)) { 
+			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
+			if (is_object($cmdlogic)) {
+				$cmdlogic->setConfiguration('value', $value);
+				$cmdlogic->save();
+				$cmdlogic->event($value);
 			}
 		}
-	
 	}
 	
 	public static function saveBatteryLevel() {
@@ -446,7 +437,7 @@ class mySensors extends eqLogic {
 		if ($name == false ) {
 			$name = 'UNKNOWN';
 		}
-		$cmdId = $name.$sensor;
+		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
@@ -472,6 +463,45 @@ class mySensors extends eqLogic {
 				}
 				$mysCmd->setUnite( $unite );
 				$mysCmd->save();
+			}
+			if ($name == 'Relais') {
+				$relonId = 'Relais'.$sensor.'On';
+				$reloffId = 'Relais'.$sensor.'Off';
+				$onlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$relonId);
+				$offlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$reloffId);
+				if (!is_object($onlogic)) {
+					$mysCmd = new mySensorsCmd();
+					$mysCmd->setEventOnly(0);
+					$mysCmd->setConfiguration('cmdCommande', '1');
+					$mysCmd->setConfiguration('request', '1');
+					$mysCmd->setConfiguration('cmdtype', '2');
+					$mysCmd->setConfiguration('sensorType', $value);
+					$mysCmd->setConfiguration('sensor', $sensor);
+					$mysCmd->setEqLogic_id($elogic->getId());
+					$mysCmd->setEqType('mySensors');
+					$mysCmd->setLogicalId($relonId);
+					$mysCmd->setType('action');
+					$mysCmd->setSubType('other');
+					$mysCmd->setName( $name . " " . $sensor . " On" );
+					$mysCmd->save();
+				}
+				if (!is_object($offlogic)) {
+					$mysCmd = new mySensorsCmd();
+					$mysCmd->setEventOnly(0);
+					$mysCmd->setConfiguration('cmdCommande', '1');
+					$mysCmd->setConfiguration('request', '0');
+					$mysCmd->setConfiguration('cmdtype', '2');
+					$mysCmd->setConfiguration('sensorType', $value);
+					$mysCmd->setConfiguration('sensor', $sensor);
+					$mysCmd->setEqLogic_id($elogic->getId());
+					$mysCmd->setEqType('mySensors');
+					$mysCmd->setLogicalId($reloffId);
+					$mysCmd->setType('action');
+					$mysCmd->setSubType('other');
+					$mysCmd->setName( $name . " " . $sensor . " Off" );
+					$mysCmd->save();
+				}
+				
 			}
 			
 		}
