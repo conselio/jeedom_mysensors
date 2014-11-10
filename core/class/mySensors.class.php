@@ -336,16 +336,16 @@ class mySensors extends eqLogic {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
 				$unite = array_search($typu, self::$_dico['U']);
-				if ($unite != false ) {
+				if ($unite == false ) {
 					$unite = 'Inconnu';
 				}
 				log::add('mySensors', 'info', $unite);
 				$cmdlogic->setConfiguration('value', $value);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
-				log::add('mySensors', 'info', $cmdlogic->getUnite());
 				if ( $cmdlogic->getUnite() != $unite ) {
 					$cmdlogic->setUnite( $unite );	
+					log::add('mySensors', 'info', $unite);
 				}
 			}
 		}
