@@ -47,7 +47,7 @@ class mySensors extends eqLogic {
 				'OTA'=> 4,
 				),
 			'U' => array( // Unité
-				'C°'=> 0, //Temperature
+				'°C'=> 0, //Temperature
 				'%'=> 1, //Humidité
 				'Relais'=> 2,
 				'Variateur'=> 3,
@@ -339,14 +339,14 @@ class mySensors extends eqLogic {
 				if ($unite == false ) {
 					$unite = 'Inconnu';
 				}
-				log::add('mySensors', 'info', $unite);
-				$cmdlogic->setConfiguration('value', $value);
-				$cmdlogic->save();
-				$cmdlogic->event($value);
 				if ( $cmdlogic->getUnite() != $unite ) {
 					$cmdlogic->setUnite( $unite );	
 					log::add('mySensors', 'info', $unite);
 				}
+				log::add('mySensors', 'info', $unite);
+				$cmdlogic->setConfiguration('value', $value);
+				$cmdlogic->save();
+				$cmdlogic->event($value);
 			}
 		}
 	}
