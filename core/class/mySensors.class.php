@@ -413,6 +413,7 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
+		sleep(2);
 		if (is_object($elogic)) { 
 			if ( $elogic->getConfiguration('SketchVersion', '') != $value ) {
 				$elogic->setConfiguration('SketchVersion',$value);
