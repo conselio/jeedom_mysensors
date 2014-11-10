@@ -329,13 +329,13 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$sensor = init('sensor');
 		$value = init('value');
-		$type = init('type');
+		$typu = init('typu');
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
-				$unite = array_search($type, self::$_dico['U']);
+				$unite = array_search($typu, self::$_dico['U']);
 				if ($unite != false ) {
 					$unite = 'Inconnu';
 				}
