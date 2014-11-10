@@ -186,7 +186,7 @@ function saveValue(sender, sensor, type, payload) {
 	console.log(Date() + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
 
 	
-	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
+	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload+"&typu=" + type.toString();
 
 			console.log(Date() + " | info | " + url);
 	request(url, function (error, response, body) {
@@ -239,6 +239,19 @@ function saveSketchVersion(sender, payload ) {
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 		console.log(Date() + " | info | Got response saveSketchVersion: " + response.statusCode);
+	  }
+	});
+}
+
+function saveLibVersion(sender, payload ) {
+
+	console.log(Date() + " | info | Save saveLibVersion : " + "Value-" + sender.toString() + "-" + payload );
+
+		url = urlJeedom + "&messagetype=saveLibVersion&type=mySensors&id="+sender.toString()+"&value="+payload;
+
+		request(url, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+		console.log(Date() + " | info | Got response saveLibVersion: " + response.statusCode);
 	  }
 	});
 }
@@ -324,6 +337,7 @@ function rfReceived(data, db, gw) {
 				;
 			else
 				saveSensor(sender, sensor, type);
+				saveLibVersion(sender, payload);
 			break;
 		case C_SET:
 			saveValue(sender, sensor, type, payload);
@@ -339,6 +353,7 @@ function rfReceived(data, db, gw) {
 				sendTime(sender, sensor, gw);
 				break;
 			case I_VERSION:
+				saveLibVersion(sender, payload);
 				break;
 			case I_ID_REQUEST:
 				sendNextAvailableSensorId(gw);
