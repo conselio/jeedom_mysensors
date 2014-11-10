@@ -388,7 +388,7 @@ class mySensors extends eqLogic {
 		else {
 				$mys = new mySensors();
 				$mys->setEqType_name('mySensors');
-				$mys->->setLogicalId($nodeid);
+				$mys->setLogicalId($nodeid);
 				$mys->setConfiguration('nodeid', $nodeid);
 				$mys->setConfiguration('SketchName',$value);
 				$mys->setName($value.'-'.$nodeid);
