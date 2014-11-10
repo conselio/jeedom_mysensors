@@ -418,71 +418,44 @@ class mySensors extends eqLogic {
 	}	
 	
 	public static function saveSensor() {
-	
-	
 		$nodeid = init('id');
 		$value = init('value');
 		$sensor = init('sensor');
-		
-		$first_eqlogic = -1;
-		$allreadyexist = false;
-		//recherche dans tous les eqlogic 
-		foreach( self::byType( 'mySensors' ) as $elogic) {
-		
-			//si le nodeid est le meme
-			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
-				//si on trouve un node déjà existant
-				if ( $first_eqlogic == -1 )
-					$first_eqlogic = $elogic->getId();
-					
-				foreach( mySensorsCmd::byEqLogicId($elogic->getId()) as $cmd ) {
-					//on cherche la commande par son sensor
-					if ( $cmd->getConfiguration( 'sensor' ) == $sensor ) {
-						$cmd->setConfiguration('sensorType', $value);
-						$cmd->save();
-						$allreadyexist = true;
-					}
+		$name = array_search($value, self::$_dico['N']);
+		if ($name == false ) {
+			$name = 'UNKNOWN';
+		}
+		$cmdId = $name.$sensor;
+		$elogic = self::byLogicalId($nodeid, 'mySensors');
+		if (is_object($elogic)) {
+			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmId);
+			if (is_object($cmdlogic)) {
+				$cmdlogic->setConfiguration('sensorType', $value);
+				$cmdlogic->save();
+			}
+			else {
+				$mysCmd = new mySensorsCmd();
+				$mysCmd->setCache('enable', 0);
+				$mysCmd->setEventOnly(0);
+				$mysCmd->setConfiguration('sensorType', $value);
+				$mysCmd->setConfiguration('sensor', $sensor);
+				$mysCmd->setEqLogic_id($elogic->getId());
+				$mysCmd->setEqType('mySensors');
+				$mysCmd->setLogicalId($cmdId);
+				$mysCmd->setType('info');
+				$mysCmd->setSubType('numeric');
+				$mysCmd->setName( $name . " " . $sensor );
+				$unite = array_search($value, self::$_dico['U']);
+				if ($unite == false ) {
+					$unite = 'Unite';
 				}
+				$mysCmd->setUnite( $unite );
+				$mysCmd->save();
 			}
+			
 		}
-		
-		if ( !$allreadyexist ) {
-		
-			if ( $first_eqlogic == '-1') {
-				
-				$mys = new mySensors();
-				$mys->setEqType_name('mySensors');
-				$mys->setConfiguration('nodeid', $nodeid);
-				$mys->setName('new Node '.$nodeid);
-				$mys->setIsEnable(true);
-				$mys->save();
-				$first_eqlogic = $mys->getId();
-			}
-			
-			$mysCmd = new mySensorsCmd();
-			$mysCmd->setCache('enable', 0);
-			$mysCmd->setEventOnly(0);
-			$mysCmd->setConfiguration('sensorType', $value);
-			$mysCmd->setConfiguration('sensor', $sensor);
-			$mysCmd->setEqLogic_id($first_eqlogic);
-			$mysCmd->setEqType('mySensors');
-			$mysCmd->setType('info');
-			$mysCmd->setSubType('numeric');
-			
-			$name = array_search($value, self::$_dico['N']);
-			if ($name == false )
-				$name = 'UNKNOWN';
 
-				
-			$mysCmd->setName( $name . " " . $sensor );
-			$unite = array_search($value, self::$_dico['U']);
-			if ($unite == false )
-				$unite = 'Unite';
-			//log::add('mySensors', 'info', $value);
-			//log::add('mySensors', 'info', $unite);
-			$mysCmd->setUnite( $unite );
-			$mysCmd->save();
-		}
+	
 		
 	
 	}
