@@ -332,19 +332,18 @@ class mySensors extends eqLogic {
 		$typu = init('typu');
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
-		log::add('mySensors', 'info', 'saveValue');
 		if (is_object($elogic)) { 
-			log::add('mySensors', 'info', 'node existant');
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
-				log::add('mySensors', 'info', 'sensor existant');
 				$unite = array_search($typu, self::$_dico['U']);
 				if ($unite != false ) {
 					$unite = 'Inconnu';
 				}
+				log::add('mySensors', 'info', $unite);
 				$cmdlogic->setConfiguration('value', $value);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
+				log::add('mySensors', 'info', $cmdlogic->getUnite());
 				if ( $cmdlogic->getUnite() != $unite ) {
 					$cmdlogic->setUnite( $unite );	
 				}
