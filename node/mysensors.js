@@ -186,7 +186,7 @@ function saveValue(sender, sensor, type, payload) {
 	console.log(Date() + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
 
 	
-	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload+"&type=" + type.toString();
+	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload+"&typu=" + type.toString();
 
 			console.log(Date() + " | info | " + url);
 	request(url, function (error, response, body) {
