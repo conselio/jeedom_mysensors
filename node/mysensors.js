@@ -337,7 +337,6 @@ function rfReceived(data, db, gw) {
 				;
 			else
 				saveSensor(sender, sensor, type);
-				saveLibVersion(sender, payload);
 			break;
 		case C_SET:
 			saveValue(sender, sensor, type, payload);
@@ -353,6 +352,7 @@ function rfReceived(data, db, gw) {
 				sendTime(sender, sensor, gw);
 				break;
 			case I_VERSION:
+				saveLibVersion(sender, payload);
 				break;
 			case I_ID_REQUEST:
 				sendNextAvailableSensorId(gw);
