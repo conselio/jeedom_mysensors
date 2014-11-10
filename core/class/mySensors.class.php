@@ -326,12 +326,10 @@ class mySensors extends eqLogic {
 	}
 	
 	public static function saveValue() {
-	
 		$nodeid = init('id');
 		$sensor = init('sensor');
 		$value = init('value');
 		$cmdId = 'Sensor'.$sensor;
-		
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
@@ -344,10 +342,8 @@ class mySensors extends eqLogic {
 	}
 	
 	public static function saveBatteryLevel() {
-
 		$nodeid = init('id');
 		$value = init('value');
-		
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'BatteryLevel');
@@ -380,7 +376,6 @@ class mySensors extends eqLogic {
 	}
 	
 	public static function saveSketchNameEvent() {
-	
 		$nodeid = init('id');
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
@@ -392,7 +387,6 @@ class mySensors extends eqLogic {
 					$elogic->save();
 			}
 		}
-		
 		else {
 				$mys = new mySensors();
 				$mys->setEqType_name('mySensors');
@@ -406,10 +400,8 @@ class mySensors extends eqLogic {
 	}
 
 	public static function saveSketchVersion() {
-	
 		$nodeid = init('id');
 		$value = init('value');
-		
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
 				$elogic->setConfiguration('SketchVersion',$value);
@@ -418,10 +410,8 @@ class mySensors extends eqLogic {
 	}
 	
 	public static function saveLibVersion() {
-	
 		$nodeid = init('id');
 		$value = init('value');
-
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
 				$elogic->setConfiguration('LibVersion',$value);
@@ -501,7 +491,25 @@ class mySensors extends eqLogic {
 					$mysCmd->setName( $name . " " . $sensor . " Off" );
 					$mysCmd->save();
 				}
-				
+			if ($name == 'Dimmer') {
+				$dimmerId = 'Dimmer'.$sensor;
+				$dimlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$dimmerId);
+				if (!is_object($onlogic)) {
+					$mysCmd = new mySensorsCmd();
+					$mysCmd->setEventOnly(0);
+					$mysCmd->setConfiguration('cmdCommande', '1');
+					$mysCmd->setConfiguration('request', '');
+					$mysCmd->setConfiguration('cmdtype', '3');
+					$mysCmd->setConfiguration('sensorType', $value);
+					$mysCmd->setConfiguration('sensor', $sensor);
+					$mysCmd->setEqLogic_id($elogic->getId());
+					$mysCmd->setEqType('mySensors');
+					$mysCmd->setLogicalId($dimmerId);
+					$mysCmd->setType('action');
+					$mysCmd->setSubType('other');
+					$mysCmd->setName( $name . " " . $sensor . " Set" );
+					$mysCmd->save();
+				}				
 			}
 			
 		}
