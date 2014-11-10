@@ -107,7 +107,7 @@ class mySensors extends eqLogic {
 			'N' => array( // Type de Capteur / Actionneur
 				'Entrée'=> 0,
 				'Mouvement'=> 1,
-				'Fumé'=> 2,
+				'Fumée'=> 2,
 				'Relais'=> 3,
 				'Variateur'=> 4,
 				'S_COVER'=> 5,
@@ -329,14 +329,22 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$sensor = init('sensor');
 		$value = init('value');
+		$type = init('type');
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
+				$unite = array_search($type, self::$_dico['U']);
+				if ($unite != false ) {
+					$unite = 'Inconnu';
+				}
 				$cmdlogic->setConfiguration('value', $value);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
+				if ( $cmdlogic->getUnite() != $unite ) {
+					$cmdlogic->setUnite( $unite );	
+				}
 			}
 		}
 	}
@@ -385,7 +393,7 @@ class mySensors extends eqLogic {
 					//si le sketch a changé sur le node, alors on set le nom avec le sketch
 					$elogic->setName($value.''.$nodeid);					
 					$elogic->save();
-			}
+				}
 		}
 		else {
 				$mys = new mySensors();
@@ -404,8 +412,10 @@ class mySensors extends eqLogic {
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
+			if ( $elogic->getConfiguration('SketchVersion', '') != $value ) {
 				$elogic->setConfiguration('SketchVersion',$value);
 				$elogic->save();
+			}
 		}
 	}
 	
@@ -414,8 +424,10 @@ class mySensors extends eqLogic {
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
+			if ( $elogic->getConfiguration('LibVersion', '') != $value ) {
 				$elogic->setConfiguration('LibVersion',$value);
 				$elogic->save();
+			}
 		}
 	}	
 	
@@ -432,8 +444,10 @@ class mySensors extends eqLogic {
 		if (is_object($elogic)) {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
-				$cmdlogic->setConfiguration('sensorType', $value);
-				$cmdlogic->save();
+				if ( $cmdlogic->getConfiguration('sensorType', '') != $value ) {
+					$cmdlogic->setConfiguration('sensorType', $value);
+					$cmdlogic->save();
+				}
 			}
 			else {
 				$mysCmd = new mySensorsCmd();
@@ -447,11 +461,6 @@ class mySensors extends eqLogic {
 				$mysCmd->setType('info');
 				$mysCmd->setSubType('numeric');
 				$mysCmd->setName( $name . " " . $sensor );
-				$unite = array_search($value, self::$_dico['U']);
-				if ($unite == false ) {
-					$unite = 'Unite';
-				}
-				$mysCmd->setUnite( $unite );
 				$mysCmd->save();
 			}
 			if ($name == 'Relais') {
