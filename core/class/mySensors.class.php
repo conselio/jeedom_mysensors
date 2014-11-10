@@ -491,7 +491,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setName( $name . " " . $sensor . " Off" );
 					$mysCmd->save();
 				}
-			if ($name == 'Dimmer') {
+			if ($name == 'Variateur') {
 				$dimmerId = 'Dimmer'.$sensor;
 				$dimlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$dimmerId);
 				if (!is_object($onlogic)) {
