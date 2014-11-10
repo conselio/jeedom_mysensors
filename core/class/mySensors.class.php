@@ -413,7 +413,7 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
-		sleep(2);
+		sleep(1);
 		if (is_object($elogic)) { 
 			if ( $elogic->getConfiguration('SketchVersion', '') != $value ) {
 				$elogic->setConfiguration('SketchVersion',$value);
@@ -423,6 +423,7 @@ class mySensors extends eqLogic {
 	}
 	
 	public static function saveLibVersion() {
+		sleep(1);
 		$nodeid = init('id');
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
@@ -435,6 +436,7 @@ class mySensors extends eqLogic {
 	}	
 	
 	public static function saveSensor() {
+		sleep(1);
 		$nodeid = init('id');
 		$value = init('value');
 		$sensor = init('sensor');
