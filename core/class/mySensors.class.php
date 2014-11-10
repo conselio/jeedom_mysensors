@@ -357,16 +357,12 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$value = init('value');
 		
-		//recherche dans tous les eqlogic 
-		foreach( self::byType( 'mySensors' ) as $elogic) {
-		
-			//si le nodeid est le meme
-			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
+		$elogic = self::byLogicalId($nodeid, 'mySensors');
+		if (is_object($elogic)) { 
 				if ( $elogic->getConfiguration('BatteryLevel', '') != $value ) {
 					$elogic->setConfiguration('BatteryLevel',$value);
 					$elogic->save();
 				}
-			}
 		}
 	
 	}
@@ -375,8 +371,8 @@ class mySensors extends eqLogic {
 	
 		$nodeid = init('id');
 		$value = init('value');
-		$eqLogic = self::byLogicalId($nodeid, 'mySensors');
-		if (is_object($eqLogic)) {
+		$elogic = self::byLogicalId($nodeid, 'mySensors');
+		if (is_object($elogic)) {
 				if ( $elogic->getConfiguration('SketchName', '') != $value ) {
 					$elogic->setConfiguration('SketchName',$value);
 					//si le sketch a changé sur le node, alors on set le nom avec le sketch
@@ -402,14 +398,10 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$value = init('value');
 		
-		//recherche dans tous les eqlogic 
-		foreach( self::byType( 'mySensors' ) as $elogic) {
-		
-			//si le nodeid est le meme
-			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
+		$elogic = self::byLogicalId($nodeid, 'mySensors');
+		if (is_object($elogic)) { 
 				$elogic->setConfiguration('SketchVersion',$value);
 				$elogic->save();
-			}
 		}
 	}
 	
@@ -417,16 +409,11 @@ class mySensors extends eqLogic {
 	
 		$nodeid = init('id');
 		$value = init('value');
-		log::add('mySensors', 'info', 'Enregistrement version de Lib');
-		//recherche dans tous les eqlogic 
-		foreach( self::byType( 'mySensors' ) as $elogic) {
-		
-			//si le nodeid est le meme
-			if ( $elogic->getConfiguration('nodeid') == $nodeid ) {
+
+		$elogic = self::byLogicalId($nodeid, 'mySensors');
+		if (is_object($elogic)) { 
 				$elogic->setConfiguration('LibVersion',$value);
 				$elogic->save();
-				log::add('mySensors', 'info', 'Enregistrement OK');
-			}
 		}
 	}	
 	
