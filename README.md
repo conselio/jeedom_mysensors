@@ -21,17 +21,19 @@ Add SketchName as an information on equipment page
 
 Add SketchVersion as an information on equipment page
 
+Save mySensors library version from presentation if send (mySensors 2.0 will) and from sensors presentation (1.4)
 
-*** Todo : ***
-
-
-Add BatteryLevel as an information on equipment
+Add BatteryLevel as an information on equipment when node send it
 
 Add related commands to some type of informations :
 
-- relay : S_LIGHT
-- dimmer : S_DIMMER
+- relay : S_LIGHT (On and Off)
+- dimmer : S_DIMMER (Set dimmer)
 
-Use LogicalID for register node and search them
+Use LogicalID for register node and search them (and also for commands)
 
-Save mySensors library version from presentation
+*** Todo : ***
+
+Widget for better display
+
+Rewrite the nodejs in python maybe ?
