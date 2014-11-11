@@ -36,4 +36,8 @@ Use LogicalID for register node and search them (and also for commands)
 
 Widget for better display
 
+Restart daemon from plugin config page
+
+Look what is possible to forward actuator/scene message to relais/dimmer for exemple
+
 Rewrite the nodejs in python maybe ?
