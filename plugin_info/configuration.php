@@ -75,7 +75,13 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 			<a class="btn btn-warning" id="bt_restartmySensors"><i class='fa fa-stop'></i> Arrêter/Redemarrer le service NodeJS</a>
 			</div>
 		</div>		
-				
+ <?php
+try {
+echo '<div class="alert alert-success">Le z-way-server est en marche</div>';
+} catch (Exception $e) {
+echo '<div class="alert alert-danger">Le z-way-server ne tourne pas</div>';
+}
+?>				
 				<script>
 				$( "#select_port" ).change(function() {
 					$( "#select_port option:selected" ).each(function() {
