@@ -26,12 +26,12 @@ try {
 
     
     if (init('action') == 'restartNode') {
-        mySensors::restartNode();
+        mySensors::stopDeamon();
         ajax::success();
     }
 
     if (init('action') == 'getNodeInfo') {
-        ajax::success(zwave::getNodeInfo(init('path')));
+        ajax::success(zwave::deamonRunning());
     }
 
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
