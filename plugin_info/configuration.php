@@ -77,9 +77,9 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 		</div>		
  <?php
 try {
-echo '<div class="alert alert-success">Le z-way-server est en marche</div>';
+echo '<div class="alert alert-success">Le service NodeJS est en marche</div>';
 } catch (Exception $e) {
-echo '<div class="alert alert-danger">Le z-way-server ne tourne pas</div>';
+echo '<div class="alert alert-danger">Le service NodeJS ne tourne pas</div>';
 }
 ?>				
 				<script>
