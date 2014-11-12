@@ -67,6 +67,8 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 				
 				<input id="port_serie" class="configKey form-control" data-l1key="modem_serie_addr" style="margin-top:5px;display:none" placeholder="Renseigner le port série (ex : /dev/ttyS0)"/>
 				<input id="network_address" class="configKey form-control" data-l1key="gateway_addr" style="margin-top:5px;display:none" placeholder="Renseigner l'e port série'adresse de la gateway (ex : 192.168.1.1:5003"/>
+				            </div>
+        </div>
 		<div id="div_status" class="form-group">
 		<label class="col-lg-4 control-label">Arrêt/Redémarrage</label>
 			<div class="col-lg-2">
@@ -131,7 +133,6 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 					});
 				});
 			</script>
-            </div>
-        </div>
+
     </fieldset>
 </form>
