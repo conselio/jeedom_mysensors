@@ -70,16 +70,16 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 				            </div>
         </div>
 		<div id="div_status" class="form-group">
-		<label class="col-lg-4 control-label">Arrêt/Redémarrage</label>
+		<label class="col-lg-4 control-label">Redémarrage</label>
 			<div class="col-lg-2">
 			<a class="btn btn-warning" id="bt_restartmySensors"><i class='fa fa-stop'></i> Arrêter/Redemarrer le service NodeJS</a>
 			</div>
 		</div>		
  <?php
  if (!mySensors::deamonRunning()) {
-echo '<div class="alert alert-danger">Le service NodeJS ne tourne pas</div>';
+echo '<div id="div_node" class="alert alert-danger">Le service NodeJS ne tourne pas</div>';
 } else {
-echo '<div class="alert alert-success">Le service NodeJS est en marche</div>';
+echo '<div id="div_node" class="alert alert-success">Le service NodeJS est en marche</div>';
 }
 ?>				
 				<script>
@@ -108,11 +108,13 @@ echo '<div class="alert alert-success">Le service NodeJS est en marche</div>';
 						if($( this ).val() == "0" || $( this ).val() == "1"){
 						 $("#div_local").show();
 						 $("#div_status").show();
+						 $("#div_node").show();
 						 $("#div_slave").hide();
 						}
 						else{
 							$("#div_local").hide();
 							$("#div_status").hide();
+							$("#div_node").hide();
 							$("#div_slave").show();
 							}
 						});
