@@ -76,10 +76,10 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 			</div>
 		</div>		
  <?php
-try {
-echo '<div class="alert alert-success">Le service NodeJS est en marche</div>';
-} catch (Exception $e) {
+ if (!self::deamonRunning()) {
 echo '<div class="alert alert-danger">Le service NodeJS ne tourne pas</div>';
+} else {
+echo '<div class="alert alert-success">Le service NodeJS est en marche</div>';
 }
 ?>				
 				<script>
