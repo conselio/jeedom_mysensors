@@ -76,7 +76,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 			</div>
 		</div>		
  <?php
- if (!self::deamonRunning()) {
+ if (!mySensors::deamonRunning()) {
 echo '<div class="alert alert-danger">Le service NodeJS ne tourne pas</div>';
 } else {
 echo '<div class="alert alert-success">Le service NodeJS est en marche</div>';
