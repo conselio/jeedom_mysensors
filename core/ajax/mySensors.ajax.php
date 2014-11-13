@@ -31,7 +31,7 @@ try {
     }
 
     if (init('action') == 'getNodeInfo') {
-        ajax::success(zwave::deamonRunning());
+        ajax::success(mySensors::deamonRunning());
     }
 
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
