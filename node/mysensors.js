@@ -87,6 +87,13 @@ const P_CUSTOM						= 6;
 var fs = require('fs');
 var appendedString="";
 
+function LogDate(Type, Message) {
+ 
+   var ceJour = new Date();
+       var ceJourJeedom = ceJour.getDate() + "/" + ceJour.getMonth() + "/" + ceJour.getFullYear() + " " + ceJour.getHours() + "" + ceJour.getMinutes() + "" + ceJour.getSeconds();
+       console.log(ceJourJeedom + "|" + Type + "|" + Message);
+}
+
 function crcUpdate(old, value) {
 	var c = old ^ value;
 	for (var i = 0; i < 8; ++i) {
@@ -165,7 +172,7 @@ function saveProtocol(sender, payload, db) {
 
 function saveSensor(sender, sensor, type) {
 
-	console.log(Date() + " | info | Save saveSensor : " + "Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
+	LogDate("info", "Save saveSensor : Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
 
 	url = urlJeedom + "&messagetype=saveSensor&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+type;
 
