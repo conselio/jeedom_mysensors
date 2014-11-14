@@ -443,7 +443,7 @@ function rfReceived(data, db, gw) {
 
 	  });
 	  server.listen(8019, function(e) {
-		LogDate("info", "server bound on 8019');
+		LogDate("info", "server bound on 8019");
 	  });
 	});
 	
