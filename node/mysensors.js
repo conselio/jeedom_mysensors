@@ -190,18 +190,18 @@ function saveSensor(sender, sensor, type) {
 function saveValue(sender, sensor, type, payload) {
 
 
-	console.log(Date() + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
+	LogDate("info", "Save Value : Value-" + sender.toString() + "-" + sensor.toString() );
 
 	
 	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload+"&typu=" + type.toString();
 
-			console.log(Date() + " | info | " + url);
+			LogDate("info", url);
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date() + " info | Got response Value: " + response.statusCode);
+		LogDate("info", "Got response Value: " + response.statusCode);
 	  }else{
 	  
-	  	console.log(Date() + ' | info | SaveValue Error : '  + error );
+	  	LogDate("info", "SaveValue Error : "  + error );
 	  }
 	});
 	
