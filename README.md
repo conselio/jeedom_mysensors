@@ -15,7 +15,7 @@ Add date and info level in nodejs logs
 
 Add variable path for nodejs (so custom installations not in /ush/share/nginx/www... will work)
 
-1.5 In progress
+Version 1.5
 
 Add SketchName as an information on equipment page
 
@@ -32,12 +32,18 @@ Add related commands to some type of informations :
 
 Use LogicalID for register node and search them (and also for commands)
 
-*** Todo : ***
+Version 1.6
+
+*Work in progress*
+
+Can restart NodeJS from config page
+
+=== Todo : ===
 
 Widget for better display
 
-Restart daemon from plugin config page
+Check and alert if node has not been seen since long time
 
-Look what is possible to forward actuator/scene message to relais/dimmer for exemple
+Look for OTA
 
 Rewrite the nodejs in python maybe ?
