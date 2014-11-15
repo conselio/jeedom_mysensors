@@ -266,7 +266,6 @@ function saveProtocol(sender, payload, db) {
 }
 
 function saveSensor(sender, sensor, type) {
-
 	LogDate("info", "Save saveSensor : Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
 
 	url = urlJeedom + "&messagetype=saveSensor&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+type;
@@ -277,14 +276,21 @@ function saveSensor(sender, sensor, type) {
 		LogDate("info", "Got response saveSensor: " + response.statusCode);
 	  }
 	});
+}
 
-	
+function saveGateway(status) {
+	LogDate("info", "Save Gateway Status " + status;
 
+	url = urlJeedom + "&messagetype=saveGateway&type=mySensors&status="+status;
+
+	request(url, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+		LogDate("info", "Got response saveSensor: " + response.statusCode);
+	  }
+	});
 }
 
 function saveValue(sender, sensor, payload) {
-
-
 	LogDate("info", "Save Value : Value-" + payload.toString() + "-" + sender.toString() + "-" + sensor.toString() );
 
 	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
@@ -298,14 +304,9 @@ function saveValue(sender, sensor, payload) {
 	  	LogDate("info", "SaveValue Error : "  + error );
 	  }
 	});
-	
-	
-
 }
 
 function saveBatteryLevel(sender, payload ) {
-
-
 	 LogDate("info", "Save BatteryLevel : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveBatteryLevel&type=mySensors&id="+sender.toString()+"&value="+payload;
@@ -686,13 +687,16 @@ function rfReceived(data, db, gw) {
 		gw = new SerialPort(gwPort, { baudrate: gwBaud });
      	gw.open();
 		gw.on('open', function() {
-			LogDate("error", "connected to serial gateway at " + gwPort);
+			LogDate("info", "connected to serial gateway at " + gwPort);
+			saveGateway('1');
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
 		}).on('end', function() {
 			LogDate("error", "disconnected from gateway");
+			saveGateway('0');
 		}).on('error', function() {
 			LogDate("error", "connection error - trying to reconnect");
+			saveGateway('0');
 			gw.open();
 		});
 	} 
