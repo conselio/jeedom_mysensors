@@ -279,7 +279,7 @@ function saveSensor(sender, sensor, type) {
 }
 
 function saveGateway(status) {
-	LogDate("info", "Save Gateway Status " + status;
+	LogDate("info", "Save Gateway Status " + status);
 
 	url = urlJeedom + "&messagetype=saveGateway&type=mySensors&status="+status;
 
