@@ -40,9 +40,11 @@ Can restart NodeJS from config page
 
 Better date output in logs to match Jeedom format
 
-=== Todo : ===
+Attach a widget for better display on some sensors (temp, hum, light, motion, battery)
 
-Widget for better display
+Change unit to sensor creation and not value send as it will be the default in 2.0
+
+=== Todo : ===
 
 Add commands for RGB and servo
 
