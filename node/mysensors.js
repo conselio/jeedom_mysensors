@@ -560,11 +560,11 @@ function rfReceived(data, db, gw) {
 			//	saveProtocol(sender, payload, db); //arduino ou arduino relay
 				;
 			else
-				saveSensor(sender, sensor, payload);
+				saveSensor(sender, sensor, type);
 				saveLibVersion(sender, payload);
 			break;
 		case C_SET:
-			saveValue(sender, sensor, type, payload);
+			saveValue(sender, sensor, payload);
 			break;
 		case C_REQ:
 			break;
