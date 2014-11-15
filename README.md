@@ -38,12 +38,16 @@ Version 1.6
 
 Can restart NodeJS from config page
 
+Better date output in logs to match Jeedom format
+
 === Todo : ===
 
 Widget for better display
 
+Add commands for RGB and servo
+
 Check and alert if node has not been seen since long time
 
-Look for OTA
+Alert if gateway is disconnected
 
-Rewrite the nodejs in python maybe ?
+Integrate OTA
