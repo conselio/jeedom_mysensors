@@ -335,15 +335,6 @@ class mySensors extends eqLogic {
 		if (is_object($elogic)) { 
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
-				$unite = array_search($typu, self::$_dico['U']);
-				if ($unite == false ) {
-					$unite = 'Inconnu';
-				}
-			/*	if ( $cmdlogic->getUnite() != $unite ) {
-					$cmdlogic->setUnite( $unite );	
-					log::add('mySensors', 'info', $unite);
-				}*/
-				log::add('mySensors', 'info', $unite);
 				$cmdlogic->setConfiguration('value', $value);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
@@ -479,9 +470,8 @@ class mySensors extends eqLogic {
 				} else if ($name == 'Humidité') {
 					$mysCmd->setTemplate("dashboard","badge" );
 					$mysCmd->setUnite( '%' );
-				} else if ($name == 'Pression') {
+				} else {
 					$mysCmd->setTemplate("dashboard","badge" );
-					$mysCmd->setUnite( '%' );
 				}
 				$mysCmd->save();
 			}
