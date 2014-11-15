@@ -282,15 +282,14 @@ function saveSensor(sender, sensor, type) {
 
 }
 
-function saveValue(sender, sensor, type, payload) {
+function saveValue(sender, sensor, payload) {
 
 
 	LogDate("info", "Save Value : Value-" + payload.toString() + "-" + sender.toString() + "-" + sensor.toString() );
 
-	
-	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload+"&typu=" + type.toString();
+	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
 
-			LogDate("info", url);
+	LogDate("info", url);
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 		LogDate("info", "Got response Value: " + response.statusCode);
@@ -310,10 +309,10 @@ function saveBatteryLevel(sender, payload ) {
 	 LogDate("info", "Save BatteryLevel : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveBatteryLevel&type=mySensors&id="+sender.toString()+"&value="+payload;
-
+	LogDate("info", url);
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		 LogDate("info", "Got response saveSketchName: " + response.statusCode);
+		 LogDate("info", "Got response saveBatteryLevel: " + response.statusCode);
 	  }
 	});
 }
@@ -323,7 +322,7 @@ function saveSketchName(sender, payload) {
 	LogDate("info", "Save saveSketchName : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveSketchName&type=mySensors&id="+sender.toString()+"&value="+payload;
-
+	LogDate("info", url);
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 		LogDate("info", "Got response saveSketchName: " + response.statusCode);
@@ -337,7 +336,7 @@ function saveSketchVersion(sender, payload ) {
 	LogDate("info", "Save saveSketchVersion : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveSketchVersion&type=mySensors&id="+sender.toString()+"&value="+payload;
-
+	LogDate("info", url);
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 		LogDate("info", "Got response saveSketchVersion: " + response.statusCode);
@@ -350,7 +349,7 @@ function saveLibVersion(sender, payload ) {
 	LogDate("info", "Save saveLibVersion : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveLibVersion&type=mySensors&id="+sender.toString()+"&value="+payload;
-
+	LogDate("info", url);
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 		LogDate("info", "Got response saveLibVersion: " + response.statusCode);
@@ -561,7 +560,7 @@ function rfReceived(data, db, gw) {
 			//	saveProtocol(sender, payload, db); //arduino ou arduino relay
 				;
 			else
-				saveSensor(sender, sensor, type);
+				saveSensor(sender, sensor, payload);
 				saveLibVersion(sender, payload);
 			break;
 		case C_SET:
