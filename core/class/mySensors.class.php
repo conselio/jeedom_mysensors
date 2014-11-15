@@ -351,7 +351,7 @@ class mySensors extends eqLogic {
 				$mysCmd->setSubType('numeric');
 				$mysCmd->setName( 'Batterie' );
 				$mysCmd->setUnite( '%' );
-				$mysCmd->setConfiguration('BatteryLevel',$value);
+				$mysCmd->setConfiguration('value',$value);
 				$mysCmd->setTemplate("dashboard","batterie" );
 				$mysCmd->save();
 				$mysCmd->event($value);
@@ -383,6 +383,50 @@ class mySensors extends eqLogic {
 				$mys->save();
 		}
 	}
+	
+	public static function saveGateway() {
+		$status = init('status');
+		$elogic = self::byLogicalId('gateway', 'mySensors');
+		if (is_object($elogic)) {
+			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'Connexion');
+			if (is_object($cmdlogic)) {
+				$cmdlogic->setConfiguration('value',$value);
+				$cmdlogic->save();
+				$cmdlogic->event($value);
+			}
+			else {
+				$mysCmd = new mySensorsCmd();
+				$mysCmd->setEqLogic_id($elogic->getId());
+				$mysCmd->setEqType('mySensors');
+				$mysCmd->setLogicalId('Connexion');
+				$mysCmd->setType('info');
+				$mysCmd->setSubType('numeric');
+				$mysCmd->setName( 'Connexion' );
+				$mysCmd->setConfiguration('value',$status);
+				$mysCmd->save();
+				$mysCmd->event($value);
+			}	
+		}
+		else {
+				$mys = new mySensors();
+				$mys->setEqType_name('mySensors');
+				$mys->setLogicalId('gateway');
+				$mys->setConfiguration('nodeid', 'gateway');
+				$mys->setName('Gateway');
+				$mys->setIsEnable(true);
+				$mys->save();
+				$mysCmd = new mySensorsCmd();
+				$mysCmd->setEqLogic_id($mys->getId());
+				$mysCmd->setEqType('mySensors');
+				$mysCmd->setLogicalId('Connexion');
+				$mysCmd->setType('info');
+				$mysCmd->setSubType('numeric');
+				$mysCmd->setName( 'Connexion' );
+				$mysCmd->setConfiguration('value',$status);
+				$mysCmd->save();
+				$mysCmd->event($value);
+		}
+	}	
 
 	public static function saveSketchVersion() {
 		$nodeid = init('id');
@@ -454,6 +498,8 @@ class mySensors extends eqLogic {
 					$mysCmd->setTemplate("dashboard","gauge" );
 				} else if ($name == 'Humidité') {
 					$mysCmd->setTemplate("dashboard","vuMeter" );
+				} else if ($name == 'Mouvement') {
+					$mysCmd->setTemplate("dashboard","vibration" );
 				} else {
 					$mysCmd->setTemplate("dashboard","badge" );
 				}
@@ -537,6 +583,7 @@ class mySensors extends eqLogic {
 			case 'saveLibVersion' : self::saveLibVersion(); break;
 			case 'saveSensor' : self::saveSensor(); break;
 			case 'saveBatteryLevel' : self::saveBatteryLevel(); break;
+			case 'saveGateway' : self::saveGateway(); break;
 		
 		}
 		
