@@ -44,12 +44,12 @@ Attach a widget for better display on some sensors (temp, hum, light, motion, ba
 
 Change unit to sensor creation and not value send as it will be the default in 2.0
 
+Automaticly create a device for the gateway with the only purpose to know the status of connexion and use it for alert
+
 === Todo : ===
 
 Add commands for RGB and servo
 
 Check and alert if node has not been seen since long time
-
-Alert if gateway is disconnected
 
 Integrate OTA
