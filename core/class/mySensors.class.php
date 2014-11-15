@@ -339,10 +339,10 @@ class mySensors extends eqLogic {
 				if ($unite == false ) {
 					$unite = 'Inconnu';
 				}
-				if ( $cmdlogic->getUnite() != $unite ) {
+			/*	if ( $cmdlogic->getUnite() != $unite ) {
 					$cmdlogic->setUnite( $unite );	
 					log::add('mySensors', 'info', $unite);
-				}
+				}*/
 				log::add('mySensors', 'info', $unite);
 				$cmdlogic->setConfiguration('value', $value);
 				$cmdlogic->save();
@@ -378,6 +378,7 @@ class mySensors extends eqLogic {
 				$mysCmd->setName( 'Batterie' );
 				$mysCmd->setUnite( '%' );
 				$mysCmd->setConfiguration('BatteryLevel',$value);
+				$mysCmd->setTemplate("dashboard","batterie" );
 				$mysCmd->save();
 				$mysCmd->event($value);
 			}				
@@ -466,6 +467,22 @@ class mySensors extends eqLogic {
 				$mysCmd->setType('info');
 				$mysCmd->setSubType('numeric');
 				$mysCmd->setName( $name . " " . $sensor );
+				if ($name == 'Relais') {
+					$mysCmd->setTemplate("dashboard","light" );
+					$mysCmd->setUnite( 'Relais' );
+				} else if ($name == 'Variateur') {
+					$mysCmd->setTemplate("dashboard","progressBar" );
+					$mysCmd->setUnite( '%' );
+				} else if ($name == 'Temperature') {
+					$mysCmd->setTemplate("dashboard","gauge" );
+					$mysCmd->setUnite( '°C' );
+				} else if ($name == 'Humidité') {
+					$mysCmd->setTemplate("dashboard","badge" );
+					$mysCmd->setUnite( '%' );
+				} else if ($name == 'Pression') {
+					$mysCmd->setTemplate("dashboard","badge" );
+					$mysCmd->setUnite( '%' );
+				}
 				$mysCmd->save();
 			}
 			if ($name == 'Relais') {
