@@ -119,11 +119,13 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
         		<script>
 				$('#bt_restartEq').on('click', function () {
+					nodeId = document.getElementById('selectNode');
 					$.ajax({// fonction permettant de faire de l'ajax
 						type: "POST", // methode de transmission des données au fichier php
 						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
 						data: {
 							action: "restartEq",
+							node: nodeId,
 						},
 						dataType: 'json',
 						error: function (request, status, error) {
