@@ -102,18 +102,23 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     <div class="col-md-3">
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LibVersion" placeholder="LibVersion"/ readonly=true>
                     </div>
-                </div>				
+                </div>	
+              	<div class="form-group">
+                    <label class="col-md-2 control-label">{{Dernière Activité}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
+                    </div>
+                </div>	                
+
             </fieldset> 
         </form>
 
-        <legend>{{MySensor}}</legend>
-		
-		<div class="alert alert-info">
-            {{ Sous type : <br/>
-            - Slider : mettre #slider# pour recupérer la valeur<br/>
-            - Color : mettre #color# pour recupérer la valeur<br/>
-            - Message : mettre #title# et #message#}}
-        </div>
+               	<div class="form-group">
+			<label class="col-md-2 control-label">{{Redémarrage}}</label>
+			<div class="col-md-3">
+				<a class="btn btn-warning" id="bt_restartEq"><i class='fa fa-stop'></i> Redemarrer l'équipement</a>
+			</div>
+		</div> 
 		
         <a class="btn btn-default btn-sm" id="bt_addmySensorsInfo"><i class="fa fa-plus-circle"></i> {{Ajouter une info}}</a>
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
