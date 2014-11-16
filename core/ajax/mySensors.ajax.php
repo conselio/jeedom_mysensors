@@ -35,7 +35,8 @@ try {
     }
 
     if (init('action') == 'restartEq') {
-        ajax::success(mySensors::sendToController( node, '0', '13', '0', '3', '0' );
+         var myNode = document.getElementById('selectNode');
+        ajax::success(mySensors::sendToController( myNode, '0', '13', '0', '3', '0' ));
     }    
 
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
