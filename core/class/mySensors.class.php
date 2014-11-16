@@ -381,6 +381,20 @@ class mySensors extends eqLogic {
 				$mys->setName($value.'-'.$nodeid);
 				$mys->setIsEnable(true);
 				$mys->save();
+					$mysCmd = new mySensorsCmd();
+					$mysCmd->setEventOnly(0);
+					$mysCmd->setConfiguration('cmdCommande', '0');
+					$mysCmd->setConfiguration('request', '');
+					$mysCmd->setConfiguration('cmdtype', '3');
+					$mysCmd->setConfiguration('sensorType', '13');
+					$mysCmd->setConfiguration('sensor', '0');
+					$mysCmd->setEqLogic_id($elogic->getId());
+					$mysCmd->setEqType('mySensors');
+					$mysCmd->setLogicalId('reboot');
+					$mysCmd->setType('action');
+					$mysCmd->setSubType('other');
+					$mysCmd->setName( "Reboot Node" );
+					$mysCmd->save();				
 		}
 	}
 	
@@ -551,7 +565,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setEventOnly(0);
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '');
-					$mysCmd->setConfiguration('cmdtype', '3');
+					$mysCmd->setConfiguration('cmdtype', '2');
 					$mysCmd->setConfiguration('sensorType', $value);
 					$mysCmd->setConfiguration('sensor', $sensor);
 					$mysCmd->setEqLogic_id($elogic->getId());
