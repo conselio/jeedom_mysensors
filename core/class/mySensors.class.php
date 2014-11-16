@@ -316,6 +316,9 @@ class mySensors extends eqLogic {
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
+			$date = date('d-m-Y H:i');
+			$elogic->setConfiguration('LastActivity', $date);
+			$elogic->save();
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
 				$cmdlogic->setConfiguration('value', $value);
@@ -330,6 +333,9 @@ class mySensors extends eqLogic {
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
+			$date = date('d-m-Y H:i');
+			$elogic->setConfiguration('LastActivity', $date);
+			$elogic->save();			
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'BatteryLevel');
 			if (is_object($cmdlogic)) {
 				if ( $cmdlogic->getConfiguration('value') != $value ) {
