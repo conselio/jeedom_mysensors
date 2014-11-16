@@ -35,7 +35,7 @@ try {
     }
 
     if (init('action') == 'restartEq') {
-         var myNode = document.getElementById('selectNode');
+        var myNode = init('node');
         ajax::success(mySensors::sendToController( myNode, '0', '13', '0', '3', '0' ));
     }    
 
