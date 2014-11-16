@@ -113,13 +113,8 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
             </fieldset> 
         </form>
 
-               	<div class="form-group">
-			<label class="col-md-2 control-label">{{Redémarrage}}</label>
-			<div class="col-md-3">
-				<a class="btn btn-warning" id="bt_restartEq"><i class='fa fa-stop'></i> Redemarrer l'équipement</a>
-			</div>
-		</div> 
-		
+
+	<a class="btn btn-default btn-sm" id="bt_restartEq"><i class="fa fa-power-off"></i> {{Redémarrer l'équipement}}</a>	
         <a class="btn btn-default btn-sm" id="bt_addmySensorsInfo"><i class="fa fa-plus-circle"></i> {{Ajouter une info}}</a>
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
         <table id="table_cmd" class="table table-bordered table-condensed">
