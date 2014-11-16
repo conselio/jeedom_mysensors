@@ -34,6 +34,10 @@ try {
         ajax::success(mySensors::deamonRunning());
     }
 
+    if (init('action') == 'restartEq') {
+        ajax::success(mySensors::sendToController( node, '0', '13', '0', '3', '0' );
+    }    
+
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
     /*     * *********Catch exeption*************** */
 } catch (Exception $e) {
