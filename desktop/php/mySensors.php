@@ -114,7 +114,6 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
         </form>
 
 	<legend>{{mySensors}}</legend>
-	<a class="btn btn-default btn-sm" id="bt_restartEq"><i class="fa fa-power-off"></i> {{Redémarrer l'équipement}}</a>	
         <a class="btn btn-default btn-sm" id="bt_addmySensorsInfo"><i class="fa fa-plus-circle"></i> {{Ajouter une info}}</a>
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
         		<script>
