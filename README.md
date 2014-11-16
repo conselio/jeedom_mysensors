@@ -48,8 +48,14 @@ Automaticly create a device for the gateway with the only purpose to know the st
 
 === Todo : ===
 
-Add commands for RGB and servo
-
 Check and alert if node has not been seen since long time
 
-Integrate OTA
+Add function on plugin to deliver data requested by a node
+
+How to reboot a node from Jeedom
+
+Add commands for RGB and servo (actualy, will wait for mySensors lib2.0 as there is changes and during presentation of sensors, they will say what commands they accepts)
+
+Integrate OTA with sketchs library and possible configuration of sketchs with variables like pin, warning level ...
+
+Integrate ACK from gateway side
