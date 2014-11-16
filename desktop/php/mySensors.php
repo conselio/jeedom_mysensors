@@ -117,6 +117,29 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 	<a class="btn btn-default btn-sm" id="bt_restartEq"><i class="fa fa-power-off"></i> {{Redémarrer l'équipement}}</a>	
         <a class="btn btn-default btn-sm" id="bt_addmySensorsInfo"><i class="fa fa-plus-circle"></i> {{Ajouter une info}}</a>
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
+        		<script>
+				$('#bt_restartEq').on('click', function () {
+					$.ajax({// fonction permettant de faire de l'ajax
+						type: "POST", // methode de transmission des données au fichier php
+						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
+						data: {
+							action: "restartEq",
+						},
+						dataType: 'json',
+						error: function (request, status, error) {
+							handleAjaxError(request, status, error);
+						},
+						success: function (data) { // si l'appel a bien fonctionné
+							if (data.state != 'ok') {
+								$('#div_alert').showAlert({message: data.result, level: 'danger'});
+								return;
+							}
+						$('#div_alert').showAlert({message: 'Le node a été relancé', level: 'success'});
+						$('#ul_plugin .li_plugin[data-plugin_id=mySensors]').click();
+						}
+					});
+				});
+			</script>        
         <table id="table_cmd" class="table table-bordered table-condensed">
             <thead>
                 <tr>
