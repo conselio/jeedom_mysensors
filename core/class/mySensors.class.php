@@ -383,7 +383,7 @@ class mySensors extends eqLogic {
 				$mys->save();
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
-					$mysCmd->setConfiguration('cmdCommande', '0');
+					$mysCmd->setConfiguration('cmdCommande', '3');
 					$mysCmd->setConfiguration('request', '');
 					$mysCmd->setConfiguration('cmdtype', '3');
 					$mysCmd->setConfiguration('sensorType', '13');
