@@ -388,7 +388,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setConfiguration('cmdtype', '3');
 					$mysCmd->setConfiguration('sensorType', '13');
 					$mysCmd->setConfiguration('sensor', '0');
-					$mysCmd->setEqLogic_id($elogic->getId());
+					$mysCmd->setEqLogic_id($mys->getId());
 					$mysCmd->setEqType('mySensors');
 					$mysCmd->setLogicalId('reboot');
 					$mysCmd->setType('action');
