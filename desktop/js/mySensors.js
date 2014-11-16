@@ -26,10 +26,6 @@ $("#bt_addmySensorsAction").on('click', function(event) {
     addCmdToTable(_cmd);
 });
 
-$("#bt_restartEq").on('click', function(event) {
-    var myNode = document.getElementById('selectNode');
-    mySensors::sendToController( myNode, '0', '13', '0', '3', '0' );
-});
 
 /*
 $('#table_cmd tbody').delegate('tr .remove', 'click', function(event) {
