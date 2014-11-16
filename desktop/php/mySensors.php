@@ -82,7 +82,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 		<div class="form-group">
                     <label class="col-md-2 control-label">{{Node ID}}</label>
                     <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
+                        <input id="selectNode" type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
                     </div>
                 </div>
               	<div class="form-group">
