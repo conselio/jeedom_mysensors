@@ -40,12 +40,20 @@ class mySensors extends eqLogic {
      	public static function pull($_options) {
      		$date = date('d-m-Y H:i');
 		foreach (eqLogic::byType('mySensors') as $elogic) {
-			if ($elogic->getInformations('followActivity') == true)
-			{
+			if ($elogic->getInformations('followActivity') == $elogic->getInformations('followActivity')){
 				$activity = $elogic->getInformations('LastActivity');
 				$duration = $elogic->getInformations('AlertLimit');
 				$interval = date_diff($date, $activity);
 				log::add('mySensors', 'info', 'Durée' + $interval);
+				if ($interval > $duration) {
+					$gate = self::byLogicalId('gateway', 'mySensors');
+					$value = $elogic->getName();
+					$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($gate->getId(),'Inactif');
+					$cmdlogic->setConfiguration('value',$value);
+					$cmdlogic->save();
+					$cmdlogic->event($value);
+					}
+				}
 			}
 		}
 	}
@@ -437,6 +445,14 @@ class mySensors extends eqLogic {
 				$mysCmd->setConfiguration('value',$status);
 				$mysCmd->save();
 				$mysCmd->event($value);
+				$mysCmd = new mySensorsCmd();
+				$mysCmd->setEqLogic_id($elogic->getId());
+				$mysCmd->setEqType('mySensors');
+				$mysCmd->setLogicalId('Inactif');
+				$mysCmd->setType('info');
+				$mysCmd->setSubType('other');
+				$mysCmd->setName( 'Inactif' );
+				$mysCmd->save();
 			}	
 		}
 		else {
