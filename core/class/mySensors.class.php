@@ -38,12 +38,13 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 class mySensors extends eqLogic {
     /*     * *************************Attributs****************************** */
      	public static function pull($_options) {
-     		$date = date('d-m-Y H:i');
+     		$date = time();
 		foreach (eqLogic::byType('mySensors') as $elogic) {
 			if ($elogic->getInformations('followActivity') == $elogic->getInformations('followActivity')){
-				$activity = $elogic->getInformations('LastActivity');
+				$actDate = $elogic->getInformations('LastActivity');
+				$activity = strtotime($actDate);
 				$duration = $elogic->getInformations('AlertLimit');
-				$interval = date_diff($date, $activity);
+				$interval = round(abs($to_time - $from_time) / 60,2);
 				log::add('mySensors', 'info', 'Durée' + $interval);
 				if ($interval > $duration) {
 					$gate = self::byLogicalId('gateway', 'mySensors');
