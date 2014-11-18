@@ -112,7 +112,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                 <div class="form-group">
                     <label class="col-md-2 control-label">{{Suivre l'Activité}}</label>
                     <div class="col-md-1">
-                        <input type="checkbox" class="eqLogicAttr" data-l1key="followActivity"/>
+                        <input type="checkbox" class="eqLogicAttrconfiguration form-control" data-l1key="followActivity" data-l2key="followActivity"/>
                     </div>
                     <label class="col-md-2 control-label" >{{Durée d'Inactivité}}</label>
                     <div class="col-md-1">
@@ -124,7 +124,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
         </form>
 
 	<legend>{{mySensors}}</legend>
-	<a class="btn btn-default btn-sm" id="bt_restartEq"><i class="fa fa-poweroff"></i> {{Reboot du Node}}</a>
+
         <a class="btn btn-default btn-sm" id="bt_addmySensorsInfo"><i class="fa fa-plus-circle"></i> {{Ajouter une info}}</a>
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
         		<script>
