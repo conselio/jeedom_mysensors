@@ -57,7 +57,7 @@ function mySensors_install() {
         $cron->setClass('mySensors');
         $cron->setFunction('pull');
         $cron->setEnable(1);
-        $cron->setDeamon(1);
+        $cron->setDeamon(0);
         $cron->setSchedule('*/15 * * * *');
         $cron->save();
     }
@@ -70,7 +70,7 @@ function mySensors_update() {
         $cron->setClass('mySensors');
         $cron->setFunction('pull');
         $cron->setEnable(1);
-        $cron->setDeamon(1);
+        $cron->setDeamon(0);
         $cron->setSchedule('*/15 * * * *');
         $cron->save();
     }
