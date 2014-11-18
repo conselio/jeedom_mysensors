@@ -56,7 +56,6 @@ class mySensors extends eqLogic {
 				}
 			}
 		}
-	}
 
 	public static $_dico = 
 			array(
