@@ -37,6 +37,18 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class mySensors extends eqLogic {
     /*     * *************************Attributs****************************** */
+     	public static function pull($_options) {
+     		$date = date('d-m-Y H:i');
+		foreach (eqLogic::byType('mySensors') as $elogic) {
+			if ($elogic->getInformations('followActivity') == true)
+			{
+				$activity = $elogic->getInformations('LastActivity');
+				$duration = $elogic->getInformations('AlertLimit');
+				$interval = date_diff($date, $activity);
+				log::add('mySensors', 'info', 'Durée' + $interval);
+			}
+		}
+	}
 
 	public static $_dico = 
 			array(
