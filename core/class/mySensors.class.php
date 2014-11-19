@@ -359,7 +359,7 @@ class mySensors extends eqLogic {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'BatteryLevel');
 			if (is_object($cmdlogic)) {
 				if ( $cmdlogic->getConfiguration('value') != $value ) {
-					$cmdlogic->setConfiguration('sensorType',$value);
+					$cmdlogic->setConfiguration('value',$value);
 					$cmdlogic->save();
 					$cmdlogic->event($value);
 				}
