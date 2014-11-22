@@ -44,7 +44,7 @@ class mySensors extends eqLogic {
 			log::add('mySensors', 'info', 'Vérification du node');
 			//if ($elogic->getInformations('followActivity') == $elogic->getInformations('followActivity')){
 				$actDate = $elogic->getInformations('LastActivity');
-				log::add('mySensors', 'info', $actDate);
+				log::add('mySensors', 'info', 'actDate');
 				$activity = strtotime($actDate);
 				log::add('mySensors', 'info', $activity);
 				$duration = $elogic->getInformations('AlertLimit');
