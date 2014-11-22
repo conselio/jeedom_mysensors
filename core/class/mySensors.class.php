@@ -39,7 +39,9 @@ class mySensors extends eqLogic {
     /*     * *************************Attributs****************************** */
      	public static function pull($_options) {
      		$date = time();
+     		log::add('mySensors', 'info', 'Cron de vérification des nodes');
 		foreach (eqLogic::byType('mySensors') as $elogic) {
+			log::add('mySensors', 'info', 'Vérification du node');
 			if ($elogic->getInformations('followActivity') == $elogic->getInformations('followActivity')){
 				$actDate = $elogic->getInformations('LastActivity');
 				$activity = strtotime($actDate);
