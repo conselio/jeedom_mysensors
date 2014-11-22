@@ -44,10 +44,13 @@ class mySensors extends eqLogic {
 			log::add('mySensors', 'info', 'Vérification du node');
 			//if ($elogic->getInformations('followActivity') == $elogic->getInformations('followActivity')){
 				$actDate = $elogic->getInformations('LastActivity');
+				log::add('mySensors', 'info', $actDate);
 				$activity = strtotime($actDate);
+				log::add('mySensors', 'info', $activity);
 				$duration = $elogic->getInformations('AlertLimit');
+				log::add('mySensors', 'info', $duration);
 				$interval = round(abs($to_time - $from_time) / 60,2);
-				log::add('mySensors', 'info', 'Durée' + $interval);
+				log::add('mySensors', 'info', $interval);
 				if ($interval > $duration) {
 					$gate = self::byLogicalId('gateway', 'mySensors');
 					$value = $elogic->getName();
