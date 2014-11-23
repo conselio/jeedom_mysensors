@@ -110,13 +110,13 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     </div>
                 </div>	    
 		<div class="form-group">
-                    <label class="col-md-4 control-label" >{{Suivi du Node}}</label>
-                    <div class="col-md-1" style="width: 4%;">
+                    <label class="col-md-2 control-label" >{{Suivi du Node}}</label>
+                    <div class="col-md-1">
                         </span><input type="checkbox" class="eqLogicAttr" data-l1key="configuration"  data-l2key="followActivity"  checked/>
                     </div>
                          <span style="font-size: 75%;">(A cocher seulement si vous désirez être alerter de l'inactivité du node)</span>
                 </div>
-
+		<div class="form-group">
                     <label class="col-md-2 control-label" >{{Durée d'Inactivité}}</label>
                     <div class="col-md-1">
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="AlertLimit" placeholder="AlertLimit"/>
