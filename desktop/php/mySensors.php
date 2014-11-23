@@ -83,18 +83,6 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                 </div>
 
               	<div class="form-group">
-                    <label class="col-md-2 control-label">{{Version Sketch}}</label>
-                    <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchVersion" placeholder="SketchVersion"/ readonly=true>
-                    </div>
-                </div>
-              	<div class="form-group">
-                    <label class="col-md-2 control-label">{{Version de Librairie}}</label>
-                    <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LibVersion" placeholder="LibVersion"/ readonly=true>
-                    </div>
-                </div>	
-              	<div class="form-group">
                     <label class="col-md-2 control-label">{{Dernière Activité}}</label>
                     <div class="col-md-3">
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
@@ -105,8 +93,6 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     <div class="col-md-3">
                         </span><input type="checkbox" class="eqLogicAttr" data-l1key="configuration"  data-l2key="followActivity"  checked/>
                     </div>
-                </div>
-		<div class="form-group">
                     <label class="col-md-2 control-label" >{{Durée d'Inactivité}}</label>
                     <div class="col-md-3">
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="AlertLimit" placeholder="AlertLimit"/>
@@ -127,10 +113,20 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         	<input id="selectNode" type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
                     		</div>
                     		
-                    		<label class="col-md-2 control-label">{{Nom du Sketch}}</label>
+                    <label class="col-md-2 control-label">{{mySensors}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LibVersion" placeholder="LibVersion"/ readonly=true>
+                    </div>                    		
+                	</div>                    		
+                        <div class="form-group">
+                    		<label class="col-md-2 control-label">{{Sketch}}</label>
                 		 <div class="col-md-3">
                 		  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchName" placeholder="SketchName"/ readonly=true>
                     		</div>
+                    		                    <label class="col-md-2 control-label">{{Version}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchVersion" placeholder="SketchVersion"/ readonly=true>
+                    </div>
                     		
                 	</div>
                 	
