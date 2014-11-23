@@ -39,7 +39,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
             <fieldset>
                 <legend>{{Général}}</legend>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">{{Nom de l'équipement mySensors}}</label>
+                    <label class="col-md-2 control-label">{{Nom du Node}}</label>
                     <div class="col-md-3">
                         <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
                         <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement mySensors}}"/>
@@ -82,12 +82,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     </div>
                 </div>
 
-              	<div class="form-group">
-                    <label class="col-md-2 control-label">{{Dernière Activité}}</label>
-                    <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
-                    </div>
-                </div>	    
+   
 		<div class="form-group">
                     <label class="col-md-2 control-label" >{{Suivi du Node}}</label>
                     <div class="col-md-3">
@@ -129,6 +124,12 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     </div>
                     		
                 	</div>
+                	              	<div class="form-group">
+                    <label class="col-md-2 control-label">{{Dernière Activité}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
+                    </div>
+                </div>	 
                 	
 
                     </fieldset> 
