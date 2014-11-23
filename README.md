@@ -46,9 +46,11 @@ Change unit to sensor creation and not value send as it will be the default in 2
 
 Automaticly create a device for the gateway with the only purpose to know the status of connexion and use it for alert
 
+Can set a node for monitoring and get an alert on inactive nodes
+
 === Todo : ===
 
-Check and alert if node has not been seen since long time
+Enhance mySensors node pages and widgets used by default
 
 Add function on plugin to deliver data requested by a node
 
