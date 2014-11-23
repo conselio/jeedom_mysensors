@@ -48,9 +48,9 @@ class mySensors extends eqLogic {
 				log::add('mySensors', 'info', 'Derniere Activite ' . $actDate);
 				$activity = strtotime($actDate);
 				$duration = $elogic->getConfiguration('AlertLimit');
-				log::add('mySensors', 'info', 'Durée d inactivité ' . $duration);
+				log::add('mySensors', 'info', 'Interval paramétré ' . $duration);
 				$interval = round(abs($date - $activity) / 60,2);
-				log::add('mySensors', 'info', 'Interval paramétré ' . $interval);
+				log::add('mySensors', 'info', 'Durée d inactivité ' . $interval);
 				if ($interval > $duration) {
 					log::add('mySensors', 'info', 'Délai dépassé pour ' . $elogic->getName());
 					$gate = self::byLogicalId('gateway', 'mySensors');
