@@ -67,6 +67,21 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 				
 				<input id="port_serie" class="configKey form-control" data-l1key="modem_serie_addr" style="margin-top:5px;display:none" placeholder="Renseigner le port série (ex : /dev/ttyS0)"/>
 				<input id="network_address" class="configKey form-control" data-l1key="gateway_addr" style="margin-top:5px;display:none" placeholder="Renseigner l'e port série'adresse de la gateway (ex : 192.168.1.1:5003"/>
+				            </div>
+        </div>
+		<div id="div_status" class="form-group">
+		<label class="col-lg-4 control-label">Redémarrage</label>
+			<div class="col-lg-2">
+			<a class="btn btn-warning" id="bt_restartmySensors"><i class='fa fa-stop'></i> Arrêter/Redemarrer le service NodeJS</a>
+			</div>
+		</div>		
+ <?php
+ if (!mySensors::deamonRunning()) {
+echo '<div id="div_node" class="alert alert-danger">Le service NodeJS ne tourne pas</div>';
+} else {
+echo '<div id="div_node" class="alert alert-success">Le service NodeJS est en marche</div>';
+}
+?>				
 				<script>
 				$( "#select_port" ).change(function() {
 					$( "#select_port option:selected" ).each(function() {
@@ -92,16 +107,40 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 					$( "#select_mode option:selected" ).each(function() {
 						if($( this ).val() == "0" || $( this ).val() == "1"){
 						 $("#div_local").show();
+						 $("#div_status").show();
+						 $("#div_node").show();
 						 $("#div_slave").hide();
 						}
 						else{
 							$("#div_local").hide();
+							$("#div_status").hide();
+							$("#div_node").hide();
 							$("#div_slave").show();
 							}
 						});
 				});
+				$('#bt_restartmySensors').on('click', function () {
+					$.ajax({// fonction permettant de faire de l'ajax
+						type: "POST", // methode de transmission des données au fichier php
+						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
+						data: {
+							action: "restartNode",
+						},
+						dataType: 'json',
+						error: function (request, status, error) {
+							handleAjaxError(request, status, error);
+						},
+						success: function (data) { // si l'appel a bien fonctionné
+							if (data.state != 'ok') {
+								$('#div_alert').showAlert({message: data.result, level: 'danger'});
+								return;
+							}
+						$('#div_alert').showAlert({message: 'Le nodejs a été correctement arrêté : il se relancera automatiquement dans 1 minute', level: 'success'});
+						$('#ul_plugin .li_plugin[data-plugin_id=mySensors]').click();
+						}
+					});
+				});
 			</script>
-            </div>
-        </div>
+
     </fieldset>
 </form>

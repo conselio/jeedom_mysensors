@@ -52,19 +52,32 @@ function remove() {
 
 function mySensors_install() {
     $cron = cron::byClassAndFunction('mySensors', 'pull');
-    if (is_object($cron)) {
-        $cron->remove();
+    if (!is_object($cron)) {
+        $cron = new cron();
+        $cron->setClass('mySensors');
+        $cron->setFunction('pull');
+        $cron->setEnable(1);
+        $cron->setDeamon(0);
+        $cron->setSchedule('*/15 * * * *');
+        $cron->save();
     }
 }
 
 function mySensors_update() {
     $cron = cron::byClassAndFunction('mySensors', 'pull');
-    if (is_object($cron)) {
-        $cron->remove();
+    if (!is_object($cron)) {
+        $cron = new cron();
+        $cron->setClass('mySensors');
+        $cron->setFunction('pull');
+        $cron->setEnable(1);
+        $cron->setDeamon(0);
+        $cron->setSchedule('*/15 * * * *');
+        $cron->save();
     }
     if (method_exists('mySensors', 'stopDeamon')) {
         mySensors::stopDeamon();
     }
+    $cron->stop();
 }
 
 function mySensors_remove() {

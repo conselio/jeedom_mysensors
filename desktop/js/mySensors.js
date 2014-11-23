@@ -26,6 +26,7 @@ $("#bt_addmySensorsAction").on('click', function(event) {
     addCmdToTable(_cmd);
 });
 
+
 /*
 $('#table_cmd tbody').delegate('tr .remove', 'click', function(event) {
     $(this).closest('tr').remove();

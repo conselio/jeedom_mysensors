@@ -15,7 +15,7 @@ Add date and info level in nodejs logs
 
 Add variable path for nodejs (so custom installations not in /ush/share/nginx/www... will work)
 
-1.5 In progress
+Version 1.5
 
 Add SketchName as an information on equipment page
 
@@ -32,8 +32,30 @@ Add related commands to some type of informations :
 
 Use LogicalID for register node and search them (and also for commands)
 
-*** Todo : ***
+Version 1.6
 
-Widget for better display
+*Work in progress*
 
-Rewrite the nodejs in python maybe ?
+Can restart NodeJS from config page
+
+Better date output in logs to match Jeedom format
+
+Attach a widget for better display on some sensors (temp, hum, light, motion, battery)
+
+Change unit to sensor creation and not value send as it will be the default in 2.0
+
+Automaticly create a device for the gateway with the only purpose to know the status of connexion and use it for alert
+
+Can set a node for monitoring and get an alert on inactive nodes
+
+=== Todo : ===
+
+Enhance mySensors node pages and widgets used by default
+
+Add function on plugin to deliver data requested by a node
+
+How to reboot a node from Jeedom (need OTA bootloader, waiting for mySensors 2.0)
+
+Add commands for RGB and servo (actualy, will wait for mySensors lib2.0 as there is changes and during presentation of sensors, they will say what commands they accepts)
+
+Integrate OTA with sketchs library and possible configuration of sketchs with variables like pin, warning level ...

@@ -80,9 +80,9 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     </div>
                 </div>
 		<div class="form-group">
-                    <label class="col-md-2 control-label">{{NODE ID}}</label>
+                    <label class="col-md-2 control-label">{{Node ID}}</label>
                     <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
+                        <input id="selectNode" type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
                     </div>
                 </div>
               	<div class="form-group">
@@ -102,21 +102,58 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     <div class="col-md-3">
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LibVersion" placeholder="LibVersion"/ readonly=true>
                     </div>
-                </div>				
+                </div>	
+              	<div class="form-group">
+                    <label class="col-md-2 control-label">{{Dernière Activité}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
+                    </div>
+                </div>	    
+		<div class="form-group">
+                    <label class="col-md-2 control-label" >{{Suivi du Node}}</label>
+                    <div class="col-md-3">
+                        </span><input type="checkbox" class="eqLogicAttr" data-l1key="configuration"  data-l2key="followActivity"  checked/>
+                    </div>
+                </div>
+		<div class="form-group">
+                    <label class="col-md-2 control-label" >{{Durée d'Inactivité}}</label>
+                    <div class="col-md-3">
+                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="AlertLimit" placeholder="AlertLimit"/>
+                    </div>
+                </div>
+
             </fieldset> 
         </form>
 
-        <legend>{{MySensor}}</legend>
-		
-		<div class="alert alert-info">
-            {{ Sous type : <br/>
-            - Slider : mettre #slider# pour recupérer la valeur<br/>
-            - Color : mettre #color# pour recupérer la valeur<br/>
-            - Message : mettre #title# et #message#}}
-        </div>
-		
+	<legend>{{mySensors}}</legend>
+
         <a class="btn btn-default btn-sm" id="bt_addmySensorsInfo"><i class="fa fa-plus-circle"></i> {{Ajouter une info}}</a>
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
+        		<script>
+				$('#bt_restartEq').on('click', function () {
+					nodeId = document.getElementById('selectNode');
+					$.ajax({// fonction permettant de faire de l'ajax
+						type: "POST", // methode de transmission des données au fichier php
+						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
+						data: {
+							action: "restartEq",
+							node: nodeId,
+						},
+						dataType: 'json',
+						error: function (request, status, error) {
+							handleAjaxError(request, status, error);
+						},
+						success: function (data) { // si l'appel a bien fonctionné
+							if (data.state != 'ok') {
+								$('#div_alert').showAlert({message: data.result, level: 'danger'});
+								return;
+							}
+						$('#div_alert').showAlert({message: 'Le node a été relancé', level: 'success'});
+						$('#ul_plugin .li_plugin[data-plugin_id=mySensors]').click();
+						}
+					});
+				});
+			</script>        
         <table id="table_cmd" class="table table-bordered table-condensed">
             <thead>
                 <tr>

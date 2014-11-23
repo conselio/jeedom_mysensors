@@ -36,6 +36,7 @@ process.argv.forEach(function(val, index, array) {
 });
 
 
+
 const gwBaud = 115200;
 
 const fwHexFiles 					= [  ];
@@ -87,6 +88,13 @@ const P_CUSTOM						= 6;
 var fs = require('fs');
 var appendedString="";
 
+function LogDate(Type, Message) {
+ 
+   var ceJour = new Date();
+       var ceJourJeedom = ceJour.getDate() + "/" + ceJour.getMonth() + "/" + ceJour.getFullYear() + " " + ceJour.getHours() + "" + ceJour.getMinutes() + "" + ceJour.getSeconds();
+       console.log(ceJourJeedom + "|" + Type + "|" + Message);
+}
+
 function crcUpdate(old, value) {
 	var c = old ^ value;
 	for (var i = 0; i < 8; ++i) {
@@ -114,6 +122,100 @@ function pushDWord(arr, val) {
 	arr.push((val  >> 24) & 0x000000FF);
 }
 
+function loadFirmware(fwtype, fwversion, sketch, db) {
+	var filename = path.basename(sketch);
+        console.log("compiling firmware: " + filename);
+        var req = {
+                files: [{
+                        filename: filename,
+                        content: fs.readFileSync(sketch).toString()
+                }],
+                format: "hex",
+                version: "105",
+                build: {
+                        mcu: "atmega328p",
+                        f_cpu: "16000000L",
+                        core: "arduino",
+                        variant: "standard"
+                }
+        };
+        requestify.post('https://codebender.cc/utilities/compile/', req).then(function(res) {
+                var body = JSON.parse(res.getBody());
+                if (body.success) {
+			console.log("loading firmware: " + filename);
+			fwdata = [];
+			var start = 0;
+			var end = 0;
+			var pos = 0;
+			var hex = body.output.split("\n");
+			for(l in hex) {
+				line = hex[l].trim();
+				if (line.length > 0) {
+					while (line.substring(0, 1) != ":")
+						line = line.substring(1);
+					var reclen = parseInt(line.substring(1, 3), 16);
+					var offset = parseInt(line.substring(3, 7), 16);
+					var rectype = parseInt(line.substring(7, 9), 16);
+					var data = line.substring(9, 9 + 2 * reclen);
+					var chksum = parseInt(line.substring(9 + (2 * reclen), 9 + (2 * reclen) + 2), 16);
+					if (rectype == 0) {
+						if ((start == 0) && (end == 0)) {
+							if (offset % 128 > 0)
+								throw new Error("error loading hex file - offset can't be devided by 128");
+							start = offset;
+							end = offset;
+						}
+						if (offset < end)
+							throw new Error("error loading hex file - offset lower than end");
+						while (offset > end) {
+							fwdata.push(255);
+							pos++;
+							end++;
+						}
+						for (var i = 0; i < reclen; i++) {
+							fwdata.push(parseInt(data.substring(i * 2, (i * 2) + 2), 16));
+							pos++;
+						}
+						end += reclen;
+					}
+				}
+			}	
+			var pad = end % 128; // ATMega328 has 64 words per page / 128 bytes per page
+			for (var i = 0; i < 128 - pad; i++) {
+				fwdata.push(255);
+				pos++;
+				end++;
+			}
+			var blocks = (end - start) / FIRMWARE_BLOCK_SIZE;
+			var crc = 0xFFFF;
+			for (var i = 0; i < blocks * FIRMWARE_BLOCK_SIZE; ++i) {
+				var v = crc;
+				crc = crcUpdate(crc, fwdata[i]);
+			}
+			db.collection('firmware', function(err, c) {
+				c.update({
+					'type': fwtype,
+					'version': fwversion
+				}, {
+					$set: {
+						'filename': filename,
+						'blocks': blocks,
+						'crc': crc,
+						'data': fwdata
+					}
+				}, {
+					upsert: true
+				}, function(err, result) {
+					if (err)
+						console.log('Error writing firmware to database');
+				});
+			});
+			console.log("loading firmware done. blocks: " + blocks + " / crc: " + crc);
+                } else {
+                        console.log("error: %j", res.body);
+                }
+        });
+}
 
 /*
 function decode(msg) {
@@ -164,67 +266,67 @@ function saveProtocol(sender, payload, db) {
 }
 
 function saveSensor(sender, sensor, type) {
-
-	console.log(Date() + " | info | Save saveSensor : " + "Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
+	LogDate("info", "Save saveSensor : Value-" + sender.toString() + "-" + sensor.toString()+ "-" + type.toString() );
 
 	url = urlJeedom + "&messagetype=saveSensor&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+type;
 
 		
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date() + " | info | Got response saveSensor: " + response.statusCode);
+		LogDate("info", "Got response saveSensor: " + response.statusCode);
 	  }
 	});
-
-	
-
 }
 
-function saveValue(sender, sensor, type, payload) {
+function saveGateway(status) {
+	LogDate("info", "Save Gateway Status " + status);
 
+	url = urlJeedom + "&messagetype=saveGateway&type=mySensors&status="+status;
 
-	console.log(Date() + " | info | Save Value : " + "Value-" + sender.toString() + "-" + sensor.toString() );
-
-	
-	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload+"&typu=" + type.toString();
-
-			console.log(Date() + " | info | " + url);
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date() + " info | Got response Value: " + response.statusCode);
-	  }else{
-	  
-	  	console.log(Date() + ' | info | SaveValue Error : '  + error );
+		LogDate("info", "Got response saveSensor: " + response.statusCode);
 	  }
 	});
-	
-	
+}
 
+function saveValue(sender, sensor, payload) {
+	LogDate("info", "Save Value : Value-" + payload.toString() + "-" + sender.toString() + "-" + sensor.toString() );
+
+	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
+
+	LogDate("info", url);
+	request(url, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+		LogDate("info", "Got response Value: " + response.statusCode);
+	  }else{
+	  
+	  	LogDate("info", "SaveValue Error : "  + error );
+	  }
+	});
 }
 
 function saveBatteryLevel(sender, payload ) {
-
-
-	console.log(Date() + " | info | Save BatteryLevel : " + "Value-" + sender.toString() + "-" + payload );
+	 LogDate("info", "Save BatteryLevel : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveBatteryLevel&type=mySensors&id="+sender.toString()+"&value="+payload;
-
+	LogDate("info", url);
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date() + " | info | Got response saveSketchName: " + response.statusCode);
+		 LogDate("info", "Got response saveBatteryLevel: " + response.statusCode);
 	  }
 	});
 }
 
 function saveSketchName(sender, payload) {
 
-	console.log(Date() + " | info | Save saveSketchName : " + "Value-" + sender.toString() + "-" + payload );
+	LogDate("info", "Save saveSketchName : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveSketchName&type=mySensors&id="+sender.toString()+"&value="+payload;
-
+	LogDate("info", url);
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date() + " | info | Got response saveSketchName: " + response.statusCode);
+		LogDate("info", "Got response saveSketchName: " + response.statusCode);
 	  }
 	});
 	
@@ -232,26 +334,26 @@ function saveSketchName(sender, payload) {
 
 function saveSketchVersion(sender, payload ) {
 
-	console.log(Date() + " | info | Save saveSketchVersion : " + "Value-" + sender.toString() + "-" + payload );
+	LogDate("info", "Save saveSketchVersion : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveSketchVersion&type=mySensors&id="+sender.toString()+"&value="+payload;
-
+	LogDate("info", url);
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date() + " | info | Got response saveSketchVersion: " + response.statusCode);
+		LogDate("info", "Got response saveSketchVersion: " + response.statusCode);
 	  }
 	});
 }
 
 function saveLibVersion(sender, payload ) {
 
-	console.log(Date() + " | info | Save saveLibVersion : " + "Value-" + sender.toString() + "-" + payload );
+	LogDate("info", "Save saveLibVersion : Value-" + sender.toString() + "-" + payload );
 
 		url = urlJeedom + "&messagetype=saveLibVersion&type=mySensors&id="+sender.toString()+"&value="+payload;
-
+	LogDate("info", url);
 		request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-		console.log(Date() + " | info | Got response saveLibVersion: " + response.statusCode);
+		LogDate("info", "Got response saveLibVersion: " + response.statusCode);
 	  }
 	});
 }
@@ -291,6 +393,129 @@ function sendConfig(destination, gw) {
 	console.log('-> ' + td.toString());
 	gw.write(td);
 }
+
+function sendFirmwareConfigResponse(destination, fwtype, fwversion, db, gw) {
+	// keep track of type/versin info for each node
+	// at the same time update the last modified date
+	// could be used to remove nodes not seen for a long time etc.
+	db.collection('node', function(err, c) {
+		c.update({
+			'id': destination
+		}, {
+			$set: {
+				'type': fwtype,
+				'version': fwversion,
+				'reboot': 0
+			}
+		}, {
+			upsert: true
+		}, function(err, result) {
+			if (err)
+				console.log("Error writing node type and version to database");
+		});
+	});
+	if (fwtype == 0xFFFF) {
+		// sensor does not know which type / blank EEPROM
+		// take predefined type (ideally selected in UI prior to connection of new sensor)
+		if (fwDefaultType == 0xFFFF)
+			throw new Error('No default sensor type defined');
+		fwtype = fwDefaultType;
+	}
+	db.collection('firmware', function(err, c) {
+		c.findOne({
+			$query: {
+				'type': fwtype
+			},
+			$orderby: {
+				'version': -1
+			}
+		}, function(err, result) {
+			if (err)
+				console.log('Error finding firmware for type ' + fwtype);
+			else if (!result)
+				console.log('No firmware found for type ' + fwtype);
+			else {
+				var payload = [];
+				pushWord(payload, result.type);
+				pushWord(payload, result.version);
+				pushWord(payload, result.blocks);
+				pushWord(payload, result.crc);
+				var sensor = NODE_SENSOR_ID;
+				var command = C_STREAM;
+				var acknowledge = 0; // no ack
+				var type = ST_FIRMWARE_CONFIG_RESPONSE;
+				var td = encode(destination, sensor, command, acknowledge, type, payload);
+				console.log('-> ' + td.toString());
+				gw.write(td);
+			}
+		});
+	});
+}
+
+function sendFirmwareResponse(destination, fwtype, fwversion, fwblock, db, gw) {
+	db.collection('firmware', function(err, c) {
+		c.findOne({
+			'type': fwtype,
+			'version': fwversion
+		}, function(err, result) {
+			if (err)
+				console.log('Error finding firmware version ' + fwversion + ' for type ' + fwtype);
+			var payload = [];
+			pushWord(payload, result.type);
+			pushWord(payload, result.version);
+			pushWord(payload, fwblock);
+			for (var i = 0; i < FIRMWARE_BLOCK_SIZE; i++)
+				payload.push(result.data[fwblock * FIRMWARE_BLOCK_SIZE + i]);
+			var sensor = NODE_SENSOR_ID;
+			var command = C_STREAM;
+			var acknowledge = 0; // no ack
+			var type = ST_FIRMWARE_RESPONSE;
+			var td = encode(destination, sensor, command, acknowledge, type, payload);
+			console.log('-> ' + td.toString());
+			gw.write(td);
+		});
+	});
+}
+
+function saveRebootRequest(destination, db) {
+	db.collection('node', function(err, c) {
+		c.update({
+			'id': destination
+		}, {
+			$set: {
+				'reboot': 1
+			}
+		}, function(err, result) {
+			if (err)
+				console.log("Error writing reboot request to database");
+		});
+	});
+}
+
+function checkRebootRequest(destination, db, gw) {
+	db.collection('node', function(err, c) {
+		c.find({
+			'id': destination
+		}, function(err, item) {
+			if (err)
+				console.log('Error checking reboot request');
+			else if (item.reboot == 1)
+				sendRebootMessage(destination, gw);
+		});
+	});
+}
+
+function sendRebootMessage(destination, gw) {
+	var sensor = NODE_SENSOR_ID;
+        var command = C_INTERNAL;
+        var acknowledge = 0; // no ack
+        var type = I_REBOOT;
+        var payload = "";
+        var td = encode(destination, sensor, command, acknowledge, type, payload);
+        console.log('-> ' + td.toString());
+        gw.write(td);
+}
+
 
 function appendData(str, db, gw) {
     pos=0;
@@ -340,7 +565,7 @@ function rfReceived(data, db, gw) {
 				saveLibVersion(sender, payload);
 			break;
 		case C_SET:
-			saveValue(sender, sensor, type, payload);
+			saveValue(sender, sensor, payload);
 			break;
 		case C_REQ:
 			break;
@@ -419,24 +644,24 @@ function rfReceived(data, db, gw) {
 	fs.unlink(pathsocket, function () {
 	  var server = net.createServer(function(c) {
 
-		console.log(Date() + ' | info | server connected');
+		LogDate("info", "server connected");
 
 		c.on('error', function(e) {
-		  console.log(Date() + ' | error | Error server disconnected');
+		  LogDate("error", "Error server disconnected");
 		});
 		
 		c.on('close', function() {
-		  console.log(Date() + ' | error | server disconnected');
+		  LogDate("error", "server disconnected");
 		});
 
 		c.on('data', function(data) {
-			console.log(Date() + ' | info | Response: "' + data + '"');
+			LogDate("info", "Response: " + data);
 			gw.write(data.toString() + '\n');
 		});
 
 	  });
 	  server.listen(8019, function(e) {
-		console.log(Date() + ' | info | server bound on 8019');
+		LogDate("info", "server bound on 8019");
 	  });
 	});
 	
@@ -445,13 +670,13 @@ function rfReceived(data, db, gw) {
 		gw.connect(gwPort, gwAddress);
 		gw.setEncoding('ascii');
 		gw.on('connect', function() {
-			console.log(Date() + ' | info | connected to ethernet gateway at ' + gwAddress + ":" + gwPort);
+			LogDate("info", "connected to ethernet gateway at " + gwAddress + ":" + gwPort);
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
 		}).on('end', function() {
-			console.log(Date() + ' | error | disconnected from gateway');
+			LogDate("error", "disconnected from gateway");
 		}).on('error', function() {
-			console.log(Date() + ' | error | connection error - trying to reconnect');
+			LogDate("error", "connection error - trying to reconnect");
 			gw.connect(gwPort, gwAddress);
 			gw.setEncoding('ascii');
 		});
@@ -462,13 +687,16 @@ function rfReceived(data, db, gw) {
 		gw = new SerialPort(gwPort, { baudrate: gwBaud });
      	gw.open();
 		gw.on('open', function() {
-			console.log(Date() + ' | info | connected to serial gateway at ' + gwPort);
+			LogDate("info", "connected to serial gateway at " + gwPort);
+			saveGateway('1');
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
 		}).on('end', function() {
-			console.log(Date() + ' | error | disconnected from gateway');
+			LogDate("error", "disconnected from gateway");
+			saveGateway('0');
 		}).on('error', function() {
-			console.log(Date() + ' | error | connection error - trying to reconnect');
+			LogDate("error", "connection error - trying to reconnect");
+			saveGateway('0');
 			gw.open();
 		});
 	} 

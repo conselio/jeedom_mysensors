@@ -37,6 +37,32 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class mySensors extends eqLogic {
     /*     * *************************Attributs****************************** */
+     	public static function pull($_options) {
+     		$date = time();
+     		log::add('mySensors', 'info', 'Cron de vérification des nodes');
+		foreach (eqLogic::byType('mySensors') as $elogic) {
+			log::add('mySensors', 'info', 'Vérification du node' . $elogic->getName());
+			if ($elogic->getConfiguration('followActivity') == '1'){
+				log::add('mySensors', 'info', $elogic->getName() . ' en surveillance');
+				$actDate = $elogic->getConfiguration('LastActivity');
+				log::add('mySensors', 'info', 'Derniere Activite ' . $actDate);
+				$activity = strtotime($actDate);
+				$duration = $elogic->getConfiguration('AlertLimit');
+				log::add('mySensors', 'info', 'Interval paramétré ' . $duration);
+				$interval = round(abs($date - $activity) / 60,2);
+				log::add('mySensors', 'info', 'Durée d inactivité ' . $interval);
+				if ($interval > $duration) {
+					log::add('mySensors', 'info', 'Délai dépassé pour ' . $elogic->getName());
+					$gate = self::byLogicalId('gateway', 'mySensors');
+					$value = $elogic->getName();
+					$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($gate->getId(),'Inactif');
+					$cmdlogic->setConfiguration('value',$value);
+					$cmdlogic->save();
+					$cmdlogic->event($value);
+					}
+				}
+			}
+		}
 
 	public static $_dico = 
 			array(
@@ -47,47 +73,30 @@ class mySensors extends eqLogic {
 				'OTA'=> 4,
 				),
 			'U' => array( // Unité
-				'°C'=> 0, //Temperature
-				'%'=> 1, //Humidité
-				'Relais'=> 2,
-				'Variateur'=> 3,
-				'hPA'=> 4, //Pression admospherique
-				'V_FORECAST'=> 5,
-				'mm'=> 6, //Niveau d'eau en milli-metre
-				'%'=> 7, //Taux de pluie
-				'KMh'=> 8, //Vitesse du vent
-				'GUST'=> 9, //Raffale
-				'DIRECTION'=> 10, //Direction du vent
+				'Entrée'=> 0,
+				'Mouvement'=> 1,
+				'Fumée'=> 2,
+				'Relais'=> 3,
+				'%'=> 4,
+				'S_COVER'=> 5,
+				'°C'=> 6,
+				'%'=> 7,
+				'hPa'=> 8,
+				'Anémomètre'=> 9,
+				'Pluie'=> 10,
 				'UV'=> 11,
 				'Kg'=> 12,
-				'cm'=> 13,
-				'V_IMPEDANCE'=> 14,
-				'V_ARMED'=> 15,
-				'Entrée'=> 16,
-				'WATT'=> 17,
-				'KWH'=> 18,
-				'V_SCENE_ON'=> 19,
-				'V_SCENE_OFF'=> 20,
-				'Radiateur'=> 21,
-				'Radiateur ON/OFF'=> 22,
-				'%'=> 23, // Niveau lumiere
-				'VAR1'=> 24,
-				'VAR2'=> 25,
-				'VAR3'=> 26,
-				'VAR4'=> 27,
-				'VAR5'=> 28,
-				'V_UP'=> 29,
-				'V_DOWN'=> 30,
-				'V_STOP'=> 31,
-				'IR_SEND'=> 32,
-				'IR_RECEIVE'=> 33,
-				'V_FLOW'=> 34,
-				'M²'=> 35, // volume
-				'V_LOCK_STATUS'=> 36,
-				'V_DUST_LEVEL'=> 37,
-				'V'=> 38, //Volt (tension)
-				'A'=> 39, //Ampere (intensité)
-				),
+				'W'=> 13,
+				'Chauffage'=> 14,
+				'cm'=> 15,
+				'Lux'=> 16,
+				'S_ARDUINO_NODE'=> 17,
+				'Repeteur'=> 18,
+				'S_LOCK'=> 19,
+				'S_IR'=> 20,
+				'L'=> 21,
+				'Qualité Air'=> 22
+			 ),
 			'I' => array( 
 				'I_BATTERY_LEVEL'=> 0,
 				'I_TIME'=> 1,
@@ -165,6 +174,8 @@ class mySensors extends eqLogic {
 		$modem_serie_addr = config::byKey('usbGateway', 'mySensors');
 		if($modem_serie_addr == "serie") {
 			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
+		} else if ($modem_serie_addr == "network") {
+			$usbGateway = config::byKey('gateway_addr', 'mySensors');
 		} else {
 			$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
 		}
@@ -333,17 +344,11 @@ class mySensors extends eqLogic {
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
+			$date = date('d-m-Y H:i');
+			$elogic->setConfiguration('LastActivity', $date);
+			$elogic->save();
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
-				$unite = array_search($typu, self::$_dico['U']);
-				if ($unite == false ) {
-					$unite = 'Inconnu';
-				}
-				if ( $cmdlogic->getUnite() != $unite ) {
-					$cmdlogic->setUnite( $unite );	
-					log::add('mySensors', 'info', $unite);
-				}
-				log::add('mySensors', 'info', $unite);
 				$cmdlogic->setConfiguration('value', $value);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
@@ -356,10 +361,13 @@ class mySensors extends eqLogic {
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
+			$date = date('d-m-Y H:i');
+			$elogic->setConfiguration('LastActivity', $date);
+			$elogic->save();			
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'BatteryLevel');
 			if (is_object($cmdlogic)) {
 				if ( $cmdlogic->getConfiguration('value') != $value ) {
-					$cmdlogic->setConfiguration('sensorType',$value);
+					$cmdlogic->setConfiguration('value',$value);
 					$cmdlogic->save();
 					$cmdlogic->event($value);
 				}
@@ -377,7 +385,8 @@ class mySensors extends eqLogic {
 				$mysCmd->setSubType('numeric');
 				$mysCmd->setName( 'Batterie' );
 				$mysCmd->setUnite( '%' );
-				$mysCmd->setConfiguration('BatteryLevel',$value);
+				$mysCmd->setConfiguration('value',$value);
+				$mysCmd->setTemplate("dashboard","batterie" );
 				$mysCmd->save();
 				$mysCmd->event($value);
 			}				
@@ -406,8 +415,74 @@ class mySensors extends eqLogic {
 				$mys->setName($value.'-'.$nodeid);
 				$mys->setIsEnable(true);
 				$mys->save();
+					$mysCmd = new mySensorsCmd();
+					$mysCmd->setEventOnly(0);
+					$mysCmd->setConfiguration('cmdCommande', '3');
+					$mysCmd->setConfiguration('request', '0');
+					$mysCmd->setConfiguration('cmdtype', '3');
+					$mysCmd->setConfiguration('sensorType', '13');
+					$mysCmd->setConfiguration('sensor', '0');
+					$mysCmd->setEqLogic_id($mys->getId());
+					$mysCmd->setEqType('mySensors');
+					$mysCmd->setLogicalId('reboot');
+					$mysCmd->setType('action');
+					$mysCmd->setSubType('other');
+					$mysCmd->setName( "Reboot Node" );
+					$mysCmd->save();				
 		}
 	}
+	
+	public static function saveGateway() {
+		$status = init('status');
+		$elogic = self::byLogicalId('gateway', 'mySensors');
+		if (is_object($elogic)) {
+			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'Connexion');
+			if (is_object($cmdlogic)) {
+				$cmdlogic->setConfiguration('value',$value);
+				$cmdlogic->save();
+				$cmdlogic->event($value);
+			}
+			else {
+				$mysCmd = new mySensorsCmd();
+				$mysCmd->setEqLogic_id($elogic->getId());
+				$mysCmd->setEqType('mySensors');
+				$mysCmd->setLogicalId('Connexion');
+				$mysCmd->setType('info');
+				$mysCmd->setSubType('numeric');
+				$mysCmd->setName( 'Connexion' );
+				$mysCmd->setConfiguration('value',$status);
+				$mysCmd->save();
+				$mysCmd->event($value);
+				$mysCmd = new mySensorsCmd();
+				$mysCmd->setEqLogic_id($elogic->getId());
+				$mysCmd->setEqType('mySensors');
+				$mysCmd->setLogicalId('Inactif');
+				$mysCmd->setType('info');
+				$mysCmd->setSubType('other');
+				$mysCmd->setName( 'Inactif' );
+				$mysCmd->save();
+			}	
+		}
+		else {
+				$mys = new mySensors();
+				$mys->setEqType_name('mySensors');
+				$mys->setLogicalId('gateway');
+				$mys->setConfiguration('nodeid', 'gateway');
+				$mys->setName('Gateway');
+				$mys->setIsEnable(true);
+				$mys->save();
+				$mysCmd = new mySensorsCmd();
+				$mysCmd->setEqLogic_id($mys->getId());
+				$mysCmd->setEqType('mySensors');
+				$mysCmd->setLogicalId('Connexion');
+				$mysCmd->setType('info');
+				$mysCmd->setSubType('numeric');
+				$mysCmd->setName( 'Connexion' );
+				$mysCmd->setConfiguration('value',$status);
+				$mysCmd->save();
+				$mysCmd->event($value);
+		}
+	}	
 
 	public static function saveSketchVersion() {
 		$nodeid = init('id');
@@ -444,6 +519,10 @@ class mySensors extends eqLogic {
 		if ($name == false ) {
 			$name = 'UNKNOWN';
 		}
+		$unite = array_search($value, self::$_dico['U']);
+		if ($unite == false ) {
+			$unite = 'UNKNOWN';
+		}		
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) {
@@ -466,6 +545,20 @@ class mySensors extends eqLogic {
 				$mysCmd->setType('info');
 				$mysCmd->setSubType('numeric');
 				$mysCmd->setName( $name . " " . $sensor );
+				$mysCmd->setUnite( $unite );
+				if ($name == 'Relais') {
+					$mysCmd->setTemplate("dashboard","light" );
+				} else if ($name == 'Variateur') {
+					$mysCmd->setTemplate("dashboard","progressBar" );
+				} else if ($name == 'Temperature') {
+					$mysCmd->setTemplate("dashboard","gauge" );
+				} else if ($name == 'Humidité') {
+					$mysCmd->setTemplate("dashboard","vuMeter" );
+				} else if ($name == 'Mouvement') {
+					$mysCmd->setTemplate("dashboard","vibration" );
+				} else {
+					$mysCmd->setTemplate("dashboard","badge" );
+				}
 				$mysCmd->save();
 			}
 			if ($name == 'Relais') {
@@ -514,7 +607,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setEventOnly(0);
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '');
-					$mysCmd->setConfiguration('cmdtype', '3');
+					$mysCmd->setConfiguration('cmdtype', '2');
 					$mysCmd->setConfiguration('sensorType', $value);
 					$mysCmd->setConfiguration('sensor', $sensor);
 					$mysCmd->setEqLogic_id($elogic->getId());
@@ -546,6 +639,7 @@ class mySensors extends eqLogic {
 			case 'saveLibVersion' : self::saveLibVersion(); break;
 			case 'saveSensor' : self::saveSensor(); break;
 			case 'saveBatteryLevel' : self::saveBatteryLevel(); break;
+			case 'saveGateway' : self::saveGateway(); break;
 		
 		}
 		
