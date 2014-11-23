@@ -164,4 +164,5 @@ function addCmdToTable(_cmd) {
 		jeedom.cmd.changeType(tr, init(_cmd.subType));
 	}
 	});
+    }
 }
