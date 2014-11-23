@@ -566,6 +566,8 @@ class mySensors extends eqLogic {
 				$reloffId = 'Relais'.$sensor.'Off';
 				$onlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$relonId);
 				$offlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$reloffId);
+				$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
+				$cmId = $cmdlogic->getId();
 				if (!is_object($onlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
@@ -579,7 +581,8 @@ class mySensors extends eqLogic {
 					$mysCmd->setLogicalId($relonId);
 					$mysCmd->setType('action');
 					$mysCmd->setSubType('other');
-					$mysCmd->setName( $name . " " . $sensor . " On" );
+					$mysCmd->setValue($cmId);
+					$mysCmd->setName( "On" . $sensor );
 					$mysCmd->save();
 				}
 				if (!is_object($offlogic)) {
@@ -595,13 +598,16 @@ class mySensors extends eqLogic {
 					$mysCmd->setLogicalId($reloffId);
 					$mysCmd->setType('action');
 					$mysCmd->setSubType('other');
-					$mysCmd->setName( $name . " " . $sensor . " Off" );
+					$mysCmd->setValue($cmId);
+					$mysCmd->setName( "Off". $sensor );
 					$mysCmd->save();
 				}
 			}
 			if ($name == 'Variateur') {
 				$dimmerId = 'Dimmer'.$sensor;
 				$dimlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$dimmerId);
+				$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
+				$cmId = $cmdlogic->getId();
 				if (!is_object($dimlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
@@ -614,8 +620,9 @@ class mySensors extends eqLogic {
 					$mysCmd->setEqType('mySensors');
 					$mysCmd->setLogicalId($dimmerId);
 					$mysCmd->setType('action');
-					$mysCmd->setSubType('other');
-					$mysCmd->setName( $name . " " . $sensor . " Set" );
+					$mysCmd->setSubType('slider');
+					$mysCmd->setValue($cmId);
+					$mysCmd->setName( "Set" . $sensor );
 					$mysCmd->save();
 				}				
 			}
