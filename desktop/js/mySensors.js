@@ -152,5 +152,16 @@ function addCmdToTable(_cmd) {
 
         $('#table_cmd tbody').append(tr);
         $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
-    }
+ 	jeedom.eqLogic.builSelectCmd({
+	id: $(".li_eqLogic.active").attr('data-eqLogic_id'),
+	filter: {type: 'info'},
+	error: function (error) {
+		$('#div_alert').showAlert({message: error.message, level: 'danger'});
+	},
+	success: function (result) {
+		tr.find('.cmdAttr[data-l1key=value]').append(result);
+		tr.setValues(_cmd, '.cmdAttr');
+		jeedom.cmd.changeType(tr, init(_cmd.subType));
+	}
+	});
 }
