@@ -31,7 +31,7 @@ $("#bt_addmySensorsAction").on('click', function(event) {
 $('#table_cmd tbody').delegate('tr .remove', 'click', function(event) {
     $(this).closest('tr').remove();
 });*/
-/*
+
 $("#table_cmd").delegate(".listEquipementInfo", 'click', function() {
     var el = $(this);
     jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function(result) {
@@ -48,7 +48,7 @@ $("#table_cmd").delegate(".listEquipementAction", 'click', function() {
     });
 });
 
-*/
+
 
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 
