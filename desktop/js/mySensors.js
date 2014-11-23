@@ -110,12 +110,14 @@ function addCmdToTable(_cmd) {
         tr += '<div class="col-lg-6">';
         tr += '<a class="cmdAction btn btn-default btn-sm" data-l1key="chooseIcon"><i class="fa fa-flag"></i> Icone</a>';
         tr += '<span class="cmdAttr" data-l1key="display" data-l2key="icon" style="margin-left : 10px;"></span>';
-        tr += '<a class="btn btn-default cursor listEquipementInfo btn-sm" data-input="calcul"><i class="fa fa-list-alt "></i> {{Rechercher équipement}}</a>';
         tr += '</div>';
         tr += '<div class="col-lg-6">';
         tr += '<input class="cmdAttr form-control input-sm" data-l1key="name">';
         tr += '</div>';
         tr += '</div>';
+        tr += '<select class="cmdAttr form-control tooltips input-sm" data-l1key="value" style="display : none;margin-top : 5px;" title="{{La valeur de la commande vaut par défaut la commande}}">';
+	tr += '<option value="">Aucune</option>';
+	tr += '</select>';
         tr += '</td>';
         tr += '<td>';
         tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="action" disabled style="margin-bottom : 5px;" />';
