@@ -42,14 +42,14 @@ class mySensors extends eqLogic {
      		log::add('mySensors', 'info', 'Cron de vérification des nodes');
 		foreach (eqLogic::byType('mySensors') as $elogic) {
 			log::add('mySensors', 'info', 'Vérification du node');
-			log::add('mySensors', 'info', $elogic->getName() + $elogic->getConfiguration('followActivity'));
+			log::add('mySensors', 'info', $elogic->getName() . $elogic->getConfiguration('followActivity'));
 			if ($elogic->getConfiguration('followActivity') == '1'){
 				log::add('mySensors', 'info', 'Surveillance Node');
-				$actDate = $elogic->getInformations('LastActivity');
+				$actDate = $elogic->getConfiguration('LastActivity');
 				log::add('mySensors', 'info', 'actDate');
 				$activity = strtotime($actDate);
 				log::add('mySensors', 'info', $activity);
-				$duration = $elogic->getInformations('AlertLimit');
+				$duration = $elogic->getConfiguration('AlertLimit');
 				log::add('mySensors', 'info', $duration);
 				$interval = round(abs($to_time - $from_time) / 60,2);
 				log::add('mySensors', 'info', $interval);
