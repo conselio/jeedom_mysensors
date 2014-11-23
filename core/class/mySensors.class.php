@@ -42,7 +42,8 @@ class mySensors extends eqLogic {
      		log::add('mySensors', 'info', 'Cron de vérification des nodes');
 		foreach (eqLogic::byType('mySensors') as $elogic) {
 			log::add('mySensors', 'info', 'Vérification du node');
-			if ($elogic->getInformations('followActivity') == '1'){
+			log::add('mySensors', 'info', $elogic->getEqType_name());
+			if ($elogic->getConfiguration('followActivity') == '1'){
 				log::add('mySensors', 'info', 'Surveillance Node');
 				$actDate = $elogic->getInformations('LastActivity');
 				log::add('mySensors', 'info', 'actDate');
