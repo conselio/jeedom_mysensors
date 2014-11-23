@@ -110,7 +110,6 @@ function addCmdToTable(_cmd) {
         tr += '<div class="col-lg-6">';
         tr += '<a class="cmdAction btn btn-default btn-sm" data-l1key="chooseIcon"><i class="fa fa-flag"></i> Icone</a>';
         tr += '<span class="cmdAttr" data-l1key="display" data-l2key="icon" style="margin-left : 10px;"></span>';
-        tr += '<a class="btn btn-default cursor listEquipementInfo btn-sm" data-input="calcul"><i class="fa fa-list-alt "></i> {{Rechercher équipement}}</a>';
         tr += '</div>';
         tr += '<div class="col-lg-6">';
         tr += '<input class="cmdAttr form-control input-sm" data-l1key="name">';
