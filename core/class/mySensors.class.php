@@ -42,17 +42,16 @@ class mySensors extends eqLogic {
      		log::add('mySensors', 'info', 'Cron de vérification des nodes');
 		foreach (eqLogic::byType('mySensors') as $elogic) {
 			log::add('mySensors', 'info', 'Vérification du node');
-			log::add('mySensors', 'info', $elogic->getName() . $elogic->getConfiguration('followActivity'));
+			log::add('mySensors', 'info', $elogic->getName() . ' surveillance ' . $elogic->getConfiguration('followActivity'));
 			if ($elogic->getConfiguration('followActivity') == '1'){
-				log::add('mySensors', 'info', 'Surveillance Node');
 				$actDate = $elogic->getConfiguration('LastActivity');
-				log::add('mySensors', 'info', 'actDate');
+				log::add('mySensors', 'info', 'Last Activity' . $actDate);
 				$activity = strtotime($actDate);
-				log::add('mySensors', 'info', $activity);
+				log::add('mySensors', 'info', 'Last en time' .$activity);
 				$duration = $elogic->getConfiguration('AlertLimit');
-				log::add('mySensors', 'info', $duration);
-				$interval = round(abs($to_time - $from_time) / 60,2);
-				log::add('mySensors', 'info', $interval);
+				log::add('mySensors', 'info', 'Durée d inactivité' . $duration);
+				$interval = round(abs($date - $activity) / 60,2);
+				log::add('mySensors', 'info', 'Interval ' . $interval);
 				if ($interval > $duration) {
 					$gate = self::byLogicalId('gateway', 'mySensors');
 					$value = $elogic->getName();
