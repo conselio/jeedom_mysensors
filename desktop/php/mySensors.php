@@ -111,8 +111,8 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                 </div>	    
 		<div class="form-group">
                     <label class="col-md-2 control-label" >{{Suivi du Node}}</label>
-                    <div class="col-md-1">
-                        <input type="checkbox" class="eqLogicAttr" data-l1key="configuration"  data-l2key="followActivity"  checked/>
+                    <div class="col-md-1" style="width: 4%;">
+                        </span><input type="checkbox" class="eqLogicAttr" data-l1key="configuration"  data-l2key="followActivity"  checked/>
                     </div>
                 </div>
 		<div class="form-group">
