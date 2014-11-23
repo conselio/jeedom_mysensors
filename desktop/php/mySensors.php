@@ -32,8 +32,10 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
             </ul>
         </div>
     </div>
-    <div class="col-md-10 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
-        <form class="form-horizontal">
+    <div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+        <div class="row">
+            <div class="col-sm-6">
+                <form class="form-horizontal">
             <fieldset>
                 <legend>{{Général}}</legend>
                 <div class="form-group">
@@ -79,18 +81,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>
                     </div>
                 </div>
-		<div class="form-group">
-                    <label class="col-md-2 control-label">{{Node ID}}</label>
-                    <div class="col-md-3">
-                        <input id="selectNode" type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
-                    </div>
-                </div>
-              	<div class="form-group">
-                    <label class="col-md-2 control-label">{{Nom du Sketch}}</label>
-                    <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchName" placeholder="SketchName"/ readonly=true>
-                    </div>
-                </div>
+
               	<div class="form-group">
                     <label class="col-md-2 control-label">{{Version Sketch}}</label>
                     <div class="col-md-3">
@@ -121,9 +112,33 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="AlertLimit" placeholder="AlertLimit"/>
                     </div>
                 </div>
-
             </fieldset> 
         </form>
+        </div>      
+        
+                <div class="col-sm-6">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <legend>{{Informations}}</legend>
+
+                        <div class="form-group">
+                    		<label class="col-md-2 control-label">{{Node ID}}</label>
+                    		<div class="col-md-3">
+                        	<input id="selectNode" type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
+                    		</div>
+                    		
+                    		<label class="col-md-2 control-label">{{Nom du Sketch}}</label>
+                		 <div class="col-md-3">
+                		  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchName" placeholder="SketchName"/ readonly=true>
+                    		</div>
+                    		
+                	</div>
+                	
+
+                    </fieldset> 
+                </form>
+            </div>
+        </div>
 
 	<legend>{{mySensors}}</legend>
 
