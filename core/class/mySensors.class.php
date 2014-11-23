@@ -41,18 +41,18 @@ class mySensors extends eqLogic {
      		$date = time();
      		log::add('mySensors', 'info', 'Cron de vérification des nodes');
 		foreach (eqLogic::byType('mySensors') as $elogic) {
-			log::add('mySensors', 'info', 'Vérification du node');
-			log::add('mySensors', 'info', $elogic->getName() . ' surveillance ' . $elogic->getConfiguration('followActivity'));
+			log::add('mySensors', 'info', 'Vérification du node' . $elogic->getName());
 			if ($elogic->getConfiguration('followActivity') == '1'){
+				log::add('mySensors', 'info', $elogic->getName() . ' en surveillance'));
 				$actDate = $elogic->getConfiguration('LastActivity');
-				log::add('mySensors', 'info', 'Last Activity' . $actDate);
+				log::add('mySensors', 'info', 'Derniere Activite ' . $actDate);
 				$activity = strtotime($actDate);
-				log::add('mySensors', 'info', 'Last en time' .$activity);
 				$duration = $elogic->getConfiguration('AlertLimit');
-				log::add('mySensors', 'info', 'Durée d inactivité' . $duration);
+				log::add('mySensors', 'info', 'Durée d inactivité ' . $duration);
 				$interval = round(abs($date - $activity) / 60,2);
-				log::add('mySensors', 'info', 'Interval ' . $interval);
+				log::add('mySensors', 'info', 'Interval paramétré ' . $interval);
 				if ($interval > $duration) {
+					log::add('mySensors', 'info', 'Délai dépassé pour ' . $elogic->getName());
 					$gate = self::byLogicalId('gateway', 'mySensors');
 					$value = $elogic->getName();
 					$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($gate->getId(),'Inactif');
