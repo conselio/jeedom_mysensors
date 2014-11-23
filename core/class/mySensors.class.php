@@ -548,16 +548,22 @@ class mySensors extends eqLogic {
 				$mysCmd->setUnite( $unite );
 				if ($name == 'Relais') {
 					$mysCmd->setTemplate("dashboard","light" );
+					$mysCmd->setTemplate("mobile","light" );
 				} else if ($name == 'Variateur') {
-					$mysCmd->setTemplate("dashboard","progressBar" );
+					$mysCmd->setTemplate("dashboard","light" );
+					$mysCmd->setTemplate("mobile","light" );
 				} else if ($name == 'Temperature') {
 					$mysCmd->setTemplate("dashboard","gauge" );
+					$mysCmd->setTemplate("mobile","gauge" );
 				} else if ($name == 'Humidité') {
 					$mysCmd->setTemplate("dashboard","vuMeter" );
+					$mysCmd->setTemplate("mobile","vuMeter" );
 				} else if ($name == 'Mouvement') {
 					$mysCmd->setTemplate("dashboard","vibration" );
+					$mysCmd->setTemplate("mobile","vibration" );
 				} else {
 					$mysCmd->setTemplate("dashboard","badge" );
+					$mysCmd->setTemplate("mobile","badge" );
 				}
 				$mysCmd->save();
 			}
@@ -582,6 +588,8 @@ class mySensors extends eqLogic {
 					$mysCmd->setType('action');
 					$mysCmd->setSubType('other');
 					$mysCmd->setValue($cmId);
+					$mysCmd->setTemplate("dashboard","light" );
+					$mysCmd->setTemplate("mobile","light" );
 					$mysCmd->setName( "On" . $sensor );
 					$mysCmd->save();
 				}
@@ -599,6 +607,8 @@ class mySensors extends eqLogic {
 					$mysCmd->setType('action');
 					$mysCmd->setSubType('other');
 					$mysCmd->setValue($cmId);
+					$mysCmd->setTemplate("dashboard","light" );
+					$mysCmd->setTemplate("mobile","light" );
 					$mysCmd->setName( "Off". $sensor );
 					$mysCmd->save();
 				}
@@ -622,6 +632,8 @@ class mySensors extends eqLogic {
 					$mysCmd->setType('action');
 					$mysCmd->setSubType('slider');
 					$mysCmd->setValue($cmId);
+					$mysCmd->setTemplate("dashboard","light" );
+					$mysCmd->setTemplate("mobile","light" );
 					$mysCmd->setName( "Set" . $sensor );
 					$mysCmd->save();
 				}				
