@@ -109,12 +109,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
                     </div>
                 </div>	    
-		<div class="form-group">
-                    <label class="col-md-2 control-label" >{{Suivi du Node}}</label>
-                    <div class="col-md-1" style="width: 4%;">
-                        </span><input type="checkbox" class="eqLogicAttr" data-l1key="configuration"  data-l2key="followActivity"  checked/>
-                    </div>
-                </div>
+
 		<div class="form-group">
                     <label class="col-md-2 control-label" >{{Durée d'Inactivité}}</label>
                     <div class="col-md-1">
