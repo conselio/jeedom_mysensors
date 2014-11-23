@@ -43,7 +43,7 @@ class mySensors extends eqLogic {
 		foreach (eqLogic::byType('mySensors') as $elogic) {
 			log::add('mySensors', 'info', 'Vérification du node' . $elogic->getName());
 			if ($elogic->getConfiguration('followActivity') == '1'){
-				log::add('mySensors', 'info', $elogic->getName() . ' en surveillance'));
+				log::add('mySensors', 'info', $elogic->getName() . ' en surveillance');
 				$actDate = $elogic->getConfiguration('LastActivity');
 				log::add('mySensors', 'info', 'Derniere Activite ' . $actDate);
 				$activity = strtotime($actDate);
