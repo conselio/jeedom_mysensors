@@ -535,7 +535,7 @@ class mySensors extends eqLogic {
 				if ($name == 'Relais') {
 					$mysCmd->setTemplate("dashboard","light" );
 					$mysCmd->setTemplate("mobile","light" );
-					$mysCmd->setVisible(0);
+					$mysCmd->isVisible(0);
 				} else if ($name == 'Variateur') {
 					$mysCmd->setTemplate("dashboard","light" );
 					$mysCmd->setTemplate("mobile","light" );
