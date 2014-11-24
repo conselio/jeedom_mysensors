@@ -415,20 +415,6 @@ class mySensors extends eqLogic {
 				$mys->setName($value.'-'.$nodeid);
 				$mys->setIsEnable(true);
 				$mys->save();
-					$mysCmd = new mySensorsCmd();
-					$mysCmd->setEventOnly(0);
-					$mysCmd->setConfiguration('cmdCommande', '3');
-					$mysCmd->setConfiguration('request', '0');
-					$mysCmd->setConfiguration('cmdtype', '3');
-					$mysCmd->setConfiguration('sensorType', '13');
-					$mysCmd->setConfiguration('sensor', '0');
-					$mysCmd->setEqLogic_id($mys->getId());
-					$mysCmd->setEqType('mySensors');
-					$mysCmd->setLogicalId('reboot');
-					$mysCmd->setType('action');
-					$mysCmd->setSubType('other');
-					$mysCmd->setName( "Reboot Node" );
-					$mysCmd->save();				
 		}
 	}
 	
@@ -549,6 +535,7 @@ class mySensors extends eqLogic {
 				if ($name == 'Relais') {
 					$mysCmd->setTemplate("dashboard","light" );
 					$mysCmd->setTemplate("mobile","light" );
+					$mysCmd->setVisible(0);
 				} else if ($name == 'Variateur') {
 					$mysCmd->setTemplate("dashboard","light" );
 					$mysCmd->setTemplate("mobile","light" );
