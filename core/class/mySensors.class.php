@@ -119,7 +119,7 @@ class mySensors extends eqLogic {
 				'Fumée'=> 2,
 				'Relais'=> 3,
 				'Variateur'=> 4,
-				'S_COVER'=> 5,
+				'Store'=> 5,
 				'Temperature'=> 6,
 				'Humidité'=> 7,
 				'Pression'=> 8,
@@ -133,11 +133,36 @@ class mySensors extends eqLogic {
 				'Niveau Lumiere'=> 16,
 				'S_ARDUINO_NODE'=> 17,
 				'Repeteur'=> 18,
-				'S_LOCK'=> 19,
+				'Verrou'=> 19,
 				'S_IR'=> 20,
 				'Eau'=> 21,
 				'Qualité Air'=> 22
 			 ),
+			'W' => array( // Type de Capteur / Actionneur
+				'door'=> 0,
+				'presence'=> 1, // type binary
+				'presence'=> 2, // type binary
+				'light'=> 3,
+				'verticale'=> 4, // pour l'action de type slider
+				'store'=> 5,
+				'thermometre'=> 6,
+				'humidite'=> 7,
+				'tile'=> 8,
+				'tile'=> 9,
+				'tile'=> 10,
+				'tile'=> 11,
+				'tile'=> 12,
+				'tile'=> 13,
+				'tile'=> 14,
+				'tile'=> 15,
+				'tile'=> 16,
+				'tile'=> 17,
+				'tile'=> 18,
+				'lock'=> 19,
+				'tile'=> 20,
+				'tile'=> 21,
+				'tile'=> 22
+			 ),			 
 			'A' => array( // Actionneur
 				'Relais'=> 2,
 				'Variateur'=> 3,
