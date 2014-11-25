@@ -152,7 +152,7 @@ function addCmdToTable(_cmd) {
 
         $('#table_cmd tbody').append(tr);
         $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
-        /*
+        
  	jeedom.eqLogic.builSelectCmd({
 	id: $(".li_eqLogic.active").attr('data-eqLogic_id'),
 	filter: {type: 'info'},
@@ -165,6 +165,6 @@ function addCmdToTable(_cmd) {
 		jeedom.cmd.changeType(tr, init(_cmd.subType));
 	}
 	});
-	*/
+	
     }
 }
