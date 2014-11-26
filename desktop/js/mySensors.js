@@ -137,6 +137,7 @@ function addCmdToTable(_cmd) {
         tr += '<td></td>';
         tr += '<td>';
         tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/> {{Afficher}}<br/></span>';
+        tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="displayName" checked/> {{Afficher le Nom}}<br/></span>';
         tr += '<span>{{Type de donnée}}:<select class="cmdAttr" data-l1key="configuration" data-l2key="cmdtype">';
 			$.each(mySensorDico['A'],function(item, index){ 
 				tr += '<option value="' + index + '">' + item + '</option>';
