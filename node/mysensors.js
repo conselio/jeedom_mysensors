@@ -290,7 +290,7 @@ function saveGateway(status) {
 	});
 }
 
-function saveValue(sender, sensor, payload) {
+function saveValue(sender, sensor, type, payload) {
 	LogDate("info", "Save Value : Value-" + payload.toString() + "-" + sender.toString() + "-" + sensor.toString() );
 
 	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString()+"&type=" + type.toString() + "&value="+payload;
