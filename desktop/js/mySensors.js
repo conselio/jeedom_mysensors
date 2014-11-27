@@ -75,6 +75,7 @@ function addCmdToTable(_cmd) {
         tr += '</td>';
         tr += '<td>';
 			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensor" style="height : 33px;" ' + disabled + ' placeholder="{{Capteur}}"></textarea>';
+	tr += 'Valeur actuelle :<br/>';		
 	tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="value" style="height : 33px;" ' + disabled + ' placeholder="{{Valeur}}" readonly=true></textarea>';		
         tr += '</td>';
         tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}"></td>';
@@ -134,16 +135,16 @@ function addCmdToTable(_cmd) {
 			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensor" style="height : 33px;" ' + disabled + ' placeholder="{{N° Actionneur}}"></textarea><br/>';
         tr += 'Valeur de la commande :<br/>';
 			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="request" style="height : 33px;" ' + disabled + ' placeholder="{{Valeur}}"></textarea>';
-        tr += '</td>';
-        tr += '<td></td>';
-        tr += '<td>';
-        tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/> {{Afficher}}<br/></span>';
-        tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="display" data-l2key="parameters" data-l3key="displayName" checked/> {{Afficher le Nom}}<br/></span>';
-        tr += '<span>{{Type de donnée}}:<select class="cmdAttr" data-l1key="configuration" data-l2key="cmdtype">';
+        tr += '</td><td>';
+	tr += '<span>{{Type de donnée}}:<select class="cmdAttr" data-l1key="configuration" data-l2key="cmdtype">';
 			$.each(mySensorDico['A'],function(item, index){ 
 				tr += '<option value="' + index + '">' + item + '</option>';
 			})
 		tr +='</select></span>';
+        tr += '</td><td>';
+        tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/> {{Afficher}}<br/></span>';
+        tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="display" data-l2key="parameters" data-l3key="displayName" checked/> {{Afficher le Nom}}<br/></span>';
+        
         tr += '</td>';
         tr += '<td>';
         if (is_numeric(_cmd.id)) {
