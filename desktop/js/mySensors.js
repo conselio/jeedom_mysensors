@@ -131,7 +131,7 @@ function addCmdToTable(_cmd) {
         tr += '</td>';
          tr += '<td>';
 			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensor" style="height : 33px;" ' + disabled + ' placeholder="{{N° Actionneur}}"></textarea><br/>';
-        
+        tr += 'Valeur de la commande :<br/>';
 			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="request" style="height : 33px;" ' + disabled + ' placeholder="{{Valeur}}"></textarea>';
         tr += '</td>';
         tr += '<td></td>';
