@@ -139,7 +139,7 @@ function addCmdToTable(_cmd) {
 			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="request" style="height : 33px;" ' + disabled + ' placeholder="{{Valeur}}"></textarea>';
         tr += '</td><td>';
 	tr += '<span>{{Type de donnée}}:<select class="cmdAttr" data-l1key="configuration" data-l2key="cmdtype">';
-			$.each(mySensorDico['A'],function(item, index){ 
+			$.each(mySensorDico['N'],function(item, index){ 
 				tr += '<option value="' + index + '">' + item + '</option>';
 			})
 		tr +='</select></span>';
