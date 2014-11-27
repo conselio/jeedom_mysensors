@@ -114,29 +114,46 @@ class mySensors extends eqLogic {
 				'I_REBOOT'=> 13,
 			 ),
 			'N' => array( // Type de Capteur / Actionneur
-				'Entrée'=> 0,
+				'Ouverture'=> 0,
 				'Mouvement'=> 1,
-				'Fumée'=> 2,
-				'Relais'=> 3,
-				'Variateur'=> 4,
-				'Store'=> 5,
-				'Temperature'=> 6,
-				'Humidité'=> 7,
-				'Pression'=> 8,
-				'Anémomètre'=> 9,
-				'Pluie'=> 10,
+				'Relais'=> 2,
+				'Dimmer'=> 3,
+				'Pression'=> 4,
+				'Prévision'=> 5,
+				'Niveau de pluie'=> 6,
+				'Débit de pluie'=> 7,
+				'Vitesse de vent'=> 8,
+				'Rafale de vent'=> 9,
+				'Direction du vent'=> 10,
 				'UV'=> 11,
 				'Poids'=> 12,
-				'Energie'=> 13,
-				'Chauffage'=> 14,
-				'Distance'=> 15,
-				'Niveau Lumiere'=> 16,
-				'S_ARDUINO_NODE'=> 17,
-				'Repeteur'=> 18,
-				'Verrou'=> 19,
-				'S_IR'=> 20,
-				'Eau'=> 21,
-				'Qualité Air'=> 22
+				'Distance'=> 13,
+				'Impédance'=> 14,
+				'Sécurité activée'=> 15,
+				'Activation'=> 16,
+				'Puissance'=> 17,
+				'KWh'=> 18,
+				'Activation Scène'=> 19,
+				'Désactivation Scène'=> 20,
+				'Mode de chauffage'=> 21,
+				'Radiateur'=> 22,
+				'Niveau de Lumière'=>23,
+				'Variable1'=>24,
+				'Variable2'=>25,
+				'Variable3'=>26,
+				'Variable4'=>27,
+				'Variable5'=>28,
+				'Lever'=>29,
+				'Descente'=>30,
+				'Arrêt'=>31,
+				'Envoi IR'=>32,
+				'Réception IR'=>33,
+				'Débit Eau'=>34,
+				'Volume Eau'=>35,
+				'Verrou'=>36,
+				'Poussière'=>37,
+				'Voltage'=>38,
+				'Courant'=>39
 			 ),
 			'W' => array( // Type de Capteur / Actionneur
 				'door'=> 0,
@@ -540,8 +557,8 @@ class mySensors extends eqLogic {
 		if (is_object($elogic)) {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
-				if ( $cmdlogic->getConfiguration('sensorType', '') != $value ) {
-					$cmdlogic->setConfiguration('sensorType', $value);
+				if ( $cmdlogic->getConfiguration('sensorCategory', '') != $value ) {
+					$cmdlogic->setConfiguration('sensorCategory', $value);
 					$cmdlogic->save();
 				}
 			}
@@ -549,7 +566,7 @@ class mySensors extends eqLogic {
 				$mysCmd = new mySensorsCmd();
 				$mysCmd->setCache('enable', 0);
 				$mysCmd->setEventOnly(0);
-				$mysCmd->setConfiguration('sensorType', $value);
+				$mysCmd->setConfiguration('sensorCategory', $value);
 				$mysCmd->setConfiguration('sensor', $sensor);
 				$mysCmd->setEqLogic_id($elogic->getId());
 				$mysCmd->setEqType('mySensors');
@@ -587,32 +604,13 @@ class mySensors extends eqLogic {
 				$offlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$reloffId);
 				$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 				$cmId = $cmdlogic->getId();
-				if (!is_object($onlogic)) {
-					$mysCmd = new mySensorsCmd();
-					$mysCmd->setEventOnly(0);
-					$mysCmd->setConfiguration('cmdCommande', '1');
-					$mysCmd->setConfiguration('request', '1');
-					$mysCmd->setConfiguration('cmdtype', '2');
-					$mysCmd->setConfiguration('sensorType', $value);
-					$mysCmd->setConfiguration('sensor', $sensor);
-					$mysCmd->setEqLogic_id($elogic->getId());
-					$mysCmd->setEqType('mySensors');
-					$mysCmd->setLogicalId($relonId);
-					$mysCmd->setType('action');
-					$mysCmd->setSubType('other');
-					$mysCmd->setValue($cmId);
-					$mysCmd->setTemplate("dashboard","light" );
-					$mysCmd->setTemplate("mobile","light" );
-					$mysCmd->setName( "On" . $sensor );
-					$mysCmd->save();
-				}
 				if (!is_object($offlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '0');
 					$mysCmd->setConfiguration('cmdtype', '2');
-					$mysCmd->setConfiguration('sensorType', $value);
+					$mysCmd->setConfiguration('sensorType', '2');
 					$mysCmd->setConfiguration('sensor', $sensor);
 					$mysCmd->setEqLogic_id($elogic->getId());
 					$mysCmd->setEqType('mySensors');
@@ -622,9 +620,29 @@ class mySensors extends eqLogic {
 					$mysCmd->setValue($cmId);
 					$mysCmd->setTemplate("dashboard","light" );
 					$mysCmd->setTemplate("mobile","light" );
-					$mysCmd->setName( "Off". $sensor );
+					$mysCmd->setName( "Off ". $sensor );
 					$mysCmd->save();
 				}
+				if (!is_object($onlogic)) {
+					$mysCmd = new mySensorsCmd();
+					$mysCmd->setEventOnly(0);
+					$mysCmd->setConfiguration('cmdCommande', '1');
+					$mysCmd->setConfiguration('request', '1');
+					$mysCmd->setConfiguration('cmdtype', '2');
+					$mysCmd->setConfiguration('sensorType', '2');
+					$mysCmd->setConfiguration('sensor', $sensor);
+					$mysCmd->setEqLogic_id($elogic->getId());
+					$mysCmd->setEqType('mySensors');
+					$mysCmd->setLogicalId($relonId);
+					$mysCmd->setType('action');
+					$mysCmd->setSubType('other');
+					$mysCmd->setValue($cmId);
+					$mysCmd->setTemplate("dashboard","light" );
+					$mysCmd->setTemplate("mobile","light" );
+					$mysCmd->setName( "On " . $sensor );
+					$mysCmd->save();
+				}
+
 			}
 			if ($name == 'Variateur') {
 				$dimmerId = 'Dimmer'.$sensor;
