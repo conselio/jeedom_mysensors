@@ -114,8 +114,8 @@ class mySensors extends eqLogic {
 				'I_REBOOT'=> 13,
 			 ),
 			'N' => array( // Type de Capteur / Actionneur
-				'Ouverture'=> 0,
-				'Mouvement'=> 1,
+				'Température'=> 0,
+				'Humidité'=> 1,
 				'Relais'=> 2,
 				'Dimmer'=> 3,
 				'Pression'=> 4,
