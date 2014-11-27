@@ -79,7 +79,7 @@ function addCmdToTable(_cmd) {
 	tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="value" style="height : 33px;" ' + disabled + ' placeholder="{{Valeur}}" readonly=true></textarea>';		
         tr += '</td>';
         tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}">';
-	tr += 'Valeur actuelle :<br/>';		
+	tr += 'Type de donnée :<br/>';		
 	tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensorType" style="height : 33px;" ' + disabled + ' placeholder="{{Type de donnée}}" readonly=true></textarea>';		
         tr += '</td><td>';
         tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isHistorized"/> {{Historiser}}<br/></span>';
