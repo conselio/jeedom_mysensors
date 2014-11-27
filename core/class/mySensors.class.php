@@ -365,7 +365,7 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$sensor = init('sensor');
 		$value = init('value');
-		$typu = init('typu');
+		$type = init('type');
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
@@ -375,6 +375,7 @@ class mySensors extends eqLogic {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
 				$cmdlogic->setConfiguration('value', $value);
+				$cmdlogic->setConfiguration('sensorType', $type);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
 			}
