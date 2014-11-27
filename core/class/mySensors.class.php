@@ -67,9 +67,9 @@ class mySensors extends eqLogic {
 	public static $_dico = 
 			array(
 			'C' => array( 
-				'PRESENTATION'=> 0,
-				'PARAMETRAGE'=> 1,
-				'INTERNE'=> 3,
+				'Présentation'=> 0,
+				'Paramétrage'=> 1,
+				'Interne'=> 3,
 				'OTA'=> 4,
 				),
 			'U' => array( // Unité
@@ -166,14 +166,14 @@ class mySensors extends eqLogic {
 			'A' => array( // Actionneur
 				'Relais'=> 2,
 				'Variateur'=> 3,
-				'V_FORECAST'=> 5,
-				'DIRECTION'=> 10, //Direction du vent
+				'Prévision'=> 5,
+				'Direction'=> 10, //Direction du vent
 				'UV'=> 11,
-				'V_IMPEDANCE'=> 14,
-				'V_ARMED'=> 15,
+				'Impédance'=> 14,
+				'Enclenchement'=> 15,
 				'Entrée'=> 16,
-				'SCENE_ON'=> 19,
-				'SCENE_OFF'=> 20,
+				'Scène Active'=> 19,
+				'Scène Désactivée'=> 20,
 				'Radiateur'=> 21,
 				'Radiateur ON/OFF'=> 22,
 				'VAR1'=> 24,
@@ -186,8 +186,8 @@ class mySensors extends eqLogic {
 				'V_STOP'=> 31,
 				'IR_SEND'=> 32,
 				'V_FLOW'=> 34,
-				'V_LOCK_STATUS'=> 36,
-				'V_DUST_LEVEL'=> 37,
+				'Verrou'=> 36,
+				'Poussière'=> 37,
 				)
 			);
 
