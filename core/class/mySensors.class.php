@@ -72,31 +72,6 @@ class mySensors extends eqLogic {
 				'Interne'=> 3,
 				'OTA'=> 4,
 				),
-			'U' => array( // Unité
-				'Entrée'=> 0,
-				'Mouvement'=> 1,
-				'Fumée'=> 2,
-				'Relais'=> 3,
-				'%'=> 4,
-				'S_COVER'=> 5,
-				'°C'=> 6,
-				'%'=> 7,
-				'hPa'=> 8,
-				'Anémomètre'=> 9,
-				'Pluie'=> 10,
-				'UV'=> 11,
-				'Kg'=> 12,
-				'W'=> 13,
-				'Chauffage'=> 14,
-				'cm'=> 15,
-				'Lux'=> 16,
-				'S_ARDUINO_NODE'=> 17,
-				'Repeteur'=> 18,
-				'S_LOCK'=> 19,
-				'S_IR'=> 20,
-				'L'=> 21,
-				'Qualité Air'=> 22
-			 ),
 			'I' => array( 
 				'I_BATTERY_LEVEL'=> 0,
 				'I_TIME'=> 1,
@@ -155,57 +130,11 @@ class mySensors extends eqLogic {
 				'Voltage'=>38,
 				'Courant'=>39
 			 ),
-			'W' => array( // Type de Capteur / Actionneur
-				'door'=> 0,
-				'presence'=> 1, // type binary
-				'presence'=> 2, // type binary
-				'light'=> 3,
-				'verticale'=> 4, // pour l'action de type slider
-				'store'=> 5,
-				'thermometre'=> 6,
-				'humidite'=> 7,
-				'tile'=> 8,
-				'tile'=> 9,
-				'tile'=> 10,
-				'tile'=> 11,
-				'tile'=> 12,
-				'tile'=> 13,
-				'tile'=> 14,
-				'tile'=> 15,
-				'tile'=> 16,
-				'tile'=> 17,
-				'tile'=> 18,
-				'lock'=> 19,
-				'tile'=> 20,
-				'tile'=> 21,
-				'tile'=> 22
-			 ),			 
-			'A' => array( // Actionneur
-				'Relais'=> 2,
-				'Variateur'=> 3,
-				'Prévision'=> 5,
-				'Direction'=> 10, //Direction du vent
-				'UV'=> 11,
-				'Impédance'=> 14,
-				'Enclenchement'=> 15,
-				'Entrée'=> 16,
-				'Scène Active'=> 19,
-				'Scène Désactivée'=> 20,
-				'Radiateur'=> 21,
-				'Radiateur ON/OFF'=> 22,
-				'VAR1'=> 24,
-				'VAR2'=> 25,
-				'VAR3'=> 26,
-				'VAR4'=> 27,
-				'VAR5'=> 28,
-				'V_UP'=> 29,
-				'V_DOWN'=> 30,
-				'V_STOP'=> 31,
-				'IR_SEND'=> 32,
-				'V_FLOW'=> 34,
-				'Verrou'=> 36,
-				'Poussière'=> 37,
-				)
+			 '0' => array( // Type de Capteur / Actionneur
+				'Température'=> 0,
+				'Humidité'=> 1,
+			)
+
 			);
 
     /************************Methode static*************************** */
