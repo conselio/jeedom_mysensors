@@ -130,9 +130,33 @@ class mySensors extends eqLogic {
 				'Voltage'=>38,
 				'Courant'=>39
 			 ),
-			 '0' => array( // Type de Capteur / Actionneur
-				'Température'=> 0,
-				'Humidité'=> 1,
+			 'S' => array( // 'S_TYPE', 'Nom', 'widget', 'variable, 'unité', 'historique', 'affichage'
+				0 => array('S_DOOR','Ouverture','door','binary','','','1',),
+				1 => array('S_MOTION','Mouvement','presence','binary','','','1',),
+				2 => array('S_SMOKE','Fumée','presence','binary','','','1',),
+				3 => array('S_LIGHT','Relais','light','binary','','','',),
+				4 => array('S_DIMMER','Variateur','light','numeric','%','','1',),
+				5 => array('S_COVER','Store','store','other','','','1',),
+				6 => array('S_TEMP','Température','thermometre','numeric','°C','1','1',),
+				7 => array('S_HUM','Humidité','humidite','numeric','%','1','1',),
+				8 => array('S_BARO','Baromètre','tile','other','Pa','1','1',),
+				9 => array('S_WIND','Vent','tile','other','','','1',),
+				10 => array('S_RAIN','Pluie','tile','numeric','cm','1','1',),
+				11 => array('S_UV','UV','tile','numeric','uvi','1','1',),
+				12 => array('S_WEIGHT','Poids','tile','numeric','kg','1','1',),
+				13 => array('S_POWER','Energie','tile','numeric','','1','1',),
+				14 => array('S_HEATER','Radiateur','tile','other','','','1',),
+				15 => array('S_DISTANCE','Distance','tile','numeric','cm','','1',),
+				16 => array('S_LIGHT_LEVEL','Luminosité','tile','numeric','','','1',),
+				17 => array('S_ARDUINO_NODE','Noeud Arduino','tile','other','','','1',),
+				18 => array('S_ARDUINO_RELAY','Noeud Répéteur','tile','other','','','1',),
+				19 => array('S_LOCK','Verrou','presence','binary','','','1',),
+				20 => array('S_IR','Infrarouge','tile','other','','','1',),
+				21 => array('S_WATER','Eau','tile','numeric','','1','1',),
+				22 => array('S_AIR_QUALITY','Qualité d Air','tile','numeric','','1','1',),
+				23 => array('S_CUSTOM','Custom','tile','other','','','1',),
+				24 => array('S_DUST','Poussière','tile','numeric','mm','1','1',),
+				25 => array('S_SCENE_CONTROLLER','Controlleur de Scène','tile','binary','','','1',)
 			)
 
 			);
@@ -384,7 +408,7 @@ class mySensors extends eqLogic {
 				$mys->setLogicalId($nodeid);
 				$mys->setConfiguration('nodeid', $nodeid);
 				$mys->setConfiguration('SketchName',$value);
-				$mys->setName($value.'-'.$nodeid);
+				$mys->setName($value.' - '.$nodeid);
 				$mys->setIsEnable(true);
 				$mys->save();
 		}
@@ -473,14 +497,16 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$value = init('value');
 		$sensor = init('sensor');
-		$name = array_search($value, self::$_dico['N']);
+		//exemple : 0 => array('S_DOOR','Ouverture','door','binary','','','1',),
+		$name = self::$_dico['S'][$value][1]);
 		if ($name == false ) {
 			$name = 'UNKNOWN';
 		}
-		$unite = array_search($value, self::$_dico['U']);
-		if ($unite == false ) {
-			$unite = 'UNKNOWN';
-		}		
+		$unite = self::$_dico['S'][$value][4]);
+		$info = self::$_dico['S'][$value][3]);
+		$widget = self::$_dico['S'][$value][2]);
+		$history = self::$_dico['S'][$value][5]);
+		$visible = self::$_dico['S'][$value][6]);
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) {
@@ -501,29 +527,13 @@ class mySensors extends eqLogic {
 				$mysCmd->setEqType('mySensors');
 				$mysCmd->setLogicalId($cmdId);
 				$mysCmd->setType('info');
-				$mysCmd->setSubType('numeric');
+				$mysCmd->setSubType($info);
 				$mysCmd->setName( $name . " " . $sensor );
 				$mysCmd->setUnite( $unite );
-				if ($name == 'Relais') {
-					$mysCmd->setTemplate("dashboard","light" );
-					$mysCmd->setTemplate("mobile","light" );
-					$mysCmd->setIsVisible(0);
-				} else if ($name == 'Variateur') {
-					$mysCmd->setTemplate("dashboard","light" );
-					$mysCmd->setTemplate("mobile","light" );
-				} else if ($name == 'Temperature') {
-					$mysCmd->setTemplate("dashboard","gauge" );
-					$mysCmd->setTemplate("mobile","gauge" );
-				} else if ($name == 'Humidité') {
-					$mysCmd->setTemplate("dashboard","vuMeter" );
-					$mysCmd->setTemplate("mobile","vuMeter" );
-				} else if ($name == 'Mouvement') {
-					$mysCmd->setTemplate("dashboard","vibration" );
-					$mysCmd->setTemplate("mobile","vibration" );
-				} else {
-					$mysCmd->setTemplate("dashboard","badge" );
-					$mysCmd->setTemplate("mobile","badge" );
-				}
+				$mysCmd->setIsVisible($visible);
+				$mysCmd->setIsHistorized($history);
+				$mysCmd->setTemplate("mobile",$widget );
+				$mysCmd->setTemplate("dashboard",$widget );
 				$mysCmd->save();
 			}
 			if ($name == 'Relais') {
@@ -549,6 +559,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setValue($cmId);
 					$mysCmd->setTemplate("dashboard","light" );
 					$mysCmd->setTemplate("mobile","light" );
+					$mysCmd->setDisplay('parameters',array('displayName' => 1));
 					$mysCmd->setName( "Off ". $sensor );
 					$mysCmd->save();
 				}
@@ -568,6 +579,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setValue($cmId);
 					$mysCmd->setTemplate("dashboard","light" );
 					$mysCmd->setTemplate("mobile","light" );
+					$mysCmd->setDisplay('parameters',array('displayName' => 1));
 					$mysCmd->setName( "On " . $sensor );
 					$mysCmd->save();
 				}
@@ -584,7 +596,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '');
 					$mysCmd->setConfiguration('cmdtype', '2');
-					$mysCmd->setConfiguration('sensorType', $value);
+					$mysCmd->setConfiguration('sensorType', '3');
 					$mysCmd->setConfiguration('sensor', $sensor);
 					$mysCmd->setEqLogic_id($elogic->getId());
 					$mysCmd->setEqType('mySensors');
