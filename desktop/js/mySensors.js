@@ -77,6 +77,8 @@ function addCmdToTable(_cmd) {
 			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensor" style="height : 33px;" ' + disabled + ' placeholder="{{Capteur}}"></textarea>';
 	tr += 'Valeur actuelle :<br/>';		
 	tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="value" style="height : 33px;" ' + disabled + ' placeholder="{{Valeur}}" readonly=true></textarea>';		
+	tr += 'Type de capteur :<br/>';		
+	tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="sensorCategory" style="height : 33px;" ' + disabled + ' placeholder="{{Type de Capteur}}" readonly=true></textarea>';	
         tr += '</td>';
         tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}">';
 	tr += 'Type de donnée :<br/>';		
