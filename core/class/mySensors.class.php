@@ -135,7 +135,7 @@ class mySensors extends eqLogic {
 				1 => array('S_MOTION','Mouvement','presence','binary','','','1',),
 				2 => array('S_SMOKE','Fumée','presence','binary','','','1',),
 				3 => array('S_LIGHT','Relais','light','binary','','','',),
-				4 => array('S_DIMMER','Variateur','light','numeric','%','','1',),
+				4 => array('S_DIMMER','Variateur','light','numeric','%','','',),
 				5 => array('S_COVER','Store','store','other','','','1',),
 				6 => array('S_TEMP','Température','thermometre','numeric','°C','1','1',),
 				7 => array('S_HUM','Humidité','humidite','numeric','%','1','1',),
