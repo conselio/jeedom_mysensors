@@ -498,15 +498,15 @@ class mySensors extends eqLogic {
 		$value = init('value');
 		$sensor = init('sensor');
 		//exemple : 0 => array('S_DOOR','Ouverture','door','binary','','','1',),
-		$name = self::$_dico['S'][$value][1]);
+		$name = self::$_dico['S'][$value][1];
 		if ($name == false ) {
 			$name = 'UNKNOWN';
 		}
-		$unite = self::$_dico['S'][$value][4]);
-		$info = self::$_dico['S'][$value][3]);
-		$widget = self::$_dico['S'][$value][2]);
-		$history = self::$_dico['S'][$value][5]);
-		$visible = self::$_dico['S'][$value][6]);
+		$unite = self::$_dico['S'][$value][4];
+		$info = self::$_dico['S'][$value][3];
+		$widget = self::$_dico['S'][$value][2];
+		$history = self::$_dico['S'][$value][5];
+		$visible = self::$_dico['S'][$value][6];
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) {
