@@ -606,7 +606,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setValue($cmId);
 					$mysCmd->setTemplate("dashboard","light" );
 					$mysCmd->setTemplate("mobile","light" );
-					$mysCmd->setName( "Set" . $sensor );
+					$mysCmd->setName( "Set " . $sensor );
 					$mysCmd->save();
 				}				
 			}
