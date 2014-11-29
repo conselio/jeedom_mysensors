@@ -128,7 +128,10 @@ class mySensors extends eqLogic {
 				'Verrou'=>36,
 				'Poussière'=>37,
 				'Voltage'=>38,
-				'Courant'=>39
+				'Courant'=>39,
+				'Connexion'=>97,
+				'Inactivité'=>98,
+				'Batterie'=>99
 			 ),
 			 'S' => array( // 'S_TYPE', 'Nom', 'widget', 'variable, 'unité', 'historique', 'affichage'
 				0 => array('S_DOOR','Ouverture','door','binary','','','1',),
@@ -156,7 +159,10 @@ class mySensors extends eqLogic {
 				22 => array('S_AIR_QUALITY','Qualité d Air','tile','numeric','','1','1',),
 				23 => array('S_CUSTOM','Custom','tile','other','','','1',),
 				24 => array('S_DUST','Poussière','tile','numeric','mm','1','1',),
-				25 => array('S_SCENE_CONTROLLER','Controlleur de Scène','tile','binary','','','1',)
+				25 => array('S_SCENE_CONTROLLER','Controlleur de Scène','tile','binary','','','1',),
+				97 => array('GATEWAY','Connexion avec Gateway','tile','other','','','',),
+				98 => array('INNA_NODE','Inactivité des Nodes','tile','other','','','',),
+				99 => array('BATTERIE','Etat de la batterie','tile','numeric','%','','1',)
 			)
 
 			);
@@ -383,6 +389,8 @@ class mySensors extends eqLogic {
 				$mysCmd->setUnite( '%' );
 				$mysCmd->setConfiguration('value',$value);
 				$mysCmd->setTemplate("dashboard","batterie" );
+				$mysCmd->setConfiguration('sensorCategory', '99');
+				$mysCmd->setConfiguration('sensorType', '99');
 				$mysCmd->save();
 				$mysCmd->event($value);
 			}				
@@ -433,6 +441,8 @@ class mySensors extends eqLogic {
 				$mysCmd->setSubType('numeric');
 				$mysCmd->setName( 'Connexion' );
 				$mysCmd->setConfiguration('value',$status);
+				$mysCmd->setConfiguration('sensorCategory', '98');
+				$mysCmd->setConfiguration('sensorType', '98');
 				$mysCmd->save();
 				$mysCmd->event($value);
 				$mysCmd = new mySensorsCmd();
@@ -442,6 +452,8 @@ class mySensors extends eqLogic {
 				$mysCmd->setType('info');
 				$mysCmd->setSubType('other');
 				$mysCmd->setName( 'Inactif' );
+				$mysCmd->setConfiguration('sensorCategory', '97');
+				$mysCmd->setConfiguration('sensorType', '97');
 				$mysCmd->save();
 			}	
 		}
@@ -549,7 +561,6 @@ class mySensors extends eqLogic {
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '0');
 					$mysCmd->setConfiguration('cmdtype', '2');
-					$mysCmd->setConfiguration('sensorType', '2');
 					$mysCmd->setConfiguration('sensor', $sensor);
 					$mysCmd->setEqLogic_id($elogic->getId());
 					$mysCmd->setEqType('mySensors');
@@ -569,7 +580,6 @@ class mySensors extends eqLogic {
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '1');
 					$mysCmd->setConfiguration('cmdtype', '2');
-					$mysCmd->setConfiguration('sensorType', '2');
 					$mysCmd->setConfiguration('sensor', $sensor);
 					$mysCmd->setEqLogic_id($elogic->getId());
 					$mysCmd->setEqType('mySensors');
@@ -595,8 +605,7 @@ class mySensors extends eqLogic {
 					$mysCmd->setEventOnly(0);
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '');
-					$mysCmd->setConfiguration('cmdtype', '2');
-					$mysCmd->setConfiguration('sensorType', '3');
+					$mysCmd->setConfiguration('cmdtype', '3');
 					$mysCmd->setConfiguration('sensor', $sensor);
 					$mysCmd->setEqLogic_id($elogic->getId());
 					$mysCmd->setEqType('mySensors');
