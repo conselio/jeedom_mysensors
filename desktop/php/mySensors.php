@@ -15,6 +15,7 @@ if (!isConnect('admin')) {
 }
 sendVarToJS('eqType', 'mySensors');
 sendVarToJS('mySensorDico', mySensors::$_dico);
+sendVarToJS('mySensorID', mySensors::$_dico);
 
 ?>
 
