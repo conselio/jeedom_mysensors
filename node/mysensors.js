@@ -290,10 +290,10 @@ function saveGateway(status) {
 	});
 }
 
-function saveValue(sender, sensor, payload) {
+function saveValue(sender, sensor, type, payload) {
 	LogDate("info", "Save Value : Value-" + payload.toString() + "-" + sender.toString() + "-" + sensor.toString() );
 
-	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+payload;
+	url = urlJeedom + "&messagetype=saveValue&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() +"&donnees=" + type.toString() + "&value="+payload;
 
 	LogDate("info", url);
 	request(url, function (error, response, body) {
@@ -565,7 +565,7 @@ function rfReceived(data, db, gw) {
 				saveLibVersion(sender, payload);
 			break;
 		case C_SET:
-			saveValue(sender, sensor, payload);
+			saveValue(sender, sensor, type, payload);
 			break;
 		case C_REQ:
 			break;
