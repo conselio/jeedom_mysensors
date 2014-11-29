@@ -139,29 +139,29 @@ class mySensors extends eqLogic {
 				2 => array('S_SMOKE','Fumée','presence','binary','','','1',),
 				3 => array('S_LIGHT','Relais','light','binary','','','',),
 				4 => array('S_DIMMER','Variateur','light','numeric','%','','',),
-				5 => array('S_COVER','Store','store','other','','','1',),
+				5 => array('S_COVER','Store','store','string','','','1',),
 				6 => array('S_TEMP','Température','thermometre','numeric','°C','1','1',),
 				7 => array('S_HUM','Humidité','humidite','numeric','%','1','1',),
-				8 => array('S_BARO','Baromètre','tile','other','Pa','1','1',),
-				9 => array('S_WIND','Vent','tile','other','','','1',),
+				8 => array('S_BARO','Baromètre','tile','string','Pa','1','1',),
+				9 => array('S_WIND','Vent','tile','string','','','1',),
 				10 => array('S_RAIN','Pluie','tile','numeric','cm','1','1',),
 				11 => array('S_UV','UV','tile','numeric','uvi','1','1',),
 				12 => array('S_WEIGHT','Poids','tile','numeric','kg','1','1',),
 				13 => array('S_POWER','Energie','tile','numeric','','1','1',),
-				14 => array('S_HEATER','Radiateur','tile','other','','','1',),
+				14 => array('S_HEATER','Radiateur','tile','string','','','1',),
 				15 => array('S_DISTANCE','Distance','tile','numeric','cm','','1',),
 				16 => array('S_LIGHT_LEVEL','Luminosité','tile','numeric','','','1',),
-				17 => array('S_ARDUINO_NODE','Noeud Arduino','tile','other','','','1',),
-				18 => array('S_ARDUINO_RELAY','Noeud Répéteur','tile','other','','','1',),
+				17 => array('S_ARDUINO_NODE','Noeud Arduino','tile','string','','','1',),
+				18 => array('S_ARDUINO_RELAY','Noeud Répéteur','tile','string','','','1',),
 				19 => array('S_LOCK','Verrou','presence','binary','','','1',),
-				20 => array('S_IR','Infrarouge','tile','other','','','1',),
+				20 => array('S_IR','Infrarouge','tile','string','','','1',),
 				21 => array('S_WATER','Eau','tile','numeric','','1','1',),
 				22 => array('S_AIR_QUALITY','Qualité d Air','tile','numeric','','1','1',),
-				23 => array('S_CUSTOM','Custom','tile','other','','','1',),
+				23 => array('S_CUSTOM','Custom','tile','string','','','1',),
 				24 => array('S_DUST','Poussière','tile','numeric','mm','1','1',),
 				25 => array('S_SCENE_CONTROLLER','Controlleur de Scène','tile','binary','','','1',),
-				97 => array('GATEWAY','Connexion avec Gateway','tile','other','','','',),
-				98 => array('INNA_NODE','Inactivité des Nodes','tile','other','','','',),
+				97 => array('GATEWAY','Connexion avec Gateway','tile','string','','','',),
+				98 => array('INNA_NODE','Inactivité des Nodes','tile','string','','','',),
 				99 => array('BATTERIE','Etat de la batterie','tile','numeric','%','','1',)
 			)
 
@@ -450,7 +450,7 @@ class mySensors extends eqLogic {
 				$mysCmd->setEqType('mySensors');
 				$mysCmd->setLogicalId('Inactif');
 				$mysCmd->setType('info');
-				$mysCmd->setSubType('other');
+				$mysCmd->setSubType('string');
 				$mysCmd->setName( 'Inactif' );
 				$mysCmd->setConfiguration('sensorCategory', '97');
 				$mysCmd->setConfiguration('sensorType', '97');
@@ -543,7 +543,7 @@ class mySensors extends eqLogic {
 				$mysCmd->setName( $name . " " . $sensor );
 				$mysCmd->setUnite( $unite );
 				$mysCmd->setIsVisible($visible);
-				if ($info != 'other') {
+				if ($info != 'string') {
 					$mysCmd->setIsHistorized($history);
 				}
 				$mysCmd->setTemplate("mobile",$widget );
