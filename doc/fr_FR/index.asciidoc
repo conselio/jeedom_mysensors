@@ -1,0 +1,20 @@
+== Thermostats
+
+=== Description
+Plugin permetant de creer et gerer des thermostats
+
+'''
+=== Configuration
+include::configuration.asciidoc[]
+
+'''
+=== FAQ
+include::faq.asciidoc[]
+
+'''
+=== Troubleshoting
+include::troubleshoting.asciidoc[]
+
+'''
+=== Changelog
+include::changelog.asciidoc[]
