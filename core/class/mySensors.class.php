@@ -342,6 +342,7 @@ class mySensors extends eqLogic {
 		$sensor = init('sensor');
 		$value = init('value');
 		$type = init('type');
+		$daType = self::$_dico['N'][$value];
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
@@ -351,7 +352,7 @@ class mySensors extends eqLogic {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
 				$cmdlogic->setConfiguration('value', $value);
-				$cmdlogic->setConfiguration('sensorType', $type);
+				$cmdlogic->setConfiguration('sensorType', $dataType);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
 			}
@@ -389,8 +390,8 @@ class mySensors extends eqLogic {
 				$mysCmd->setUnite( '%' );
 				$mysCmd->setConfiguration('value',$value);
 				$mysCmd->setTemplate("dashboard","batterie" );
-				$mysCmd->setConfiguration('sensorCategory', '99');
-				$mysCmd->setConfiguration('sensorType', '99');
+				$mysCmd->setConfiguration('sensorCategory', 'Batterie');
+				$mysCmd->setConfiguration('sensorType', 'Batterie');
 				$mysCmd->save();
 				$mysCmd->event($value);
 			}				
@@ -441,8 +442,8 @@ class mySensors extends eqLogic {
 				$mysCmd->setSubType('numeric');
 				$mysCmd->setName( 'Connexion' );
 				$mysCmd->setConfiguration('value',$status);
-				$mysCmd->setConfiguration('sensorCategory', '98');
-				$mysCmd->setConfiguration('sensorType', '98');
+				$mysCmd->setConfiguration('sensorCategory', 'Statut Gateway');
+				$mysCmd->setConfiguration('sensorType', 'Connexion');
 				$mysCmd->save();
 				$mysCmd->event($value);
 				$mysCmd = new mySensorsCmd();
@@ -452,8 +453,8 @@ class mySensors extends eqLogic {
 				$mysCmd->setType('info');
 				$mysCmd->setSubType('string');
 				$mysCmd->setName( 'Inactif' );
-				$mysCmd->setConfiguration('sensorCategory', '97');
-				$mysCmd->setConfiguration('sensorType', '97');
+				$mysCmd->setConfiguration('sensorCategory', 'Noeuds Inactifs');
+				$mysCmd->setConfiguration('sensorType', 'Inactivité');
 				$mysCmd->save();
 			}	
 		}
@@ -515,6 +516,7 @@ class mySensors extends eqLogic {
 			$name = 'UNKNOWN';
 		}
 		$unite = self::$_dico['S'][$value][4];
+		$sType = self::$_dico['S'][$value][1];
 		$info = self::$_dico['S'][$value][3];
 		$widget = self::$_dico['S'][$value][2];
 		$history = self::$_dico['S'][$value][5];
@@ -533,7 +535,7 @@ class mySensors extends eqLogic {
 				$mysCmd = new mySensorsCmd();
 				$mysCmd->setCache('enable', 0);
 				$mysCmd->setEventOnly(0);
-				$mysCmd->setConfiguration('sensorCategory', $value);
+				$mysCmd->setConfiguration('sensorCategory', $sType);
 				$mysCmd->setConfiguration('sensor', $sensor);
 				$mysCmd->setEqLogic_id($elogic->getId());
 				$mysCmd->setEqType('mySensors');
