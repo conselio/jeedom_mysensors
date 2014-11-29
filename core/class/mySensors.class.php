@@ -526,8 +526,8 @@ class mySensors extends eqLogic {
 		if (is_object($elogic)) {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
-				if ( $cmdlogic->getConfiguration('sensorCategory', '') != $value ) {
-					$cmdlogic->setConfiguration('sensorCategory', $value);
+				if ( $cmdlogic->getConfiguration('sensorCategory', '') != $sType ) {
+					$cmdlogic->setConfiguration('sensorCategory', $sType);
 					$cmdlogic->save();
 				}
 			}
