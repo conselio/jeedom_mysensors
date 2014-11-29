@@ -543,7 +543,9 @@ class mySensors extends eqLogic {
 				$mysCmd->setName( $name . " " . $sensor );
 				$mysCmd->setUnite( $unite );
 				$mysCmd->setIsVisible($visible);
-				$mysCmd->setIsHistorized($history);
+				if ($info != 'other') {
+					$mysCmd->setIsHistorized($history);
+				}
 				$mysCmd->setTemplate("mobile",$widget );
 				$mysCmd->setTemplate("dashboard",$widget );
 				$mysCmd->save();
