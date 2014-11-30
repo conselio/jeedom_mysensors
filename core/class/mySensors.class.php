@@ -434,7 +434,7 @@ class mySensors extends eqLogic {
 		if (is_object($elogic)) {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'Connexion');
 			if (is_object($cmdlogic)) {
-				$cmdlogic->setConfiguration('value',$value);
+				$cmdlogic->setConfiguration('value',$status);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
 			}
