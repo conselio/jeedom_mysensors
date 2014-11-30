@@ -1,17 +1,17 @@
 [panel,danger]
-.En mode histeresys mon thermostat ne change jamais d'état
+.Aucun équipement ne se créé
 --
-C'est que les sondes de temperature ne remontent pas automatiquement leur valeur, il est conseillé de mettre en place un "Cron de controle"
---
-
-[panel,danger]
-.J'ai beau changer la température ou de mode, le thermostat revient toujours à l'état précedent
---
-Verifiez que votre thermostat n'est pas verouillé 
+Vérifier qu'au moins un équipement "gateway" existe, il représente votre passerelle. Si ce n'est pas le cas, sur la page de configuration vous pouvez vérifier le service du plugin
 --
 
 [panel,danger]
-.Mon thermostat semble ne jamais passer en mode chauffage ou climatisation
+.Comment se créer mes équipements
 --
-Si le thermostat n'a pas de commande correspondant au chauffage et/ou à la climatisation celui-ci ne peut pas passer dans ces modes.
+Au démarrage d'un noeud, celui-ci se présente sur le réseau, un équipement lié est alors créer avec tous ses capteurs et les commandes associées le cas échéant
+--
+
+[panel,danger]
+.Je suspect un problème de connexion sur le réseau
+--
+L'équipement gateway dispose de deux informations qui peuvent être utile pour les alertes de connexions, le premier vous donne l'état de la gateway, le deuxième vous donne des alertes sur des noeuds inactifs
 --
