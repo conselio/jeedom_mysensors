@@ -1,11 +1,11 @@
 [panel,primary]
-.Combien de temps faut-il, en mode temporel, pour apprendre
+.Quel type de gateway mySensors est supporté
 --
-Il faut en moyen 3 jours pour que le système aprenne et regule de maniere optimal
+On peut gérer une gateway série sur jeedom central ou esclave, mais également une gateway réseau
 --
 
 [panel,primary]
-.Mes coefficients n'arretent pas de bouger
+.Qu'est-ce que mySensors
 --
-C'est normale le systeme corrige en permanence ses coefficients
+mySensors est un protocole de transmission sans fil de capteurs à base d'Arduino. Des exemples de capteurs sont proposés sur le site mySensors, mais les limites sont celles du catalogue de capteurs Arduino existant
 --
