@@ -185,7 +185,7 @@ class mySensors extends eqLogic {
 			}
 		}
 
-		if ($usbGateway != '' && file_exists( $usbGateway )) {
+		if ($usbGateway != '') {
             		if (!self::deamonRunning()) {
                 		self::runDeamon();
             		}
@@ -211,6 +211,7 @@ class mySensors extends eqLogic {
 			$netAd = explode(":",config::byKey('gateway_addr', 'mySensors'));
 			$usbGateway = $netAd[0];
 			$gatePort = $netAd[1];	
+			log::add('mySensors', 'info', $usbGateway);
 		} else {
 			$gateMode = "Serial";
 			$gatePort = "";	
