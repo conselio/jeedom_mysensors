@@ -173,6 +173,7 @@ class mySensors extends eqLogic {
         
         if (config::byKey('externalDeamon', 'mySensors', 0) != 2) {
 		$modem_serie_addr = config::byKey('usbGateway', 'mySensors');
+		log::add('mySensors', 'info', $modem_serie_addr);
 		if($modem_serie_addr == "serie") {
 			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
 		} else if ($modem_serie_addr == "network") {
