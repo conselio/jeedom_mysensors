@@ -352,7 +352,7 @@ class mySensors extends eqLogic {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
 				$cmdlogic->setConfiguration('value', $value);
-				$cmdlogic->setConfiguration('sensorType', $dataType);
+				$cmdlogic->setConfiguration('sensorType', $daType);
 				$cmdlogic->save();
 				$cmdlogic->event($value);
 			}
