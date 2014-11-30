@@ -1,7 +1,7 @@
-== Thermostats
+== mySensors
 
 === Description
-Plugin permetant de creer et gerer des thermostats
+Plugin permetant de gérer les capteurs de type mySensors
 
 '''
 === Configuration
