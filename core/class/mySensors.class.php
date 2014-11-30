@@ -342,7 +342,7 @@ class mySensors extends eqLogic {
 		$sensor = init('sensor');
 		$value = init('value');
 		$type = init('donnees');
-		$daType = self::$_dico['N'][$type];
+		$daType = array_search($type, self::$_dico['N']);
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
