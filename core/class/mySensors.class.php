@@ -176,11 +176,13 @@ class mySensors extends eqLogic {
 		log::add('mySensors', 'info', $modem_serie_addr);
 		if($modem_serie_addr == "serie") {
 			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
-		} else if ($modem_serie_addr == "network") {
-			$usbGateway = config::byKey('gateway_addr', 'mySensors');
-			log::add('mySensors', 'info', $gateway_addr);
 		} else {
-			$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
+			if ($modem_serie_addr == "network") {
+				$usbGateway = config::byKey('gateway_addr', 'mySensors');
+				log::add('mySensors', 'info', $gateway_addr);
+			} else {
+				$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
+			}
 		}
 
 		if ($usbGateway != '' && file_exists( $usbGateway )) {
