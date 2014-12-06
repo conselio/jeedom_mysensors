@@ -58,10 +58,15 @@ Complete with lib 1.4 (on V_ message and S_ types), waiting for 2.0 for new func
 
 Enhance mySensors node pages and widgets used by default
 
+Add inclusion mode in nodejs and jeedom
+
 Add function on plugin to deliver data requested by a node
 
-How to reboot a node from Jeedom (need OTA bootloader, waiting for mySensors 2.0)
+How to reboot a node from Jeedom
+void (softReset){
+asm volatile ("  jmp 0");
+}
 
-Add commands for RGB and servo (actualy, will wait for mySensors lib2.0 as there is changes and during presentation of sensors, they will say what commands they accepts)
+Add commands for Lock
 
 Integrate OTA with sketchs library and possible configuration of sketchs with variables like pin, warning level ...
