@@ -97,7 +97,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
         </form>
         </div>      
         
-                <div class="col-sm-6">
+                <div id="infoNode" class="col-sm-6">
                 <form class="form-horizontal">
                     <fieldset>
                         <legend>{{Informations}}</legend>
@@ -196,13 +196,13 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 </div>
 
 <script>
-	window.onload = function() {
+	$( "#ul_eqLogic" ).change(function() {
 		if($( "#selectNode" ).val() == "gateway"){
-			$("#selectNode").hide();
+			$("#infoNode").hide();
 			$("#followNode").hide();
 		}
 		else {
-			$("#selectNode").show();
+			$("#infoNode").show();
 			$("#followNode").show();
 		}
 	}
