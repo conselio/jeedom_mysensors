@@ -15,7 +15,6 @@ if (!isConnect('admin')) {
 }
 sendVarToJS('eqType', 'mySensors');
 sendVarToJS('mySensorDico', mySensors::$_dico);
-sendVarToJS('mySensorID', mySensors::$_dico);
 
 ?>
 
@@ -84,7 +83,7 @@ sendVarToJS('mySensorID', mySensors::$_dico);
                 </div>
 
    
-		<div class="form-group">
+		<div id="followNode" class="form-group">
                     <label class="col-md-2 control-label" >{{Suivi du Node}}</label>
                     <div class="col-md-3">
                         </span><input type="checkbox" class="eqLogicAttr" data-l1key="configuration"  data-l2key="followActivity"  checked/>
@@ -195,6 +194,19 @@ sendVarToJS('mySensorID', mySensors::$_dico);
 
     </div>
 </div>
+
+<script>
+	$( "#ul_eqLogic" ).change(function() {
+		if($( "#selectNode" ).val() == "gateway"){
+			$("#selectNode").hide();
+			$("#followNode").hide();
+		}
+		else {
+			$("#selectNode").show();
+			$("#followNode").show();
+		}
+	});
+</script>
 
 <?php include_file('desktop', 'mySensors', 'js', 'mySensors'); ?>
 <?php include_file('core', 'plugin.template', 'js'); ?>
