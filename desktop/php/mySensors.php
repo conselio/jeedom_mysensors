@@ -205,7 +205,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 			$("#selectNode").show();
 			$("#followNode").show();
 		}
-	});
+	}
 </script>
 
 <?php include_file('desktop', 'mySensors', 'js', 'mySensors'); ?>
