@@ -196,7 +196,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 </div>
 
 <script>
-	$( "#ul_eqLogic" ).change(function() {
+	$( "#selectNode" ).change(function() {
 		if($( "#selectNode" ).val() == "gateway"){
 			$("#infoNode").hide();
 			$("#followNode").hide();
