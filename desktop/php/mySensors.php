@@ -39,7 +39,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
         </legend>
         <?php
         if (count($eqLogics) == 0) {
-            echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de mySensors, démarrer un node pour qu'il apparaisse}}</span></center>";
+            echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Aucun mySensors détecté, démarrer un node pour ajout}}</span></center>";
         } else {
             ?>
             <div class="eqLogicThumbnailContainer">
