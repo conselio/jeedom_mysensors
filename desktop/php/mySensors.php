@@ -39,15 +39,15 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
         </legend>
         <?php
         if (count($eqLogics) == 0) {
-            echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de virtuel, cliquez sur Ajouter un équipement pour commencer}}</span></center>";
+            echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de mySensors, démarrer un node pour qu'il apparaisse}}</span></center>";
         } else {
             ?>
             <div class="eqLogicThumbnailContainer">
                 <?php
-                foreach ($eqLogics as $eqLogic) {
-                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
+                foreach ($eqLogics as $eqLogic) {ard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
                     echo "<center>";
-                    echo '<img src="plugins/virtual/doc/images/virtual_icon.png" height="105" width="95" />';
+                    echo '<div class="eqLogicDisplayC
+                    echo '<img src="plugins/mySensors/doc/images/mysensors_icon.png" height="105" width="95" />';
                     echo "</center>";
                     echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
                     echo '</div>';
@@ -63,7 +63,9 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
             <div class="col-sm-6">
                 <form class="form-horizontal">
             <fieldset>
-                <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i>{{Général}}</legend>
+                <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i>  {{Général}}
+                <i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i>
+                </legend>
                 <div class="form-group">
                     <label class="col-md-2 control-label">{{Nom du Node}}</label>
                     <div class="col-md-3">
@@ -119,6 +121,12 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="AlertLimit" placeholder="AlertLimit"/>
                     </div>
                 </div>
+	<div class="form-group">
+                    <label class="col-sm-2 control-label">{{Commentaire}}</label>
+                    <div class="col-sm-3">
+                        <textarea class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="commentaire" ></textarea>
+                    </div>
+                </div>                
             </fieldset> 
         </form>
         </div>      
