@@ -14,6 +14,7 @@ if (!isConnect('admin')) {
     throw new Exception('{{401 - Accès non autorisé}}');
 }
 sendVarToJS('eqType', 'mySensors');
+$eqLogics = eqLogic::byType('mySensors');
 sendVarToJS('mySensorDico', mySensors::$_dico);
 
 ?>
