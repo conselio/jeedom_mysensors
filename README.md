@@ -54,9 +54,15 @@ Adding widget types and commands for types of sensors needing it
 
 Complete with lib 1.4 (on V_ message and S_ types), waiting for 2.0 for new function on mySensors part for the plugin
 
-=== Todo : ===
+Version 1.8
 
-Enhance mySensors node pages and widgets used by default
+Enhancing configuration page with new template
+
+Correcting one bug on gateway connexion
+
+Adding widgets
+
+=== Todo : ===
 
 Add inclusion mode in nodejs and jeedom
 
@@ -69,4 +75,4 @@ asm volatile ("  jmp 0");
 
 Add commands for Lock
 
-Integrate OTA with sketchs library and possible configuration of sketchs with variables like pin, warning level ...
+Add order on information and commands
