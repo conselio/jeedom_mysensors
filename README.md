@@ -66,6 +66,8 @@ Version 1.9
 
 Add commands for Lock
 
+Add order on information and commands
+
 === Todo : ===
 
 Add inclusion mode in nodejs and jeedom
@@ -77,4 +79,4 @@ void (softReset){
 asm volatile ("  jmp 0");
 }
 
-Add order on information and commands
+Adding gateway version info
