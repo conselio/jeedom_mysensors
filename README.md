@@ -62,6 +62,10 @@ Correcting one bug on gateway connexion
 
 Adding widgets
 
+Version 1.9
+
+Add commands for Lock
+
 === Todo : ===
 
 Add inclusion mode in nodejs and jeedom
@@ -72,7 +76,5 @@ How to reboot a node from Jeedom
 void (softReset){
 asm volatile ("  jmp 0");
 }
-
-Add commands for Lock
 
 Add order on information and commands
