@@ -570,6 +570,9 @@ class mySensors extends eqLogic {
 				if (!is_object($offlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '0');
 					$mysCmd->setConfiguration('cmdtype', '2');
@@ -589,6 +592,9 @@ class mySensors extends eqLogic {
 				if (!is_object($onlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '1');
 					$mysCmd->setConfiguration('cmdtype', '2');
@@ -617,6 +623,9 @@ class mySensors extends eqLogic {
 				if (!is_object($offlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '1');
 					$mysCmd->setConfiguration('cmdtype', '36');
@@ -636,6 +645,9 @@ class mySensors extends eqLogic {
 				if (!is_object($onlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '0');
 					$mysCmd->setConfiguration('cmdtype', '36');
@@ -662,6 +674,9 @@ class mySensors extends eqLogic {
 				if (!is_object($dimlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '');
 					$mysCmd->setConfiguration('cmdtype', '3');
@@ -687,6 +702,9 @@ class mySensors extends eqLogic {
 				if (!is_object($offlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '0');
 					$mysCmd->setConfiguration('cmdtype', '3');
@@ -703,6 +721,9 @@ class mySensors extends eqLogic {
 				if (!is_object($onlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '100');
 					$mysCmd->setConfiguration('cmdtype', '3');
@@ -725,6 +746,9 @@ class mySensors extends eqLogic {
 				if (!is_object($dimlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '');
 					$mysCmd->setConfiguration('cmdtype', '32');
@@ -749,6 +773,9 @@ class mySensors extends eqLogic {
 				if (!is_object($offlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '0');
 					$mysCmd->setConfiguration('cmdtype', '22');
@@ -765,6 +792,9 @@ class mySensors extends eqLogic {
 				if (!is_object($onlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '1');
 					$mysCmd->setConfiguration('cmdtype', '22');
@@ -791,6 +821,9 @@ class mySensors extends eqLogic {
 				if (!is_object($offlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '1');
 					$mysCmd->setConfiguration('cmdtype', '29');
@@ -807,6 +840,9 @@ class mySensors extends eqLogic {
 				if (!is_object($onlogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '1');
 					$mysCmd->setConfiguration('cmdtype', '30');
@@ -823,6 +859,9 @@ class mySensors extends eqLogic {
 				if (!is_object($stoplogic)) {
 					$mysCmd = new mySensorsCmd();
 					$mysCmd->setEventOnly(0);
+				$cmds = $elogic->getCmd();
+				$order = count($cmds);
+				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
 					$mysCmd->setConfiguration('request', '1');
 					$mysCmd->setConfiguration('cmdtype', '31');
