@@ -35,7 +35,6 @@ try {
     }
 
     if (init('action') == 'restartEq') {
-        var myNode = '';
         ajax::success(mySensors::sendToController( '32', '0', '13', '0', '3', '0' ));
     }    
 
