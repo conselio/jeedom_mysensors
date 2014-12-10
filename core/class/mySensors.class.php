@@ -538,6 +538,9 @@ class mySensors extends eqLogic {
 			}
 			else {
 				$mysCmd = new mySensorsCmd();
+				$cmds = $elogic->getCmd();
+				$order = count($cmds) + 1;
+				$mysCmd->setOrder($cmds);
 				$mysCmd->setCache('enable', 0);
 				$mysCmd->setEventOnly(0);
 				$mysCmd->setConfiguration('sensorCategory', $sType);
