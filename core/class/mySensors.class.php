@@ -604,6 +604,53 @@ class mySensors extends eqLogic {
 				}
 
 			}
+			if ($name == 'Verrou') {
+				$relonId = 'Verrou'.$sensor.'On';
+				$reloffId = 'Verrou'.$sensor.'Off';
+				$onlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$relonId);
+				$offlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$reloffId);
+				$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
+				$cmId = $cmdlogic->getId();
+				if (!is_object($offlogic)) {
+					$mysCmd = new mySensorsCmd();
+					$mysCmd->setEventOnly(0);
+					$mysCmd->setConfiguration('cmdCommande', '1');
+					$mysCmd->setConfiguration('request', '1');
+					$mysCmd->setConfiguration('cmdtype', '36');
+					$mysCmd->setConfiguration('sensor', $sensor);
+					$mysCmd->setEqLogic_id($elogic->getId());
+					$mysCmd->setEqType('mySensors');
+					$mysCmd->setLogicalId($reloffId);
+					$mysCmd->setType('action');
+					$mysCmd->setSubType('other');
+					$mysCmd->setValue($cmId);
+					$mysCmd->setTemplate("dashboard","lock" );
+					$mysCmd->setTemplate("mobile","lock" );
+					$mysCmd->setDisplay('parameters',array('displayName' => 1));
+					$mysCmd->setName( "Off ". $sensor );
+					$mysCmd->save();
+				}
+				if (!is_object($onlogic)) {
+					$mysCmd = new mySensorsCmd();
+					$mysCmd->setEventOnly(0);
+					$mysCmd->setConfiguration('cmdCommande', '1');
+					$mysCmd->setConfiguration('request', '0');
+					$mysCmd->setConfiguration('cmdtype', '36');
+					$mysCmd->setConfiguration('sensor', $sensor);
+					$mysCmd->setEqLogic_id($elogic->getId());
+					$mysCmd->setEqType('mySensors');
+					$mysCmd->setLogicalId($relonId);
+					$mysCmd->setType('action');
+					$mysCmd->setSubType('other');
+					$mysCmd->setValue($cmId);
+					$mysCmd->setTemplate("dashboard","lock" );
+					$mysCmd->setTemplate("mobile","lock" );
+					$mysCmd->setDisplay('parameters',array('displayName' => 1));
+					$mysCmd->setName( "On " . $sensor );
+					$mysCmd->save();
+				}
+
+			}			
 			if ($name == 'Variateur') {
 				$dimmerId = 'Dimmer'.$sensor;
 				$dimlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$dimmerId);
