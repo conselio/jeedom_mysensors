@@ -80,3 +80,5 @@ asm volatile ("  jmp 0");
 }
 
 Adding gateway version info
+
+Load sketch with avrdude
