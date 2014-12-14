@@ -68,9 +68,11 @@ Add commands for Lock
 
 Add order on information and commands
 
-=== Todo : ===
+Add inclusion
 
-Add inclusion mode in nodejs and jeedom
+Reformat log of NodeJS
+
+=== Todo : ===
 
 Add function on plugin to deliver data requested by a node
 
