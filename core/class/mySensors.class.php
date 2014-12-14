@@ -214,7 +214,7 @@ class mySensors extends eqLogic {
 			log::add('mySensors', 'info', $usbGateway);
 		} else {
 			$gateMode = "Serial";
-			$gatePort = "";	
+			$gatePort = "0";	
 		}
 		
 		if ($usbGateway == '' ) {
@@ -233,7 +233,7 @@ class mySensors extends eqLogic {
 			$url = $jeeurl . '/core/api/jeeApi.php?api=' . config::byKey('api');
 		}
 	
-	$inclusion = config::byKey('include_mode');
+	$inclusion = config::byKey('include_mode', 'mySensors');
 	$sensor_path = realpath(dirname(__FILE__) . '/../../node');	
         $cmd = 'nice -n 19 node ' . $sensor_path . '/mysensors.js ' . $url . ' ' . $usbGateway . ' ' . $gateMode . ' ' . $gatePort . ' ' . $inclusion;
 		
