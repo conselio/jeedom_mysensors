@@ -234,7 +234,6 @@ class mySensors extends eqLogic {
 		}
 	
 	$inclusion = config::byKey('include_mode', 'mySensors');
-	$inclusion = 'off';
 	$sensor_path = realpath(dirname(__FILE__) . '/../../node');	
         $cmd = 'nice -n 19 node ' . $sensor_path . '/mysensors.js ' . $url . ' ' . $usbGateway . ' ' . $gateMode . ' ' . $gatePort . ' ' . $inclusion;
 		
