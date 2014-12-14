@@ -74,8 +74,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 			<div class="col-lg-2">
 			<input type="checkbox" data-l1key="include_mode" checked/>
 			</div>
-	</div>
-	<div>
+		<br>
 		<label class="col-lg-4 control-label">Redémarrage</label>
 			<div class="col-lg-2">
 			<a class="btn btn-warning" id="bt_restartmySensors"><i class='fa fa-stop'></i> Arrêter/Redemarrer le service NodeJS</a>
