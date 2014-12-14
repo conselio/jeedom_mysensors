@@ -411,7 +411,7 @@ function sendTime(destination, sensor, gw) {
 }
 	
 function sendNextAvailableSensorId( gw) {
-	
+	if (inclusion == 'on' ) {
 	var destination = BROADCAST_ADDRESS;
 	var sensor = NODE_SENSOR_ID;
 	var command = C_INTERNAL;
@@ -421,6 +421,7 @@ function sendNextAvailableSensorId( gw) {
 	var td = encode(destination, sensor, command, acknowledge, type, payload);
 	console.log('-> ' + td.toString());
 	gw.write(td);
+	}
 	
 	
 }
