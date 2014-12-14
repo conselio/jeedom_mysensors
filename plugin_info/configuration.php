@@ -73,7 +73,9 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 		<div id="div_inclusion" class="form-group">		
 		<label class="col-lg-4 control-label" >Inclusion</label>
 			<div class="col-lg-2">
-			<input type="checkbox" data-l1key="include_mode" checked/>
+			<select id="select_include" class="configKey form-control" data-l1key="include_mode">
+                    	<option value="on">Activé</option>	
+                    	<option value="off">Désactivé</option>
 			</div>
 		</div>
 		
