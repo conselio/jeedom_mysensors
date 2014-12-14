@@ -6,7 +6,7 @@
     <icon>fa fa-tablet</icon>
     <licence>AGPL</licence>
     <author>CONSELIO SA</author>
-    <installation>Aucune</installation>
+    <installation>Installer npm pour NodeJs, puis le mode serial pour nodejs.</installation>
     <require>1.141</require>
     <version>1.9</version>
     <category>automation protocol</category>
