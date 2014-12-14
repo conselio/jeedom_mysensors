@@ -31,6 +31,7 @@ process.argv.forEach(function(val, index, array) {
 		case 3 : gwPort = val; break;
 		case 4 : gwType = val; break;
 		case 5 : gwAddress = val; break;
+		case 6 : inclusion = val; break;
 	}
   
 });
@@ -88,10 +89,47 @@ const P_CUSTOM						= 6;
 var fs = require('fs');
 var appendedString="";
 
+Date.prototype.getFullDay = function () {
+   if (this.getDate() < 10) {
+       return '0' + this.getDate();
+   }
+   return this.getDate();
+};
+
+Date.prototype.getFullMonth = function () {
+   t = this.getMonth() + 1;
+   if (t < 10) {
+       return '0' + t;
+   }
+   return t;
+};
+
+Date.prototype.getFullHours = function () {
+   if (this.getHours() < 10) {
+       return '0' + this.getHours();
+   }
+   return this.getHours();
+};
+
+Date.prototype.getFullMinutes = function () {
+   if (this.getMinutes() < 10) {
+       return '0' + this.getMinutes();
+   }
+   return this.getMinutes();
+};
+
+Date.prototype.getFullSeconds = function () {
+   if (this.getSeconds() < 10) {
+       return '0' + this.getSeconds();
+   }
+   return this.getSeconds();
+};
+
 function LogDate(Type, Message) {
  
    var ceJour = new Date();
-       var ceJourJeedom = ceJour.getDate() + "/" + ceJour.getMonth() + "/" + ceJour.getFullYear() + " " + ceJour.getHours() + "" + ceJour.getMinutes() + "" + ceJour.getSeconds();
+//       var ceJourJeedom = ceJour.getDate() + "/" + ceJour.getMonth() + "/" + ceJour.getFullYear() + " " + ceJour.getHours() + ":" + ceJour.getMinutes() + ":" + ceJour.getSeconds();
+       var ceJourJeedom = ceJour.getFullDay() + "/" + ceJour.getFullMonth() + "/" + ceJour.getFullYear() + " " + ceJour.getFullHours() + ":" + ceJour.getFullMinutes() + ":" + ceJour.getFullSeconds();
        console.log(ceJourJeedom + "|" + Type + "|" + Message);
 }
 
