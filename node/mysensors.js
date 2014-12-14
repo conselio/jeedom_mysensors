@@ -129,8 +129,8 @@ function LogDate(Type, Message) {
  
    var ceJour = new Date();
 //       var ceJourJeedom = ceJour.getDate() + "/" + ceJour.getMonth() + "/" + ceJour.getFullYear() + " " + ceJour.getHours() + ":" + ceJour.getMinutes() + ":" + ceJour.getSeconds();
-       var ceJourJeedom = ceJour.getFullDay() + "/" + ceJour.getFullMonth() + "/" + ceJour.getFullYear() + " " + ceJour.getFullHours() + ":" + ceJour.getFullMinutes() + ":" + ceJour.getFullSeconds();
-       console.log(ceJourJeedom + "|" + Type + "|" + Message);
+       var ceJourJeedom = ceJour.getFullDay() + "-" + ceJour.getFullMonth() + "-" + ceJour.getFullYear() + " " + ceJour.getFullHours() + ":" + ceJour.getFullMinutes() + ":" + ceJour.getFullSeconds();
+       console.log(ceJourJeedom + " | " + Type + " | " + Message);
 }
 
 function crcUpdate(old, value) {
