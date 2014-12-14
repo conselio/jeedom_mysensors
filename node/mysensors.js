@@ -308,12 +308,16 @@ function saveSensor(sender, sensor, type) {
 
 	url = urlJeedom + "&messagetype=saveSensor&type=mySensors&id="+sender.toString()+"&sensor=" + sensor.toString() + "&value="+type;
 
-		
+	if (inclusion == 'on' ) {	
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 		LogDate("info", "Got response saveSensor: " + response.statusCode);
 	  }
 	});
+	}
+	else {
+		LogDate("info", "Inclusion Off");
+	}
 }
 
 function saveGateway(status) {
