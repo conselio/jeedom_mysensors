@@ -71,11 +71,12 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
         </div>
 		
 		<div id="div_inclusion" class="form-group">		
-		<label class="col-lg-4 control-label" >Inclusion</label>
+		<label class="col-lg-4 control-label" >Inclusion :</label>
 			<div class="col-lg-2">
 			<select id="select_include" class="configKey form-control" data-l1key="include_mode">
                     	<option value="on">Activé</option>	
                     	<option value="off">Désactivé</option>
+                    	</select>
 			</div>
 		</div>
 		
@@ -84,7 +85,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 			<div class="col-lg-2">
 			<a class="btn btn-warning" id="bt_restartmySensors"><i class='fa fa-stop'></i> Arrêter/Redemarrer le service NodeJS</a>
 			</div>
-	</div>		
+		</div>		
  <?php
  if (!mySensors::deamonRunning()) {
 echo '<div id="div_node" class="alert alert-danger">Le service NodeJS ne tourne pas</div>';
