@@ -117,12 +117,14 @@ echo '<div id="div_node" class="alert alert-success">Le service NodeJS est en ma
 						 $("#div_local").show();
 						 $("#div_status").show();
 						 $("#div_node").show();
+						 $("#div_inclusion").show();
 						 $("#div_slave").hide();
 						}
 						else{
 							$("#div_local").hide();
 							$("#div_status").hide();
 							$("#div_node").hide();
+							$("#div_inclusion").hide();
 							$("#div_slave").show();
 							}
 						});
