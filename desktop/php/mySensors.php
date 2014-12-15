@@ -35,7 +35,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
     </div>
     
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-        <legend>{{Mes virtuels}}
+        <legend>{{Mes mySensors}}
         </legend>
         <?php
         if (count($eqLogics) == 0) {
