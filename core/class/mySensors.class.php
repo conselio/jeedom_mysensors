@@ -501,6 +501,9 @@ class mySensors extends eqLogic {
 	public static function saveLibVersion() {
 		sleep(1);
 		$nodeid = init('id');
+		if ($nodeid == '0') {
+			$nodeid = 'gateway';
+		}
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
