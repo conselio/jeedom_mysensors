@@ -147,7 +147,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LibVersion" placeholder="LibVersion"/ readonly=true>
                     </div>                    		
                 	</div>                    		
-                        <div class="form-group">
+                        <div id="infoSketch" class="form-group">
                     		<label class="col-md-2 control-label">{{Sketch}}</label>
                 		 <div class="col-md-3">
                 		  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchName" placeholder="SketchName"/ readonly=true>
@@ -158,7 +158,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     </div>
                     		
                 	</div>
-                	              	<div class="form-group">
+                	              	<div id="infoActiv" class="form-group">
                     <label class="col-md-2 control-label">{{Dernière Activité}}</label>
                     <div class="col-md-3">
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
@@ -232,11 +232,13 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 <script>
 	$( "#selectNode" ).change(function() {
 		if($( "#selectNode" ).val() == "gateway"){
-			$("#infoNode").hide();
+			$("#infoSketch").hide();
+			$("#infoActiv").hide();
 			$("#followNode").hide();
 		}
 		else {
-			$("#infoNode").show();
+			$("#infoSketch").show();
+			$("#infoActiv").show();
 			$("#followNode").show();
 		}
 	});
