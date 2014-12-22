@@ -26,6 +26,12 @@ Add inclusion
 
 Reformat log of NodeJS
 
+Version 1.9.1
+
+Adding libversion for gateway
+
+Adding images for the market and online doc
+
 ==== 29/11/2014
 
 - Ajout doc
