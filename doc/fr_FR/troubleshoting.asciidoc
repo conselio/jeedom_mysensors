@@ -15,3 +15,9 @@ Au démarrage d'un noeud, celui-ci se présente sur le réseau, un équipement l
 --
 L'équipement gateway dispose de deux informations qui peuvent être utile pour les alertes de connexions, le premier vous donne l'état de la gateway, le deuxième vous donne des alertes sur des noeuds inactifs
 --
+
+[panel,danger]
+.Mes logs montrent que j'ai bien de la communication, mais rien dans Jeedom n'apparait
+--
+Vérifier votre configuration réseau dans Jeedom. Vous devez bien avoir un /jeedom de présent dans votre adresse interne.
+--
