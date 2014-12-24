@@ -12,7 +12,7 @@ image::../images/mySensors-Network.png[Réseau mySensors]
 
 Le plugin Jeedom permet d'utiliser une gateway USB (sur un Jeedom central ou déporté) ou une network gateway.
 
-=== Lexique mySensors
+==== Lexique mySensors
 
   *  Node  : un nœud de capteur/actionneur
   *  Repeater : un répéteur de signal (mais accessoirement, peut aussi être un capteur)
