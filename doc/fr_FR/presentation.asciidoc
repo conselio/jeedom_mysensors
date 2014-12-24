@@ -1,0 +1,20 @@
+Le plugin MySensors permet d'utiliser les équipement MySensors à base d'arduino.
+
+Les équiments MySensors sont des capteurs ou actionneurs à monter soit même, ce qui permet d'avoir un coût de revient très faible et une flexibilité sans limite.
+
+Ils forment un réseau de nœuds (Capteur ou Actionneur) sans fil qui communique avec une Gateway.
+
+C'est elle qui est connectée à Jeedom par ce plugin et qui transmet les informations entre les noeuds et Jeedom dans le protocole mySensors.
+
+Chaque nœud permet de répéter le signal d'un capteur qui serait hors de portée de la gateway avec si besoin des nœuds répéteurs. 
+
+image::../images/mySensors-Network.png[Réseau mySensors]
+
+Le plugin Jeedom permet d'utiliser une gateway USB (sur un Jeedom central ou déporté) ou une network gateway.
+
+=== Lexique mySensors
+
+  *  Node  : un nœud de capteur/actionneur
+  *  Repeater : un répéteur de signal (mais accessoirement, peut aussi être un capteur)
+  *  Gateway : la passerelle entre le réseau mySensors et votre réseau informatique
+  *  Controller : le service côté informatique qui communique avec la gateway
