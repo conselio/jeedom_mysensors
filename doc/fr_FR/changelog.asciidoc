@@ -1,14 +1,14 @@
-== Version 1.9.2
+==== Version 1.9.2
 
 Ajout de la doc du plugin
 
-== Version 1.9.1
+==== Version 1.9.1
 
 Ajout de la version de lib de la gateway
 
 Modification des images pour le market et la doc
 
-== Version 1.9
+==== Version 1.9
 
 Ajout de commande pour le type Lock
 
@@ -18,7 +18,7 @@ Ajout du mode d'inclusion
 
 Modification du format des dates de log du NodeJS
 
-== Version 1.8
+==== Version 1.8
 
 Amélioration de l'affichage de la page d'équipement
 
@@ -26,7 +26,7 @@ Correction d'un bug sur le statut de la connexion gateway
 
 Ajout de widgets par défaut
 
-== Version 1.7
+==== Version 1.7
 
 Amélioration de l'affichage de la page d'équipement
 
