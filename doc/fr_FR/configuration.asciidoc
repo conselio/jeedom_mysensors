@@ -1,5 +1,62 @@
-Ce plugin est destiné à la gestion d'un réseau de capteurs mySensors
-mySensors et un projet de protocole de communication sans fil entre noeuds Arduino.
-Une fois le protocole établi, à vous de jouer et combiner les arduinos et tous les capteurs existants
+=== Configuration du plugin
 
-Doc à terminer
+La première étape de configuration se fait sur la page du plugin.
+
+Elle permettra de configurer la connexion avec la gateway.
+
+image::../images/mySensors4.jpg[Image du produit]
+
+==== Configuration du mode
+
+Plusieurs modes sont disponibles pour mySensors :
+
+  *  Local : pour utiliser le service controlleur en local (à choisir pour un gateway branchée localement ou network gateway)
+
+  *  Gateway sur un Jeedom Esclave : pour utiliser le controlleur sur un Jeedom déporté
+
+  *  Jeedom Esclave : pour un jeedom déporté qui a une gateway branchée en local
+
+==== Configuration de l'esclave
+
+Ce choix n'apparait qu'avec le mode "gateway sur un Jeedom esclave".
+
+Il permet de sélectionner le jeedom déporté qui doit être utilisé pour envoyer les commandes.
+
+==== Configuration du port
+
+Ce choix n'apparait que pour une gateway locale ou l'esclave (là où tourne un controlleur)
+
+La liste est constituée de :
+
+  *  la liste des périphériques USB branchés, celle-ci est automatique
+
+  *  la possibilité de choisir une connexion série (dans ce cas, il faudra remplir un champ libre avec le port)
+
+  *  la possibilité de choisir une network gateway (dans ce cas, il faudra remplir un champ libre avec l'adresse)
+
+=== Menu mySensors
+
+Vous retrouverez toute la configuration des équipements (informations et commandes) dans le menu Plugins->Protocole domotique->mySensors 
+
+image::../images/mySensors3.jpg[Image du produit]
+
+==== Configuration des nodes et leurs capteurs
+
+Les équipements Jeedom sont automatiquement créées au démarrage des nodes.
+De la même facon que les équipements sont automatiquement créés à l'arrivée de nouveaux nodes, les capteurs des nodes sont automatiquement créer comme des "Informations" dans Jeedom.
+
+Exemple : si on reprend le cas du capteur de température, le protocole mySensors inclut une présentation du noeud sur son réseau, il envoit les informations qu'il fournit : température, niveau de batterie, humidité ... automatiquement, le controlleur créer les informations associées avec leur SENSOR_ID (que vous avec dans le sketch injecté sur l'Arduino) 
+
+image::../images/mySensors2.jpg[Image du produit]
+
+==== Configuration des commandes des nodes
+
+Des commandes sont créées automatiquement pour certains capteurs.
+
+* Relais : on/off
+
+* Dimmer : slider
+
+* Verrou : activé/désactivé
+
+image::../images/mySensors1.jpg[Image du produit]
