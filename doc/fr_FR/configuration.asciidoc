@@ -4,7 +4,7 @@ La première étape de configuration se fait sur la page du plugin.
 
 Elle permettra de configurer la connexion avec la gateway.
 
-image::../images/mySensors4.jpg[Image du produit]
+image::../images/mySensors4.png[Image du produit]
 
 ==== Configuration du mode
 
@@ -38,7 +38,7 @@ La liste est constituée de :
 
 Vous retrouverez toute la configuration des équipements (informations et commandes) dans le menu Plugins->Protocole domotique->mySensors 
 
-image::../images/mySensors3.jpg[Image du produit]
+image::../images/mySensors3.png[Image du produit]
 
 ==== Configuration des nodes et leurs capteurs
 
@@ -47,7 +47,7 @@ De la même facon que les équipements sont automatiquement créés à l'arrivé
 
 Exemple : si on reprend le cas du capteur de température, le protocole mySensors inclut une présentation du noeud sur son réseau, il envoit les informations qu'il fournit : température, niveau de batterie, humidité ... automatiquement, le controlleur créer les informations associées avec leur SENSOR_ID (que vous avec dans le sketch injecté sur l'Arduino) 
 
-image::../images/mySensors2.jpg[Image du produit]
+image::../images/mySensors2.png[Image du produit]
 
 ==== Configuration des commandes des nodes
 
@@ -59,4 +59,4 @@ Des commandes sont créées automatiquement pour certains capteurs.
 
 * Verrou : activé/désactivé
 
-image::../images/mySensors1.jpg[Image du produit]
+image::../images/mySensors1.png[Image du produit]
