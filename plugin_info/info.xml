@@ -8,7 +8,7 @@
     <author>CONSELIO SA</author>
     <installation>Installer npm pour NodeJs, puis le mode serial pour nodejs.</installation>
     <require>1.141</require>
-    <version>1.9.1</version>
+    <version>1.9.2</version>
     <category>automation protocol</category>
     <allowRemote>1</allowRemote>
 </info>
