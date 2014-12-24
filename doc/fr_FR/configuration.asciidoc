@@ -1,4 +1,4 @@
-=== Configuration du plugin
+==== Configuration du plugin
 
 La première étape de configuration se fait sur la page du plugin.
 
@@ -6,7 +6,7 @@ Elle permettra de configurer la connexion avec la gateway.
 
 image::../images/mySensors4.png[Image du produit]
 
-==== Configuration du mode
+===== Configuration du mode
 
 Plusieurs modes sont disponibles pour mySensors :
 
@@ -16,13 +16,13 @@ Plusieurs modes sont disponibles pour mySensors :
 
   *  Jeedom Esclave : pour un jeedom déporté qui a une gateway branchée en local
 
-==== Configuration de l'esclave
+===== Configuration de l'esclave
 
 Ce choix n'apparait qu'avec le mode "gateway sur un Jeedom esclave".
 
 Il permet de sélectionner le jeedom déporté qui doit être utilisé pour envoyer les commandes.
 
-==== Configuration du port
+===== Configuration du port
 
 Ce choix n'apparait que pour une gateway locale ou l'esclave (là où tourne un controlleur)
 
@@ -34,13 +34,13 @@ La liste est constituée de :
 
   *  la possibilité de choisir une network gateway (dans ce cas, il faudra remplir un champ libre avec l'adresse)
 
-=== Menu mySensors
+===== Menu mySensors
 
 Vous retrouverez toute la configuration des équipements (informations et commandes) dans le menu Plugins->Protocole domotique->mySensors 
 
 image::../images/mySensors3.png[Image du produit]
 
-==== Configuration des nodes et leurs capteurs
+===== Configuration des nodes et leurs capteurs
 
 Les équipements Jeedom sont automatiquement créées au démarrage des nodes.
 De la même facon que les équipements sont automatiquement créés à l'arrivée de nouveaux nodes, les capteurs des nodes sont automatiquement créer comme des "Informations" dans Jeedom.
@@ -49,7 +49,7 @@ Exemple : si on reprend le cas du capteur de température, le protocole mySensor
 
 image::../images/mySensors2.png[Image du produit]
 
-==== Configuration des commandes des nodes
+===== Configuration des commandes des nodes
 
 Des commandes sont créées automatiquement pour certains capteurs.
 
