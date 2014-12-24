@@ -1,41 +1,35 @@
-==== 14/12/2014
+== Version 1.9.2
 
-Version 1.7
+Ajout de la doc du plugin
 
-Enhancing the configuration page for nodes
+== Version 1.9.1
 
-Adding widget types and commands for types of sensors needing it
+Ajout de la version de lib de la gateway
 
-Complete with lib 1.4 (on V_ message and S_ types), waiting for 2.0 for new function on mySensors part for the plugin
+Modification des images pour le market et la doc
 
-Version 1.8
+== Version 1.9
 
-Enhancing configuration page with new template
+Ajout de commande pour le type Lock
 
-Correcting one bug on gateway connexion
+Ajout de l'ordre par défaut Capteur -> Commande 1 -> Commande 2 -> Capteur
 
-Adding widgets
+Ajout du mode d'inclusion
 
-Version 1.9
+Modification du format des dates de log du NodeJS
 
-Add commands for Lock
+== Version 1.8
 
-Add order on information and commands
+Amélioration de l'affichage de la page d'équipement
 
-Add inclusion
+Correction d'un bug sur le statut de la connexion gateway
 
-Reformat log of NodeJS
+Ajout de widgets par défaut
 
-Version 1.9.1
+== Version 1.7
 
-Adding libversion for gateway
+Amélioration de l'affichage de la page d'équipement
 
-Adding images for the market and online doc
+Ajout de widgets par défaut sur certains équipements et des commandes qui lui sont liés
 
-==== 29/11/2014
-
-- Ajout doc
-
-==== 27/11/2014
-
-- Refonte présentation des informations sur la page équipement
+Finalisation du support de la lib 1.4 (pou V_ message et S_ types), en attente des retours de la version 2
