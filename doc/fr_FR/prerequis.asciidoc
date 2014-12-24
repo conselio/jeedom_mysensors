@@ -1,1 +1,7 @@
-Prerequis
+Avant de faire communiquer Jeedom avec MySensors, il est nécessaire d'installer le module SerialPort pour NodeJS. (Communication de JSnode par USB) Pour se faire,lancer la commande via une console :
+
+[source]
+---------------------------------------------------------------------
+sudo apt-get install npm
+sudo npm install serialport 
+---------------------------------------------------------------------
