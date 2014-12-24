@@ -1,7 +1,7 @@
 == mySensors
 
 === Description
-Plugin permetant de gérer les capteurs de type mySensors
+include::presentation.asciidoc[]
 
 '''
 === Prerequis
