@@ -4,6 +4,10 @@
 Plugin permetant de gérer les capteurs de type mySensors
 
 '''
+=== Prerequis
+include::prerequis.asciidoc[]
+
+'''
 === Configuration
 include::configuration.asciidoc[]
 
