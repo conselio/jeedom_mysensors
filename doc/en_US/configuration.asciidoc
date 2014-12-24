@@ -1,0 +1,5 @@
+Ce plugin est destiné à la gestion d'un réseau de capteurs mySensors
+mySensors et un projet de protocole de communication sans fil entre noeuds Arduino.
+Une fois le protocole établi, à vous de jouer et combiner les arduinos et tous les capteurs existants
+
+Doc à terminer

@@ -1,0 +1,41 @@
+==== 14/12/2014
+
+Version 1.7
+
+Enhancing the configuration page for nodes
+
+Adding widget types and commands for types of sensors needing it
+
+Complete with lib 1.4 (on V_ message and S_ types), waiting for 2.0 for new function on mySensors part for the plugin
+
+Version 1.8
+
+Enhancing configuration page with new template
+
+Correcting one bug on gateway connexion
+
+Adding widgets
+
+Version 1.9
+
+Add commands for Lock
+
+Add order on information and commands
+
+Add inclusion
+
+Reformat log of NodeJS
+
+Version 1.9.1
+
+Adding libversion for gateway
+
+Adding images for the market and online doc
+
+==== 29/11/2014
+
+- Ajout doc
+
+==== 27/11/2014
+
+- Refonte présentation des informations sur la page équipement

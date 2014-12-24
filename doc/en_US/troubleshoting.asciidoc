@@ -1,0 +1,23 @@
+[panel,danger]
+.Aucun équipement ne se créé
+--
+Vérifier qu'au moins un équipement "gateway" existe, il représente votre passerelle. Si ce n'est pas le cas, sur la page de configuration vous pouvez vérifier le service du plugin
+--
+
+[panel,danger]
+.Comment se créer mes équipements
+--
+Au démarrage d'un noeud, celui-ci se présente sur le réseau, un équipement lié est alors créer avec tous ses capteurs et les commandes associées le cas échéant
+--
+
+[panel,danger]
+.Je suspect un problème de connexion sur le réseau
+--
+L'équipement gateway dispose de deux informations qui peuvent être utile pour les alertes de connexions, le premier vous donne l'état de la gateway, le deuxième vous donne des alertes sur des noeuds inactifs
+--
+
+[panel,danger]
+.Mes logs montrent que j'ai bien de la communication, mais rien dans Jeedom n'apparait
+--
+Vérifier votre configuration réseau dans Jeedom. Vous devez bien avoir un /jeedom de présent dans votre adresse interne.
+--
