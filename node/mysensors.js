@@ -14,14 +14,12 @@ var fs = require('fs');
 var request = require('request');
 
 
-const gwType = 'Serial';
 
 var urlJeedom = '';
+var gwType = 'Serial';
+var gwAddress = '';
 var gwPort = '';
-
-//const gwType = 'Ethernet';
-const gwAddress = '';
-//const gwPort
+var inclusion = '';
 
 // print process.argv
 process.argv.forEach(function(val, index, array) {
@@ -680,6 +678,12 @@ function rfReceived(data, db, gw) {
 	}
 }
 
+LogDate("info", "Jeedom url : " + urlJeedom);
+LogDate("info", "gwPort : " + gwPort);
+LogDate("info", "gwType : " + gwType);
+LogDate("info", "gwAddress : " + gwAddress);
+LogDate("info", "Inclusion : " + inclusion);
+
 	var db = null;
 
 	//pour la connexion avec Jeedom => Node
@@ -708,7 +712,7 @@ function rfReceived(data, db, gw) {
 	  });
 	});
 	
-	if (gwType == 'Ethernet') {
+	if (gwType == 'Network') {
 		gw = require('net').Socket();
 		gw.connect(gwPort, gwAddress);
 		gw.setEncoding('ascii');
