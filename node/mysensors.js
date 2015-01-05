@@ -13,8 +13,6 @@ var net = require('net');
 var fs = require('fs');
 var request = require('request');
 
-
-
 var urlJeedom = '';
 var gwType = 'Serial';
 var gwAddress = '';
@@ -717,13 +715,16 @@ LogDate("info", "Inclusion : " + inclusion);
 		gw.connect(gwPort, gwAddress);
 		gw.setEncoding('ascii');
 		gw.on('connect', function() {
-			LogDate("info", "connected to ethernet gateway at " + gwAddress + ":" + gwPort);
+			LogDate("info", "connected to network gateway at " + gwAddress + ":" + gwPort);
+			saveGateway('1');
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
 		}).on('end', function() {
-			LogDate("error", "disconnected from gateway");
+			LogDate("error", "disconnected from network gateway");
+			saveGateway('0');
 		}).on('error', function() {
 			LogDate("error", "connection error - trying to reconnect");
+			saveGateway('0');
 			gw.connect(gwPort, gwAddress);
 			gw.setEncoding('ascii');
 		});
@@ -739,7 +740,7 @@ LogDate("info", "Inclusion : " + inclusion);
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
 		}).on('end', function() {
-			LogDate("error", "disconnected from gateway");
+			LogDate("error", "disconnected from serial gateway");
 			saveGateway('0');
 		}).on('error', function() {
 			LogDate("error", "connection error - trying to reconnect");
