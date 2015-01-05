@@ -6,9 +6,9 @@
     <icon>fa fa-tablet</icon>
     <licence>AGPL</licence>
     <author>CONSELIO SA</author>
-    <installation>Installer npm pour NodeJs, puis le mode serial pour nodejs.</installation>
+    <installation>Le module serialport pour nodejs est nécessaire pour ce plugin.</installation>
     <require>1.141</require>
-    <version>1.9.2</version>
+    <version>1.9.3</version>
     <category>automation protocol</category>
     <allowRemote>1</allowRemote>
 </info>
