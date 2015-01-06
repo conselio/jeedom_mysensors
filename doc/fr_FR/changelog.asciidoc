@@ -1,3 +1,9 @@
+==== Version 1.9.3/1.9.4
+
+Ajout de doc
+
+Correction de bugs network gateway
+
 ==== Version 1.9.2
 
 Ajout de la doc du plugin
