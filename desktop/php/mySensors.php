@@ -164,6 +164,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
                     </div>
                 </div>	 
+                <a href='http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html'>Lien vers la documentation des Noeuds</a>
                 	
 
                     </fieldset> 
