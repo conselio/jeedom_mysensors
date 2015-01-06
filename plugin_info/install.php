@@ -78,6 +78,9 @@ function mySensors_update() {
         mySensors::stopDeamon();
     }
     $cron->stop();
+    $sensor_path = realpath(dirname(__FILE__) . '/../../node');
+    exec('cd $sensor_path; npm install');
+    exec('sudo apt-get -y install avrdude');
 }
 
 function mySensors_remove() {
