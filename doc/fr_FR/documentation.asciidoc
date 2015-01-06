@@ -1,23 +1,23 @@
 ==== Sur le Wiki Jeedom
 
-La page du plugin (attention, peut ne pas être maintenu à jour https://wiki.jeedom.fr/index.php?title=MySensors)
+https://wiki.jeedom.fr/index.php?title=MySensors[La page du plugin] (attention, peut ne pas être maintenu à jour)
 
-La page indexant les noeuds (https://wiki.jeedom.fr/index.php?title=N%C5%93uds_MySensors)
+https://wiki.jeedom.fr/index.php?title=N%C5%93uds_MySensors[La page indexant les noeuds]
 
-Serial Gateway (https://wiki.jeedom.fr/index.php?title=MySensors_Gateway)
+https://wiki.jeedom.fr/index.php?title=MySensors_Gateway[Serial Gateway]
 
-Network Gateway (https://wiki.jeedom.fr/index.php?title=MySensors_Gateway_Ethernet)
+https://wiki.jeedom.fr/index.php?title=MySensors_Gateway_Ethernet[Network Gateway]
 
 ==== Sur le forum Jeedom
 
-Le fil du plugin mySensors (https://forum.jeedom.fr/viewtopic.php?f=28&t=1591)
+https://forum.jeedom.fr/viewtopic.php?f=28&t=1591[Le fil du plugin mySensors]
 
-La section mySensors (https://forum.jeedom.fr/viewforum.php?f=35)
+https://forum.jeedom.fr/viewforum.php?f=35[La section mySensors]
 
 ==== Le site du projet mySensors
 
-En anglais (http://mysensors.org/build/)
+http://mysensors.org/build/[Le site mySensors] (en anglais)
 
 ==== Les vidéos Jeedom
 
-Les tutos vidéos Jeedom (https://jeedom.fr/video.php)
+https://jeedom.fr/video.php[Les tutos vidéos Jeedom]
