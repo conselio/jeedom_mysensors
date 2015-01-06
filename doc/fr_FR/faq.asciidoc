@@ -1,11 +1,22 @@
 [panel,primary]
 .Quel type de gateway mySensors est supporté
 --
-On peut gérer une gateway série sur jeedom central ou esclave, mais également une gateway réseau
+On peut utiliser une gateway sur port USB ou réseau (voir les liens de documentation plus bas pour plus d'informations)
+La gateway USB peut être utilisée sur le Jeedom principal ou un satellite
 --
 
 [panel,primary]
 .Qu'est-ce que mySensors
 --
-mySensors est un protocole de transmission sans fil de capteurs à base d'Arduino. Des exemples de capteurs sont proposés sur le site mySensors, mais les limites sont celles du catalogue de capteurs Arduino existant
+mySensors est un protocole de transmission sans fil de capteurs à base d'Arduino. 
+Des exemples de capteurs sont proposés sur le site mySensors, mais les limites sont celles du catalogue de capteurs Arduino existant
+Dans la section autres documentations, un lien vers le site mySensors est disponible (en anglais) et également des liens vers des noeuds en francais
+--
+
+[panel,primary]
+.Mon service est toujours indiqué comme ne fonctionnant pas, que faire ?
+--
+Il se peut que le module serialport pour NodeJS ne soit pas installé.
+Cela se produit sur des installations autres que le Pi et normalement est réglé à partir de la version 1.9.4 qui fait l'installation automatique.
+Pour installer le module serialport, depuis le répertoire plugins/mySensors/node, il faut lancer la commande npm install (en tant que www-data)
 --
