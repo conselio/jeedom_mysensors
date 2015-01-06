@@ -222,7 +222,7 @@ class mySensors extends eqLogic {
 		}
 		
 		if (config::byKey('jeeNetwork::mode') == 'slave') { //Je suis l'esclave
-			$url  = 'http://' . config::byKey('jeeNetwork::master::ip') . '/core/api/jeeApi.php?api=' . config::byKey('jeeNetwork::master::apikey');
+			$url  = config::byKey('jeeNetwork::master::ip') . '/core/api/jeeApi.php?api=' . config::byKey('jeeNetwork::master::apikey');
 		} else {
 			if (stripos(config::byKey('internalAddr'), 'jeedom') !== FALSE) {
 				//on est pas sur une Mini
