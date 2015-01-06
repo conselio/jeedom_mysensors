@@ -20,5 +20,9 @@ include::faq.asciidoc[]
 include::troubleshoting.asciidoc[]
 
 '''
+=== Autres Documentations
+include::documentation.asciidoc[]
+
+'''
 === Changelog
 include::changelog.asciidoc[]
