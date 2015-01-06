@@ -24,9 +24,9 @@ process.argv.forEach(function(val, index, array) {
   
 	switch ( index ) {
 		case 2 : urlJeedom = val; break;
-		case 3 : gwPort = val; break;
+		case 3 : gwAddress = val; break;
 		case 4 : gwType = val; break;
-		case 5 : gwAddress = val; break;
+		case 5 : gwPort = val; break;
 		case 6 : inclusion = val; break;
 	}
   
