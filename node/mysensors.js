@@ -732,10 +732,10 @@ LogDate("info", "Inclusion : " + inclusion);
 	
 		var serialPort = require("serialport");
 		var SerialPort = require('serialport').SerialPort;
-		gw = new SerialPort(gwPort, { baudrate: gwBaud });
+		gw = new SerialPort(gwAddress, { baudrate: gwBaud });
      	gw.open();
 		gw.on('open', function() {
-			LogDate("info", "connected to serial gateway at " + gwPort);
+			LogDate("info", "connected to serial gateway at " + gwAddress);
 			saveGateway('1');
 		}).on('data', function(rd) {
 			appendData(rd.toString(), db, gw);
