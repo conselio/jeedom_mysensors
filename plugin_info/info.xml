@@ -8,7 +8,7 @@
     <author>CONSELIO SA</author>
     <installation>Le module serialport pour nodejs est nécessaire pour ce plugin.</installation>
     <require>1.141</require>
-    <version>1.9.3</version>
+    <version>1.9.4</version>
     <category>automation protocol</category>
     <allowRemote>1</allowRemote>
 </info>
