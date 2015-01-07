@@ -1,8 +1,16 @@
-Le plugin MySensors permet d'utiliser les équipement MySensors à base d'arduino.
+==== mySensors, un protocole domotique DIY
 
-Les équiments MySensors sont des capteurs ou actionneurs à monter soit même, ce qui permet d'avoir un coût de revient très faible et une flexibilité sans limite.
+Le plugin MySensors permet d'utiliser des équipement utilisant le protocole MySensors.
 
-Ils forment un réseau de nœuds (Capteur ou Actionneur) sans fil qui communique avec une Gateway.
+Les équiments MySensors sont des capteurs ou actionneurs à base d'Arduino.
+
+A monter soit même, dans la mouvance DIY (Do It Yourself, Faites le Vous Même), ce qui permet d'avoir un coût de revient très faible et une flexibilité sans limite. Les limites de possibilités mySensors sont celles du catalogue de composants connectables à un Arduino et les exemples existants.
+
+==== mySensors, qu'est-ce que c'est
+
+mySensors est un protocole de communication sans fil orienté domotique
+
+On a donc un réseau de noeuds qui communique sur la fréquence du 2.4GHz entre eux et ce réseau de noeuds dispose d'une passerelle qui fait le lien entre l'informatique et les noeuds
 
 C'est elle qui est connectée à Jeedom par ce plugin et qui transmet les informations entre les noeuds et Jeedom dans le protocole mySensors.
 
@@ -12,9 +20,23 @@ image::../images/mySensors-Network.png[Réseau mySensors]
 
 Le plugin Jeedom permet d'utiliser une gateway USB (sur un Jeedom central ou déporté) ou une network gateway.
 
-==== Lexique mySensors
+==== mySensors, un peu de lexique
 
   *  Node  : un nœud de capteur/actionneur
   *  Repeater : un répéteur de signal (mais accessoirement, peut aussi être un capteur)
   *  Gateway : la passerelle entre le réseau mySensors et votre réseau informatique
   *  Controller : le service côté informatique qui communique avec la gateway
+
+==== mySensors, qu'est-ce que ca peut faire
+
+mySensors reconnait la communication bidirectionnelle, on peut donc avoir de simples capteurs (température, mouvement ...) mais aussi des actionneurs (relais, verrou ...)
+
+Le protocole prend en charge l'acquittement et le retour d'état. On y dispose d'une configuration de l'activation de l'association de nouveaux noeuds.
+
+En revanche aujourd'hui le protocole n'est pas chiffré. Néanmoins, il est nécessaire de connaitre la fréquence de communication (réglable dans la lib) et connaitre le protocole pour déchiffre les trames.
+
+Tous les capteurs classiques sont faisables. Température, multi-capteurs, mouvement ... A condition de mettre un peu d'huile de coude et souvent de la soudure pour obtenir un bon résultat sur ces capteurs nécessitant d'être apparent et de taille réduite.
+
+Mais il est possible également de répondre à des besoins plus exotiques pour lesquels il n'existe pas de matériel sur le marché dans des protocoles classiques (Zwave, Enocean ...)
+
+Quelques exemples : mesure de niveau d'une citerne ou résever de pelets/granulés, systèmes de capteurs pour le jardin/aquarium ...
