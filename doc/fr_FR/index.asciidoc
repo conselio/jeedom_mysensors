@@ -12,6 +12,10 @@ include::prerequis.asciidoc[]
 include::configuration.asciidoc[]
 
 '''
+=== Débuter
+include::debuter.asciidoc[]
+
+'''
 === FAQ
 include::faq.asciidoc[]
 
