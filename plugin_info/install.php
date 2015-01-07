@@ -79,7 +79,7 @@ function mySensors_update() {
     }
     $cron->stop();
     $sensor_path = realpath(dirname(__FILE__) . '/../../node');
-    exec('cd jeedom/plugins/mySensors/node; npm install');
+    exec('cd ~; cd jeedom/plugins/mySensors/node; npm install');
     exec('sudo apt-get -y install avrdude');
 }
 
