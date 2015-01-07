@@ -1,3 +1,9 @@
+==== Version 1.9.5
+
+Ajout de doc
+
+Modification du setEventOnly pour conserver les bonnes heures d'envoi de données
+
 ==== Version 1.9.3/1.9.4
 
 Ajout de doc
