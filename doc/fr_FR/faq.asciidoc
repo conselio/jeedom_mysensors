@@ -1,15 +1,18 @@
 [panel,primary]
-.Quel type de gateway mySensors est supporté
+.Quel type de gateway mySensors est supporté ?
 --
 On peut utiliser une gateway sur port USB ou réseau (voir les liens de documentation plus bas pour plus d'informations)
+
 La gateway USB peut être utilisée sur le Jeedom principal ou un satellite
 --
 
 [panel,primary]
-.Qu'est-ce que mySensors
+.Qu'est-ce que mySensors ?
 --
-mySensors est un protocole de transmission sans fil de capteurs à base d'Arduino. 
+mySensors est un protocole de transmission sans fil de capteurs à base d'Arduino et de puce NRF24L01
+
 Des exemples de capteurs sont proposés sur le site mySensors, mais les limites sont celles du catalogue de capteurs Arduino existant
+
 Dans la section autres documentations, un lien vers le site mySensors est disponible (en anglais) et également des liens vers des noeuds en francais
 --
 
@@ -17,6 +20,32 @@ Dans la section autres documentations, un lien vers le site mySensors est dispon
 .Mon service est toujours indiqué comme ne fonctionnant pas, que faire ?
 --
 Il se peut que le module serialport pour NodeJS ne soit pas installé.
+
 Cela se produit sur des installations autres que le Pi et normalement est réglé à partir de la version 1.9.4 qui fait l'installation automatique.
+
 Pour installer le module serialport, depuis le répertoire plugins/mySensors/node, il faut lancer la commande npm install (en tant que www-data)
+--
+
+[panel,primary]
+.Ma passerelle est branchée en USB sur un jeedom satellite et le service ne démarre pas ?
+--
+Vérifier votre configuration réseau Jeedom dans Général->Administration->Configuration dans la partie Réseau
+--
+
+[panel,primary]
+.Le champ "version de librairie" de ma passerelle ne se remplit pas ?
+--
+Il faut adapter le sketch de la passerelle pour qu'elle envoit cette information, ce qui n'est pas le cas dans la lib 1.4.1
+
+La ligne est à ajouter après le gw.begin...
+
+Pour une passerelle USB :
+----
+Serial.print("0;0;3;0;2;");Serial.print(LIBRARY_VERSION);
+----
+
+Pour une passerelle Réseau :
+----
+server.write("0;0;3;0;2;");server.write(LIBRARY_VERSION);
+----
 --
