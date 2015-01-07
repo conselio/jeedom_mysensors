@@ -37,14 +37,14 @@ Vérifier votre configuration réseau Jeedom dans Général->Administration->Con
 --
 Il faut adapter le sketch de la passerelle pour qu'elle envoit cette information, ce qui n'est pas le cas dans la lib 1.4.1
 
-La ligne est à ajouter après le gw.begin...
+La ligne à ajouter :
 
-Pour une passerelle USB :
+Pour une passerelle USB après le gw.begin...:
 ----
 Serial.print("0;0;3;0;2;");Serial.print(LIBRARY_VERSION);
 ----
 
-Pour une passerelle Réseau :
+Pour une passerelle Réseau après le server.begin();:
 ----
 server.write("0;0;3;0;2;");server.write(LIBRARY_VERSION);
 ----
