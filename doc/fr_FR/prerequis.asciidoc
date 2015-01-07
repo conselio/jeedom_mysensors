@@ -1,7 +1,16 @@
-Avant de faire communiquer Jeedom avec MySensors, il est nécessaire d'installer le module SerialPort pour NodeJS. (Communication de JSnode par USB) Pour se faire,lancer la commande via une console :
+==== Serial Gateway
+
+Jeedom pour pouvoir communiquer avec une Gateway sur port USB a besoin du module serialport pour nodejs.
+Normalement cette installation est faite par le plugin lors de son activation et mise à jour.
+Pour information, voici des commandes qui peuvent servir.
 
 [source]
 ---------------------------------------------------------------------
 sudo apt-get install npm
 sudo npm install serialport 
 ---------------------------------------------------------------------
+
+==== Network Gateway
+
+Pour utiliser une gateway en réseau, aucun prérequis système.
+
