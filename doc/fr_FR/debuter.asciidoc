@@ -1,0 +1,16 @@
+Voici une liste pour ceux qui souhaiteraient s'essayer à mySensors.
+
+Celle-ci est prévu pour ne pas nécessiter de soudure. Elle consiste en une passerelle USB et un noeud de température/humidité.
+
+Vous trouverez la documentation et les sketchs des noeuds dans le chapitre documentation. Il est possible de prendre tout autre capteur pour essayer. La liste donner représente environ 20$ pour se lancer.
+
+
+* 2x http://www.kqzyfj.com/o398qgpmgo3BB6D6CD354BCAD46?url=http%3A%2F%2Ffr.aliexpress.com%2Fitem%2FFor-arduino-Nano-3-0-Atmel-ATmega328-Mini-USB-Board-with-USB-Cable-Free-Shipping%2F1738718548.html[Arduino Nano]
+
+* 2x http://www.anrdoezrs.net/rq114uoxuowBJJELEKLBDCJKILCE?url=http%3A%2F%2Ffr.aliexpress.com%2Fitem%2F10Pcs-x-NRF24L01-Wireless-Module-2-4G-Wireless-Communication-Module-Upgrade-Module%2F1289649564.html[composant sans fil NRF24L01]
+
+* http://www.anrdoezrs.net/click-7729289-10786902?url=http%3A%2F%2Ffr.aliexpress.com%2Fitem%2FFree-shipping-Nano-328P-IO-wireless-sensor-expansion-board-for-XBEE-and-NRF24L01-Socket-for-arduino%2F32246061565.html[Carte d'extension Arduino Nano]
+
+* http://www.jdoqocy.com/click-7729289-10786902?url=http%3A%2F%2Ffr.aliexpress.com%2Fitem%2FFree-shipping-40pcs-20cm-1p-1p-female-to-Female-jumper-wire-Dupont-cable-for-Arduino-Breadboard%2F1773714009.html[Cable de connexions]
+
+* http://www.anrdoezrs.net/click-7729289-10786902?url=http%3A%2F%2Ffr.aliexpress.com%2Fitem%2FDHT22-AM2302-Digital-Temperature-And-Humidity-Sensor-Module-Replace-SHT11-SHT15%2F1859157389.html[Capteur DHT22 pour Température et Humidité]
