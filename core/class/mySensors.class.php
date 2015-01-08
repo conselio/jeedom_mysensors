@@ -337,6 +337,12 @@ class mySensors extends eqLogic {
 
 	}
 	
+	public static function getConfig() {
+		$nodeid = init('id');
+		$param = init('param');
+		echo "resultat API";
+	}
+	
 	public static function saveValue() {
 		$nodeid = init('id');
 		$sensor = init('sensor');
@@ -895,6 +901,7 @@ class mySensors extends eqLogic {
 			case 'saveSensor' : self::saveSensor(); break;
 			case 'saveBatteryLevel' : self::saveBatteryLevel(); break;
 			case 'saveGateway' : self::saveGateway(); break;
+			case 'getConfig' : self::getConfig(); break;
 		
 		}
 		
