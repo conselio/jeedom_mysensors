@@ -139,7 +139,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <div class="form-group">
                     		<label class="col-md-2 control-label">{{Node ID}}</label>
                     		<div class="col-md-3">
-                        	<input id="selectNode" type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="nodeid" placeholder="NODE ID"/ readonly=true>
+                    		 <span class="zwaveInfo tooltips label label-default" data-l1key="configuration" data-l2key="nodeid"></span>
                     		</div>
                     		
                     <label class="col-md-2 control-label">{{mySensors}}</label>
