@@ -33,6 +33,14 @@ try {
     if (init('action') == 'getNodeInfo') {
         ajax::success(mySensors::deamonRunning());
     }
+    
+     if (init('action') == 'getModuleInfo') {
+        $eqLogic = mySensors::byId(init('id'));
+        if (!is_object($eqLogic)) {
+        throw new Exception(__('mySensors eqLogic non trouvé : ', __FILE__) . init('id'));
+            }
+        ajax::success($eqLogic->getInfo());
+    }
 
     if (init('action') == 'restartEq') {
         ajax::success(mySensors::sendToController( '32', '0', '13', '0', '3', '0' ));
