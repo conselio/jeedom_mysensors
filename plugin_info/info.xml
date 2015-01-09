@@ -7,8 +7,8 @@
     <licence>AGPL</licence>
     <author>CONSELIO SA</author>
     <installation>Le module serialport pour nodejs est nécessaire pour ce plugin.</installation>
-    <require>1.141</require>
-    <version>1.9.5</version>
+    <require>1.152</require>
+    <version>1.9.6</version>
     <category>automation protocol</category>
     <allowRemote>1</allowRemote>
 </info>
