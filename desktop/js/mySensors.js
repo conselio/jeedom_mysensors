@@ -15,6 +15,10 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
+$(".li_eqLogic").on('click', function () {
+printModuleInfo($(this).attr('data-eqLogic_id'));
+return false;
+});
 
 $("#bt_addmySensorsInfo").on('click', function(event) {
     var _cmd = {type: 'info'};
@@ -48,10 +52,38 @@ $("#table_cmd").delegate(".listEquipementAction", 'click', function() {
     });
 });
 
-
-
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 
+function printModuleInfo(_id) {
+    $.ajax({// fonction permettant de faire de l'ajax
+        type: "POST", // méthode de transmission des données au fichier php
+        url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
+        data: {
+            action: "getModuleInfo",
+            id: _id,
+        },
+        dataType: 'json',
+        global: false,
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success: function (data) { // si l'appel a bien fonctionné
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            }
+            $('.mySensorsInfo').value('');
+            for (var i in data.result) {
+                var value = data.result[i]['value'];
+                if (isset(data.result[i]['unite'])) {
+                    value += ' ' + data.result[i]['unite'];
+                }
+                $('.mySensorsInfo[data-l1key=' + i + ']').value(value);
+                $('.mySensorsInfo[data-l1key=' + i + ']').attr('title', data.result[i]['datetime']);
+            }
+        }
+    });
+}
 
 function addCmdToTable(_cmd) {
     if (!isset(_cmd)) {
