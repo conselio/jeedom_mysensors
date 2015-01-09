@@ -121,13 +121,14 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="AlertLimit" placeholder="AlertLimit"/>
                     </div>
                 </div>
-	<div class="form-group">
+              
+            </fieldset> 
+            	<div class="form-group">
                     <label class="col-sm-2 control-label">{{Commentaire}}</label>
                     <div class="col-sm-3">
                         <textarea class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="commentaire" ></textarea>
                     </div>
-                </div>                
-            </fieldset> 
+                </div>  
         </form>
         </div>      
         
@@ -137,34 +138,41 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <legend>{{Informations}}</legend>
 
                         <div class="form-group">
-                    		<label class="col-md-2 control-label">{{Node ID}}</label>
+                    		<label class="col-md-2 control-label">{{ID du Node}}</label>
                     		<div class="col-md-3">
-                    		 <span class="zwaveInfo tooltips label label-default" data-l1key="configuration" data-l2key="nodeid"></span>
+                    		 <span class="mySensorsInfo tooltips label label-default" data-l1key="nodeId"></span>
                     		</div>
                     		
-                    <label class="col-md-2 control-label">{{mySensors}}</label>
-                    <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LibVersion" placeholder="LibVersion"/ readonly=true>
-                    </div>                    		
+                    		<label class="col-md-2 control-label">{{Version mySensors}}</label>
+                    		<div class="col-md-3">
+                        	<span class="mySensorsInfo tooltips label label-default" data-l1key="libVersion"></span>
+                    		</div>                    		
+                		
                 	</div>                    		
+                        
                         <div id="infoSketch" class="form-group">
-                    		<label class="col-md-2 control-label">{{Sketch}}</label>
+                    		<label class="col-md-2 control-label">{{Nom du Sketch}}</label>
                 		 <div class="col-md-3">
-                		  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchName" placeholder="SketchName"/ readonly=true>
+                		  <span class="mySensorsInfo tooltips label label-default" data-l1key="sketchNom"></span>
                     		</div>
-                    		                    <label class="col-md-2 control-label">{{Version}}</label>
-                    <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="SketchVersion" placeholder="SketchVersion"/ readonly=true>
-                    </div>
+                    	
+                    	        <label class="col-md-2 control-label">{{Version du Sketch}}</label>
+                    		<div class="col-md-3">
+                        	<span class="mySensorsInfo tooltips label label-default" data-l1key="sketchVersion"></span>
+                    		</div>
                     		
                 	</div>
-                	              	<div id="infoActiv" class="form-group">
-                    <label class="col-md-2 control-label">{{Dernière Activité}}</label>
-                    <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
-                    </div>
-                </div>	 
-                <a href='http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html'>Lien vers la documentation des Noeuds</a>
+                	<a href='http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html'>Lien vers la documentation des Noeuds</a>
+                	              	
+                	<div id="infoActiv" class="form-group">
+                    		<label class="col-md-2 control-label">{{Dernière Activité}}</label>
+                		 <div class="col-md-3">
+                		 <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
+                    		</div>
+                	</div>	 
+                
+                	<legend>{{Paramètres du Sketch}}</legend>
+                	
                 	
 
                     </fieldset> 
