@@ -1,3 +1,9 @@
+==== Version 1.9.6
+
+Changement de l'interface équipement
+
+Modification du logo
+
 ==== Version 1.9.5
 
 Ajout de doc
