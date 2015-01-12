@@ -246,13 +246,9 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 	$( "#selectNode" ).change(function() {
 		if($( "#selectNode" ).val() == "gateway"){
 			$("#infoSketch").hide();
-			$("#infoActiv").hide();
-			$("#followNode").hide();
 		}
 		else {
 			$("#infoSketch").show();
-			$("#infoActiv").show();
-			$("#followNode").show();
 		}
 	});
 </script>
