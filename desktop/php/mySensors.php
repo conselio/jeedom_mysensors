@@ -117,14 +117,15 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                                     <input class="eqLogicAttr form-control" data-l1key="timeout" />
                                 </div>
                             </div>
-              
-            </fieldset> 
-            	<div class="form-group">
+                            <div class="form-group">
                     <label class="col-sm-2 control-label">{{Commentaire}}</label>
                     <div class="col-sm-3">
                         <textarea class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="commentaire" ></textarea>
                     </div>
                 </div>  
+              
+            </fieldset> 
+            	
         </form>
         </div>      
         
@@ -158,7 +159,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     		</div>
                     		
                 	</div>
-                	<a href='http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html'>Lien vers la documentation des Noeuds</a>
+                	
                 	              	
 <div class="form-group">
                                 <label class="col-sm-2 control-label">{{Marque}}</label>
@@ -218,7 +219,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                                     <img src="core/img/no_image.gif" data-original=".jpg" id="img_device" class="img-responsive" />
                                 </div>
                             </div>	 
-                
+                <a href='http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html'>Lien vers la documentation des Noeuds</a>
                 	<legend>{{Paramètres du Sketch}}</legend>
                 	
                 	
