@@ -27,6 +27,13 @@ if (!isConnect()) {
 
 <form class="form-horizontal">
     <fieldset>
+    <?php
+if (config::byKey(gateway,mySensors != 1)) {
+echo '<div id="div_node" class="alert alert-danger">Gateway non connectée</div>';
+} else {
+echo '<div id="div_node" class="alert alert-success">Gateway connectée, version de librairie mySensors ' . config::byKey(libGateway, mySensors) . '</div>';
+}
+?>
         <div class="form-group">
             <label class="col-lg-4 control-label">Mode : </label>
             <div class="col-lg-4">
