@@ -176,12 +176,64 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                 	</div>
                 	<a href='http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html'>Lien vers la documentation des Noeuds</a>
                 	              	
-                	<div id="infoActiv" class="form-group">
-                    		<label class="col-md-2 control-label">{{Dernière Activité}}</label>
-                		 <div class="col-md-3">
-                		 <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="LastActivity" placeholder="LastActivity"/ readonly=true>
-                    		</div>
-                	</div>	 
+<div class="form-group">
+                                <label class="col-sm-2 control-label">{{Marque}}</label>
+                                <div class="col-sm-2">
+                                    <span class="zwaveInfo tooltips label label-default" data-l1key="brand"></span>
+                                </div>
+                                <label class="col-sm-2 control-label">{{Nom}}</label>
+                                <div class="col-sm-3">
+                                    <span class="zwaveInfo tooltips label label-default" data-l1key="name"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group expertModeVisible">
+                                <label class="col-sm-2 control-label">{{Identifiant Fabricant}}</label>
+                                <div class="col-sm-2">
+                                    <span class="zwaveInfo tooltips label label-default" data-l1key="manufacturerId"></span>
+                                </div>
+                                <label class="col-sm-2 control-label">{{Type produit}}</label>
+                                <div class="col-sm-2">
+                                    <span class="zwaveInfo tooltips label label-default" data-l1key="manufacturerProductType"></span>
+                                </div>
+                                <label class="col-sm-2 control-label">{{Identifiant Produit}}</label>
+                                <div class="col-sm-2">
+                                    <span class="zwaveInfo tooltips label label-default" data-l1key="manufacturerProductId"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">{{Batterie}}</label>
+                                        <div class="col-sm-2">
+                                            <span class="zwaveInfo tooltips label label-default" data-l1key="battery"></span>
+                                        </div>
+                                        <label class="col-sm-4 control-label">{{Interview}}</label>
+                                        <div class="col-sm-2">
+                                            <a class="btn btn-default" id="bt_showInterview" ><i class="fa fa-eye"></i> <span class="zwaveInfo" data-l1key="interviewComplete"></span></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">{{Dernière communication}}</label>
+                                        <div class="col-sm-4">
+                                            <span class="zwaveInfo tooltips label label-default" data-l1key="lastReceived"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">{{Etat}}</label>
+                                        <div class="col-sm-4">
+                                            <span class="zwaveInfo tooltips label label-default" data-l1key="state"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-5">
+                                    <img src="core/img/no_image.gif" data-original=".jpg" id="img_device" class="img-responsive" />
+                                </div>
+                            </div>	 
                 
                 	<legend>{{Paramètres du Sketch}}</legend>
                 	
