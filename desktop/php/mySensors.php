@@ -117,22 +117,6 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                                     <input class="eqLogicAttr form-control" data-l1key="timeout" />
                                 </div>
                             </div>
-                            <div class="form-group expertModeVisible">
-                                <label class="col-sm-4 control-label">{{Fréquence de rafraîchissement des valeurs (cron)}}</label>
-                                <div class="col-sm-4">
-                                    <input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="refreshDelay"/>
-                                </div>
-                            </div>
-                            <div class="form-group expertModeVisible">
-                                <label class="col-sm-4 control-label">{{Ne jamais mettre en erreur}}</label>
-                                <div class="col-sm-1">
-                                    <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="nerverFail"/>
-                                </div>
-                                <label class="col-sm-4 control-label">{{Ne pas vérifier la batterie}}</label>
-                                <div class="col-sm-1">
-                                    <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="noBatterieCheck"/>
-                                </div>
-                            </div>
               
             </fieldset> 
             	<div class="form-group">
