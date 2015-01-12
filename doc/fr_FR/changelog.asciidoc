@@ -1,3 +1,9 @@
+==== Version 1.9.7
+
+Refonte de la page équipement
+
+La supervision des équipements et des batteries passe dans le core de Jeedom
+
 ==== Version 1.9.6
 
 Changement de l'interface équipement
