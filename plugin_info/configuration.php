@@ -31,7 +31,7 @@ if (!isConnect()) {
 if (config::byKey(gateway,mySensors != 1)) {
 echo '<div id="div_node" class="alert alert-danger">Gateway non connectée</div>';
 } else {
-echo '<div id="div_node" class="alert alert-success">Gateway connectée, version de librairie mySensors ' . config::byKey(libGateway, mySensors) . '</div>';
+echo '<div id="div_node" class="alert alert-success">Gateway connectée, version de librairie mySensors ' . config::byKey(gateLib, mySensors) . '</div>';
 }
 ?>
         <div class="form-group">
