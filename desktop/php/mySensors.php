@@ -161,16 +161,15 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                 	</div>
                 	
                 	<div class="form-group">
+                    		<label class="col-md-2 control-label">{{Dernière Activité}}</label>
+                    		<div class="col-md-3">
+                        	<span class="mySensorsInfo tooltips label label-default" data-l1key="lastActivity"></span>
+                    		</div>    
+                    		
                     		<label class="col-md-2 control-label">{{Batterie}}</label>
                     		<div class="col-md-3">
                     		 <span class="mySensorsInfo tooltips label label-default" data-l1key="perBatterie"></span>
                     		</div>
-                    		
-                    		<label class="col-md-2 control-label">{{Dernière Activité}}</label>
-                    		<div class="col-md-3">
-                        	<span class="mySensorsInfo tooltips label label-default" data-l1key="lastActivity"></span>
-                    		</div>                    		
-                		
                 	</div>  
 	 
                 
