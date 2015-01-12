@@ -14,6 +14,10 @@ void (softReset){
 asm volatile ("  jmp 0");
 }
 
-Adding gateway version info
+Send libversion at presentation including gateway
+
+Have a way for each node to listen for reboot (of course sleeping node will not answering)
+
+Data type is not needed and sensor types must be more globals (ie. IR_SEND must become REMOTE, no type, no reference to a technology)
 
 Load sketch with avrdude
