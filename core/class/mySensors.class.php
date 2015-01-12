@@ -895,22 +895,22 @@ public function getInfo($_infos = '') {
         return $return;
     }
         $return['nodeId'] = array(
-            'value' => $this->getConfiguration('SketchName', ''),
+            'value' => $this->getConfiguration('nodeid', ''),
             );
         $return['libVersion'] = array(
-            'value' => $this->getConfiguration('SketchName', ''),
+            'value' => $this->getConfiguration('LibVersion', ''),
             );
         $return['sketchNom'] = array(
             'value' => $this->getConfiguration('SketchName', ''),
             );
         $return['sketchVersion'] = array(
-            'value' => $this->getConfiguration('SketchName', ''),
+            'value' => $this->getConfiguration('SketchVersion', ''),
             );
         $return['perBatterie'] = array(
             'value' => $this->getConfiguration('SketchName', ''),
             );
         $return['lastActivity'] = array(
-            'value' => $this->getConfiguration('SketchName', ''),
+            'value' => $this->getConfiguration('LastActivity', ''),
             );            
 return $return;
 }
