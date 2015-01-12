@@ -907,10 +907,10 @@ public function getInfo($_infos = '') {
             'value' => $this->getConfiguration('SketchVersion', ''),
             );
         $return['perBatterie'] = array(
-            'value' => $this->getConfiguration('SketchName', ''),
+            'value' => $this->getConfiguration('battery', ''),
             );
         $return['lastActivity'] = array(
-            'value' => $this->getConfiguration('LastActivity', ''),
+            'value' => $this->getConfiguration('updatetime', ''),
             );            
 return $return;
 }
