@@ -111,16 +111,28 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                 </div>
 
    
-		<div id="followNode" class="form-group">
-                    <label class="col-md-2 control-label" >{{Suivi du Node}}</label>
-                    <div class="col-md-3">
-                        </span><input type="checkbox" class="eqLogicAttr" data-l1key="configuration"  data-l2key="followActivity"  checked/>
-                    </div>
-                    <label class="col-md-2 control-label" >{{Durée d'Inactivité}}</label>
-                    <div class="col-md-3">
-                        <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="AlertLimit" placeholder="AlertLimit"/>
-                    </div>
-                </div>
+                            <div class="form-group expertModeVisible">
+                                <label class="col-sm-4 control-label">{{Délai maximum autorisé entre 2 messages (min)}}</label>
+                                <div class="col-sm-4">
+                                    <input class="eqLogicAttr form-control" data-l1key="timeout" />
+                                </div>
+                            </div>
+                            <div class="form-group expertModeVisible">
+                                <label class="col-sm-4 control-label">{{Fréquence de rafraîchissement des valeurs (cron)}}</label>
+                                <div class="col-sm-4">
+                                    <input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="refreshDelay"/>
+                                </div>
+                            </div>
+                            <div class="form-group expertModeVisible">
+                                <label class="col-sm-4 control-label">{{Ne jamais mettre en erreur}}</label>
+                                <div class="col-sm-1">
+                                    <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="nerverFail"/>
+                                </div>
+                                <label class="col-sm-4 control-label">{{Ne pas vérifier la batterie}}</label>
+                                <div class="col-sm-1">
+                                    <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="noBatterieCheck"/>
+                                </div>
+                            </div>
               
             </fieldset> 
             	<div class="form-group">
