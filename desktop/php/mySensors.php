@@ -173,7 +173,8 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                 		
                 	</div>  
 	 
-                <a href="http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html><span class="label label-primary" style="text-shadow : none;">Documentation Noeuds</span></a>
+                
+                <a href="http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html" class="btn btn-primary btn-mini"><i class="icon-white icon-book"></i> Documentation Noeuds</a>
                 
                 	<legend>{{Paramètres du Sketch}}</legend>
                 	
