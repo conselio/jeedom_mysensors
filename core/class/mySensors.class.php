@@ -888,6 +888,102 @@ class mySensors extends eqLogic {
 	
 	}
 
+
+public function getInfo($_infos = '') {
+    $deviceConf = self::devicesParameters($this->getConfiguration('device'));
+    $return = array();
+    if (!is_numeric($this->getLogicalId())) {
+        return $return;
+    }
+    if($_infos == ''){
+        $results = self::callRazberry('/ZWaveAPI/Run/devices[' . $this->getLogicalId() . ']');
+    }else{
+        $results = $_infos['devices'][$this->getLogicalId()];
+    }
+    if ($this->getConfiguration('noBatterieCheck') != 1 && isset($results['instances']) && isset($results['instances'][0]) &&
+        isset($results['instances'][0]['commandClasses']) && isset($results['instances'][0]['commandClasses'][128]) &&
+        isset($results['instances'][0]['commandClasses'][128]['data']['supported']) && $results['instances'][0]['commandClasses'][128]['data']['supported']['value'] === true) {
+        $return['battery'] = array(
+            'value' => $results['instances'][0]['commandClasses'][128]['data']['last']['value'],
+            'datetime' => date('Y-m-d H:i:s', $results['instances'][0]['commandClasses'][128]['data']['last']['updateTime']),
+            'unite' => '%',
+            );
+}
+
+if (isset($results['data'])) {
+    if (isset($results['data']['isAwake'])) {
+        $return['state'] = array(
+            'value' => ($results['data']['isAwake']['value']) ? 'Réveillé' : 'Endormi',
+            'datetime' => date('Y-m-d H:i:s', $results['data']['isAwake']['updateTime']),
+            );
+    }
+    if (isset($results['data']['isFailed'])) {
+        $return['state']['value'] = ($results['data']['isFailed']['value']) ? 'Dead' : $return['state']['value'];
+    }
+    if (isset($deviceConf['name'])) {
+        $return['name'] = array(
+            'value' => $deviceConf['name'],
+            'datetime' => date('Y-m-d H:i:s'),
+            );
+    }
+    if (isset($deviceConf['vendor'])) {
+        $return['brand'] = array(
+            'value' => $deviceConf['vendor'],
+            'datetime' => date('Y-m-d H:i:s'),
+            );
+    } else {
+        if (isset($results['data']['vendorString'])) {
+            $return['brand'] = array(
+                'value' => $results['data']['vendorString']['value'],
+                'datetime' => date('Y-m-d H:i:s', $results['data']['vendorString']['updateTime']),
+                );
+        }
+    }
+
+    if (isset($results['data']['lastReceived'])) {
+        $return['lastReceived'] = array(
+            'value' => date('Y-m-d H:i:s', $results['data']['lastReceived']['updateTime']),
+            'datetime' => date('Y-m-d H:i:s', $results['data']['lastReceived']['updateTime']),
+            );
+    }
+    if (isset($results['data']['manufacturerId'])) {
+        $return['manufacturerId'] = array(
+            'value' => $results['data']['manufacturerId']['value'],
+            );
+    }
+    if (isset($results['data']['manufacturerProductType'])) {
+        $return['manufacturerProductType'] = array(
+            'value' => $results['data']['manufacturerProductType']['value'],
+            );
+    }
+    if (isset($results['data']['manufacturerProductId'])) {
+        $return['manufacturerProductId'] = array(
+            'value' => $results['data']['manufacturerProductId']['value'],
+            );
+    }
+}
+$return['interviewComplete'] = array(
+    'value' => __('Complet', __FILE__),
+    );
+
+if (isset($results['instances']) && is_array($results['instances'])) {
+    foreach ($results['instances'] as $instanceID => $instance) {
+        foreach ($instance['commandClasses'] as $ccId => $commandClasses) {
+            if (($ccId == 96 && $instanceID != 0) || (($ccId == 134 || $ccId == 114 || $ccId == 96) && $instanceID == 0)) {
+                continue;
+            }
+            if (isset($commandClasses['data']) && isset($commandClasses['data']['supported']) && (!isset($commandClasses['data']['supported']['value']) || $commandClasses['data']['supported']['value'] != true)) {
+                continue;
+            }
+            if (isset($commandClasses['data']) && isset($commandClasses['data']['interviewDone']) && (!isset($commandClasses['data']['interviewDone']['value']) || $commandClasses['data']['interviewDone']['value'] != true)) {
+                $return['interviewComplete']['value'] = __('Incomplet', __FILE__);
+            }
+        }
+    }
+}
+return $return;
+}
+
 	
     public static function event() {
 
