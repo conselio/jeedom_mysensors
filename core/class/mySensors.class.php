@@ -38,30 +38,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 class mySensors extends eqLogic {
     /*     * *************************Attributs****************************** */
      	public static function pull($_options) {
-     		$date = time();
-     		log::add('mySensors', 'info', 'Cron de vérification des nodes');
-		foreach (eqLogic::byType('mySensors') as $elogic) {
-			log::add('mySensors', 'info', 'Vérification du node' . $elogic->getName());
-			if ($elogic->getConfiguration('followActivity') == '1'){
-				log::add('mySensors', 'info', $elogic->getName() . ' en surveillance');
-				$actDate = $elogic->getConfiguration('LastActivity');
-				log::add('mySensors', 'info', 'Derniere Activite ' . $actDate);
-				$activity = strtotime($actDate);
-				$duration = $elogic->getConfiguration('AlertLimit');
-				log::add('mySensors', 'info', 'Interval paramétré ' . $duration);
-				$interval = round(abs($date - $activity) / 60,2);
-				log::add('mySensors', 'info', 'Durée d inactivité ' . $interval);
-				if ($interval > $duration) {
-					log::add('mySensors', 'info', 'Délai dépassé pour ' . $elogic->getName());
-					$gate = self::byLogicalId('gateway', 'mySensors');
-					$value = $elogic->getName();
-					$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($gate->getId(),'Inactif');
-					$cmdlogic->setConfiguration('value',$value);
-					$cmdlogic->save();
-					$cmdlogic->event($value);
-					}
-				}
-			}
+
 		}
 
 	public static $_dico = 
@@ -352,9 +329,6 @@ class mySensors extends eqLogic {
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
-			$date = date('d-m-Y H:i');
-			$elogic->setConfiguration('LastActivity', $date);
-			$elogic->save();
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
 				$cmdlogic->setConfiguration('value', $value);
@@ -370,37 +344,8 @@ class mySensors extends eqLogic {
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
-			$date = date('d-m-Y H:i');
-			$elogic->setConfiguration('LastActivity', $date);
+			$elogic->batteryStatus($value);
 			$elogic->save();			
-			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'BatteryLevel');
-			if (is_object($cmdlogic)) {
-				if ( $cmdlogic->getConfiguration('value') != $value ) {
-					$cmdlogic->setConfiguration('value',$value);
-					$cmdlogic->save();
-					$cmdlogic->event($value);
-				}
-			}
-			else {
-				$mysCmd = new mySensorsCmd();
-				$mysCmd->setCache('enable', 0);
-				$mysCmd->setEventOnly(0);
-				$mysCmd->setConfiguration('sensorType', '0');
-				$mysCmd->setConfiguration('sensor', '0');
-				$mysCmd->setEqLogic_id($elogic->getId());
-				$mysCmd->setEqType('mySensors');
-				$mysCmd->setLogicalId('BatteryLevel');
-				$mysCmd->setType('info');
-				$mysCmd->setSubType('numeric');
-				$mysCmd->setName( 'Batterie' );
-				$mysCmd->setUnite( '%' );
-				$mysCmd->setConfiguration('value',$value);
-				$mysCmd->setTemplate("dashboard","batterie" );
-				$mysCmd->setConfiguration('sensorCategory', 'Batterie');
-				$mysCmd->setConfiguration('sensorType', 'Batterie');
-				$mysCmd->save();
-				$mysCmd->event($value);
-			}				
 		}
 	
 	}
@@ -452,16 +397,6 @@ class mySensors extends eqLogic {
 				$mysCmd->setConfiguration('sensorType', 'Connexion');
 				$mysCmd->save();
 				$mysCmd->event($value);
-				$mysCmd = new mySensorsCmd();
-				$mysCmd->setEqLogic_id($elogic->getId());
-				$mysCmd->setEqType('mySensors');
-				$mysCmd->setLogicalId('Inactif');
-				$mysCmd->setType('info');
-				$mysCmd->setSubType('string');
-				$mysCmd->setName( 'Inactif' );
-				$mysCmd->setConfiguration('sensorCategory', 'Noeuds Inactifs');
-				$mysCmd->setConfiguration('sensorType', 'Inactivité');
-				$mysCmd->save();
 			}	
 		}
 		else {
