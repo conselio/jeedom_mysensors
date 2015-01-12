@@ -376,7 +376,7 @@ class mySensors extends eqLogic {
 	
 	public static function saveGateway() {
 		$status = init('status');
-		config::save($status, service,  mySensors);
+		config::save(gateway, $status,  mySensors);
 		$elogic = self::byLogicalId('gateway', 'mySensors');
 		if (is_object($elogic)) {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'Connexion');
@@ -437,10 +437,10 @@ class mySensors extends eqLogic {
 	public static function saveLibVersion() {
 		sleep(1);
 		$nodeid = init('id');
-		if ($nodeid == '0') {
-			$nodeid = 'gateway';
-		}
 		$value = init('value');
+		if ($nodeid == '0') {
+			config::save(gateLib, $value,  mySensors);
+		}
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
 			if ( $elogic->getConfiguration('LibVersion', '') != $value ) {
