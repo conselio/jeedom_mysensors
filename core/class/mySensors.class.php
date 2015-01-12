@@ -826,9 +826,6 @@ class mySensors extends eqLogic {
 
 public function getInfo($_infos = '') {
     $return = array();
-    if (!is_numeric($this->getLogicalId())) {
-        return $return;
-    }
         $return['nodeId'] = array(
             'value' => $this->getConfiguration('nodeid', ''),
             );
