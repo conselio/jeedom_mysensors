@@ -344,6 +344,7 @@ class mySensors extends eqLogic {
 		$value = init('value');
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
+			$elogic->setConfiguration('battery',$value);
 			$elogic->batteryStatus($value);
 			$elogic->save();			
 		}
@@ -358,7 +359,7 @@ class mySensors extends eqLogic {
 				if ( $elogic->getConfiguration('SketchName', '') != $value ) {
 					$elogic->setConfiguration('SketchName',$value);
 					//si le sketch a changé sur le node, alors on set le nom avec le sketch
-					$elogic->setName($value.''.$nodeid);					
+					$elogic->setName($value.' - '.$nodeid);					
 					$elogic->save();
 				}
 		}
