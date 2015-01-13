@@ -112,9 +112,9 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 
    
                             <div class="form-group expertModeVisible">
-                                <label class="col-md-2 control-label">{{Délai maximum autorisé entre 2 messages (min)}}</label>
+                                <label class="col-md-2 control-label">{{Délai max entre 2 messages}}</label>
                                 <div class="col-md-8">
-                                    <input class="eqLogicAttr form-control" data-l1key="timeout" />
+                                    <input class="eqLogicAttr form-control" data-l1key="timeout" placeholder="Délai maximum autorisé entre 2 messages (en mn)"/>
                                 </div>
                             </div>
                             <div class="form-group">
