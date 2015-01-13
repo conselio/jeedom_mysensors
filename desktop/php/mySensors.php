@@ -172,9 +172,19 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     		</div>
                 	</div>  
 	 
-                
-                <a href="http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html" class="btn btn-primary btn-mini"><i class="icon-white icon-book"></i> Documentation Noeuds</a>
-                
+                	<div class="form-group">
+                    		
+                    		<div class="col-md-3">
+                        	<a href="http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html" class="btn btn-default"><i class="fa fa-book"></i> Documentation</a>
+                    		</div>    
+                    		
+                    		
+                    		<div class="col-md-3">
+				<a class="btn btn-default" id="bt_restartNode" ><i class="fa fa-power-off"></i> Redémarrer</a>
+				</div>
+                	</div>                 
+                <a href="http://doc.jeedom.fr/fr_FR/doc_mySensors_modules.html" class="btn btn-default"><i class="fa fa-book"></i> Documentation</a>
+                <a class="btn btn-default" id="bt_restartNode" ><i class="fa fa-power-off"></i> Redémarrer</a>
                 	<legend>{{Paramètres du Sketch}}</legend>
                 	
                 	
