@@ -841,7 +841,8 @@ public function getInfo($_infos = '') {
             'value' => $this->getConfiguration('SketchVersion', ''),
             );
         $return['perBatterie'] = array(
-            'value' => $this->getConfiguration('battery', ''),
+        	$batterie = $this->getConfiguration('battery', '');
+            'value' => $this->getConfiguration('battery', '') . ' %',
             );
         $return['lastActivity'] = array(
             'value' => $this->getConfiguration('updatetime', ''),
