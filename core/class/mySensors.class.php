@@ -841,9 +841,15 @@ public function getInfo($_infos = '') {
             'value' => $this->getConfiguration('SketchVersion', ''),
             );
         $return['perBatterie'] = array(
-        	$batterie = $this->getConfiguration('battery', '');
-            'value' => $this->getConfiguration('battery', '') . ' %',
+       	    'value' => $rebatterie,
             );
+        	$batterie = $this->getConfiguration('battery', '');
+        	if (is_object($batterie)) {
+			$rebatterie = $batterie . ' %';
+		}
+		else {
+			$rebatterie = "secteur"
+		}
         $return['lastActivity'] = array(
             'value' => $this->getConfiguration('updatetime', ''),
             );            
