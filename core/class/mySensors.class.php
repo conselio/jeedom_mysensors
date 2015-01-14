@@ -329,7 +329,7 @@ class mySensors extends eqLogic {
 		$cmdId = 'Sensor'.$sensor;
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
-			$elogic->setConfiguration('LastActivity', $date);
+			$elogic->setStatus('lastCommunication', date('Y-m-d H:i:s'));
 			$elogic->save();
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),$cmdId);
 			if (is_object($cmdlogic)) {
