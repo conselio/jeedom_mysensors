@@ -843,16 +843,16 @@ public function getInfo($_infos = '') {
         $return['sketchVersion'] = array(
             'value' => $this->getConfiguration('SketchVersion', ''),
             );
-        $return['perBatterie'] = array(
-       	    'value' => $rebatterie,
-            );
-        	$batterie = $this->getConfiguration('battery', '');
+        $batterie = $this->getConfiguration('battery', '');
         	if (is_object($batterie)) {
 			$rebatterie = $batterie . ' %';
 		}
 		else {
 			$rebatterie = "secteur";
 		}
+	$return['perBatterie'] = array(
+       	    'value' => $rebatterie,
+            );
         $return['lastActivity'] = array(
             'value' => $this->getConfiguration('updatetime', ''),
             );            
