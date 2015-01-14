@@ -443,6 +443,7 @@ class mySensors extends eqLogic {
 		$value = init('value');
 		if ($nodeid == '0') {
 			config::save(gateLib, $value,  mySensors);
+			log::add('mySensors', 'info', 'Gateway Lib ' . $value . config::byKey(gateLib,mySensors));			
 		}
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
