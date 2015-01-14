@@ -851,7 +851,7 @@ public function getInfo($_infos = '') {
 			$rebatterie = $batterie . ' %';
 		}
 		else {
-			$rebatterie = "secteur"
+			$rebatterie = "secteur";
 		}
         $return['lastActivity'] = array(
             'value' => $this->getConfiguration('updatetime', ''),
