@@ -35,7 +35,7 @@ $libVer = config::byKey('gateLib','mySensors');
 if ($libVer=='') {
 $libVer = 'inconnue';
 }
-echo '<div class="alert alert-success">Gateway connectée (version mySensors ' . config::byKey('gateLib','mySensors') . ')</div>';
+echo '<div class="alert alert-success">Gateway connectée (version mySensors ' . $libVer . ')</div>';
 }
 ?>
         <div class="form-group">
