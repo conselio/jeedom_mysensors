@@ -21,3 +21,7 @@ Have a way for each node to listen for reboot (of course sleeping node will not 
 Data type is not needed and sensor types must be more globals (ie. IR_SEND must become REMOTE, no type, no reference to a technology)
 
 Load sketch with avrdude
+
+Send sensor name in presentation payload
+
+Send the power source by node, maybe in battery
