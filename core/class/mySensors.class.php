@@ -845,11 +845,11 @@ public function getInfo($_infos = '') {
             'value' => $this->getConfiguration('SketchVersion', ''),
             );
         $batterie = $this->getConfiguration('battery', '');
-        	if (is_object($batterie)) {
-			$rebatterie = $batterie . ' %';
+        	if ($batterie == '') {
+			$rebatterie = 'secteur';
 		}
 		else {
-			$rebatterie = "secteur";
+			$rebatterie = $batterie . ' %';
 		}
 	$return['perBatterie'] = array(
        	    'value' => $rebatterie,
