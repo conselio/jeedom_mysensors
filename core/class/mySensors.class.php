@@ -348,7 +348,7 @@ class mySensors extends eqLogic {
 		if (is_object($elogic)) { 
 			$elogic->setConfiguration('battery',$value);
 			$elogic->batteryStatus($value);
-			$elogic->event($value);
+			$elogic->setStatus('lastCommunication', date('Y-m-d H:i:s'));
 			$elogic->save();			
 		}
 	
