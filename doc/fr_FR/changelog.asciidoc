@@ -1,3 +1,9 @@
+==== Version 1.9.8
+
+Correction d'un bug sur la batterie
+
+Modification de l'affichage de la version de librairie de la gateway
+
 ==== Version 1.9.7
 
 Refonte de la page équipement
