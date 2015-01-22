@@ -381,6 +381,7 @@ class mySensors extends eqLogic {
 	public static function saveGateway() {
 		$status = init('status');
 		config::save(gateway, $status,  mySensors);
+		/*
 		$elogic = self::byLogicalId('gateway', 'mySensors');
 		if (is_object($elogic)) {
 			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'Connexion');
@@ -423,6 +424,7 @@ class mySensors extends eqLogic {
 				$mysCmd->save();
 				$mysCmd->event($value);
 		}
+		*/
 	}	
 
 	public static function saveSketchVersion() {
