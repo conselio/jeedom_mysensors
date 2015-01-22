@@ -623,7 +623,7 @@ class mySensors extends eqLogic {
 				$order = count($cmds);
 				$mysCmd->setOrder($order);					
 					$mysCmd->setConfiguration('cmdCommande', '1');
-					$mysCmd->setConfiguration('request', '');
+					$mysCmd->setConfiguration('request', '#slider#');
 					$mysCmd->setConfiguration('cmdtype', '3');
 					$mysCmd->setConfiguration('sensor', $sensor);
 					$mysCmd->setEqLogic_id($elogic->getId());
