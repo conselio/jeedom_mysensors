@@ -1,7 +1,7 @@
 [panel,danger]
 .Aucun équipement ne se créé
 --
-Vérifier qu'au moins un équipement "gateway" existe, il représente votre passerelle. Si ce n'est pas le cas, sur la page de configuration vous pouvez vérifier le service du plugin
+Sur la page de configuration vous pouvez vérifier le service du plugin et voir dans les logs si des informations sont recues
 --
 
 [panel,danger]
