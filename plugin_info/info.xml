@@ -6,7 +6,7 @@
     <icon>fa fa-tablet</icon>
     <licence>AGPL</licence>
     <author>CONSELIO SA</author>
-    <installation>Le module serialport pour nodejs est nécessaire pour ce plugin.</installation>
+    <installation>Le module serialport pour nodejs est nécessaire pour ce plugin. La configuration réseau Jeedom doit également être remplie.</installation>
     <require>1.152</require>
     <version>1.9.8</version>
     <category>automation protocol</category>
