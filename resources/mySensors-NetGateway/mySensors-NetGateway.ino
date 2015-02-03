@@ -45,10 +45,10 @@
 #include <stdarg.h>
 
 // Use this if you have attached a Ethernet ENC28J60 shields  
-//#include <UIPEthernet.h>  
+#include <UIPEthernet.h>  
 
 // Use this fo WizNET W5100 module and Arduino Ethernet Shield 
-#include <Ethernet.h>   
+//include <Ethernet.h>   
 
 
 #define INCLUSION_MODE_TIME 1 // Number of minutes inclusion mode is enabled
@@ -61,7 +61,7 @@
 #define RADIO_TX_LED_PIN    9  // the PCB, on board LED
 
 #define IP_PORT 5003        // The port you want to open 
-IPAddress myIp (192, 168, 178, 66);  // Configure your static ip-address here    COMPILE ERROR HERE? Use Arduino IDE 1.5.7 or later!
+IPAddress myIp (192, 168, 0, 50);  // Configure your static ip-address here    COMPILE ERROR HERE? Use Arduino IDE 1.5.7 or later!
 
 // The MAC address can be anything you want but should be unique on your network.
 // Newer boards have a MAC address printed on the underside of the PCB, which you can (optionally) use.
@@ -140,5 +140,6 @@ void loop()
    }  
    gw.processRadioMessage();    
 }
+
 
 

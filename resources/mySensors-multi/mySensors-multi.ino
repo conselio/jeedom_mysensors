@@ -48,7 +48,7 @@ void setup()
   debouncer.interval(5);
 
   // Send the Sketch Version Information to the Gateway
-  gw.sendSketchInfo("MultiSensor", "1.0");
+  gw.sendSketchInfo("Multi-Sensor", "1.0");
 
   // Register all sensors to gw (they will be created as child devices)
   gw.present(CHILD_ID_HUM, S_HUM);
@@ -109,5 +109,6 @@ void loop()
   // Sleep until interrupt comes in on motion sensor. Send update every two minute. 
   gw.sleep(INTERRUPT,CHANGE, SLEEP_TIME);
 }
+
 
 

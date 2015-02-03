@@ -9,9 +9,7 @@
 #include <SPI.h>
 #include <IRLib.h>
 
-int RECV_PIN = 8;
-
-#define CHILD_1  3  // childId
+int RECV_PIN = 4;
 
 IRsend irsend;
 IRrecv irrecv(RECV_PIN);
@@ -19,7 +17,7 @@ IRdecode decoder;
 //decode_results results;
 unsigned int Buffer[RAWBUF];
 MySensor gw;
-MyMessage msg(CHILD_1, V_VAR1);
+MyMessage msg(0, V_IR_RECEIVE);
 
 void setup()  
 {  
@@ -31,7 +29,7 @@ void setup()
   gw.sendSketchInfo("IR Sensor", "1.0");
 
   // Register a sensors to gw. Use binary light for test purposes.
-  gw.present(CHILD_1, S_LIGHT);
+  gw.present(0, S_IR);
 }
 
 
@@ -54,13 +52,9 @@ void loop()
 
 void incomingMessage(const MyMessage &message) {
   // We only expect one type of message from controller. But we better check anyway.
-  if (message.type==V_LIGHT) {
-     int incomingRelayStatus = message.getInt();
-     if (incomingRelayStatus == 1) {
-      irsend.send(NEC, 0x1EE17887, 32); // Vol up yamaha ysp-900
-     } else {
-      irsend.send(NEC, 0x1EE1F807, 32); // Vol down yamaha ysp-900
-     }
+  if (message.type==V_IR_SEND) {
+     int incomingRelayStatus = atoi( message.data );
+      irsend.send(SONY, incomingRelayStatus, 32 ); // Vol up yamaha ysp-900
      // Start receiving ir again...
     irrecv.enableIRIn(); 
   }
@@ -116,3 +110,4 @@ void incomingMessage(const MyMessage &message) {
   Serial.println("");
 }
 */
+
