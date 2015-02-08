@@ -35,9 +35,9 @@
        mySensors::runningDaemon();
     }
     
-    if ($jsonrpc->getMethod() == 'svcNode') {
+    if ($jsonrpc->getMethod() == 'saveNode') {
        log::add('mySensors','debug','Envoi de la conf aux esclaves')
-       mySensors::svcNode();
+       mySensors::saveNode();
     }
     
      if ($jsonrpc->getMethod() == 'listUSB') {

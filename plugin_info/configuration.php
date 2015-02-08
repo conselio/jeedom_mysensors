@@ -60,7 +60,7 @@ if (!isConnect()) {
 						echo '<option value="' . $jeeNetwork->getId(). '">Jeedom esclave ' . $jeeNetwork->getName() . ' (' . $jeeNetwork->getId(). ')</option>';
 					}
                     ?>
-                    <option value="network">Réseau</option>
+                    <option value="network">Gateway Réseau</option>
                 </select>
             </div>
         </div>
@@ -117,6 +117,34 @@ if (!isConnect()) {
 						else{
 							$("#select_port").show();							
 							$("#network_address").hide();
+    $.ajax({// fonction permettant de faire de l'ajax
+        type: "POST", // méthode de transmission des données au fichier php
+        url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
+        data: {
+            action: "getUSB",
+            id: $( this ).val(),
+        },
+        dataType: 'json',
+        global: false,
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success: function (data) { // si l'appel a bien fonctionné
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            }
+            $('.mySensorsInfo').value('');
+            for (var i in data.result) {
+                var value = data.result[i]['value'];
+                if (isset(data.result[i]['unite'])) {
+                    value += ' ' + data.result[i]['unite'];
+                }
+                $('.mySensorsInfo[data-l1key=' + i + ']').value(value);
+                $('.mySensorsInfo[data-l1key=' + i + ']').attr('title', data.result[i]['datetime']);
+            }
+        }
+    });							
 							}
 						});
 				});
@@ -140,7 +168,9 @@ if (!isConnect()) {
             $('#ul_plugin .li_plugin[data-plugin_id=mySensors]').click();
         }
     });				
-			}
+			
+		}			
+			
 				
 			</script>
 

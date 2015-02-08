@@ -41,6 +41,16 @@ try {
             }
         ajax::success($eqLogic->getInfo());
     }
+    
+    if (init('action') == 'getUSB') {
+        if (init('id') == 'master') {
+			$jeeNetwork = jeeNetwork::byId('1');
+			ajax::success($jeeNetwork->sendRawRequest('jeedom::getUsbMapping'));
+        } else {
+			$jeeNetwork = jeeNetwork::byId('1');
+			ajax::success($jeeNetwork->sendRawRequest('jeedom::getUsbMapping'));
+		}
+    }
 
     if (init('action') == 'restartEq') {
         ajax::success(mySensors::sendToController( '32', '0', '13', '0', '3', '0' ));
