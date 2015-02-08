@@ -57,7 +57,7 @@ if (!isConnect()) {
                     <option value="master">Jeedom maître</option>
                     <?php
                     foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
-						echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . ' (' . $jeeNetwork->getId(). ')</option>';
+						echo '<option value="' . $jeeNetwork->getId(). '">Jeedom esclave ' . $jeeNetwork->getName() . ' (' . $jeeNetwork->getId(). ')</option>';
 					}
                     ?>
                     <option value="network">Réseau</option>
@@ -75,7 +75,7 @@ if (!isConnect()) {
                     foreach (jeedom::getUsbMapping() as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
                     }
-					echo '<option value="serie">Modem Série</option><option value="network">Network Gateway</option>';
+					echo '<option value="serie">Modem Série non listé (port manuel)</option>';
                     ?>
                 </select>
 				
