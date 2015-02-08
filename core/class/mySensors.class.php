@@ -271,9 +271,17 @@ class mySensors extends eqLogic {
                 sleep(1);
             }
         }
+		config::save(gateway, '0',  mySensors);
 
         return self::deamonRunning();
     }
+    
+ 	public static function saveDaemon() {
+		$status = init('status');
+		config::save(running, $status,  mySensors);
+		
+		self::stopDaemon();
+    }   
 	
 	/**
 	* retourne le numéro du prochain mysensorid dispo
@@ -314,7 +322,7 @@ class mySensors extends eqLogic {
 
 	}
 	
-	public static function getConfig() {
+	public static function getValue() {
 		$nodeid = init('id');
 		$param = init('param');
 		echo "resultat API";
@@ -381,50 +389,6 @@ class mySensors extends eqLogic {
 	public static function saveGateway() {
 		$status = init('status');
 		config::save(gateway, $status,  mySensors);
-		/*
-		$elogic = self::byLogicalId('gateway', 'mySensors');
-		if (is_object($elogic)) {
-			$cmdlogic = mySensorsCmd::byEqLogicIdAndLogicalId($elogic->getId(),'Connexion');
-			if (is_object($cmdlogic)) {
-				$cmdlogic->setConfiguration('value',$status);
-				$cmdlogic->save();
-				$cmdlogic->event($status);
-			}
-			else {
-				$mysCmd = new mySensorsCmd();
-				$mysCmd->setEqLogic_id($elogic->getId());
-				$mysCmd->setEqType('mySensors');
-				$mysCmd->setLogicalId('Connexion');
-				$mysCmd->setType('info');
-				$mysCmd->setSubType('numeric');
-				$mysCmd->setName( 'Connexion' );
-				$mysCmd->setConfiguration('value',$status);
-				$mysCmd->setConfiguration('sensorCategory', 'Statut Gateway');
-				$mysCmd->setConfiguration('sensorType', 'Connexion');
-				$mysCmd->save();
-				$mysCmd->event($value);
-			}	
-		}
-		else {
-				$mys = new mySensors();
-				$mys->setEqType_name('mySensors');
-				$mys->setLogicalId('gateway');
-				$mys->setConfiguration('nodeid', 'gateway');
-				$mys->setName('Gateway');
-				$mys->setIsEnable(true);
-				$mys->save();
-				$mysCmd = new mySensorsCmd();
-				$mysCmd->setEqLogic_id($mys->getId());
-				$mysCmd->setEqType('mySensors');
-				$mysCmd->setLogicalId('Connexion');
-				$mysCmd->setType('info');
-				$mysCmd->setSubType('numeric');
-				$mysCmd->setName( 'Connexion' );
-				$mysCmd->setConfiguration('value',$status);
-				$mysCmd->save();
-				$mysCmd->event($value);
-		}
-		*/
 	}	
 
 	public static function saveSketchVersion() {
@@ -875,7 +839,7 @@ return $return;
 			case 'saveSensor' : self::saveSensor(); break;
 			case 'saveBatteryLevel' : self::saveBatteryLevel(); break;
 			case 'saveGateway' : self::saveGateway(); break;
-			case 'getConfig' : self::getConfig(); break;
+			case 'getValue' : self::getValue(); break;
 		
 		}
 		

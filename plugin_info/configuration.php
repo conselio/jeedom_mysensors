@@ -144,9 +144,9 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
      function mySensors_postSaveConfiguration(){
              $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
-            url: "plugins/sms/core/ajax/mySensors.ajax.php", // url du fichier php
+            url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
             data: {
-                action: "restartDeamon",
+                action: "postSave",
             },
             dataType: 'json',
             error: function (request, status, error) {
@@ -157,7 +157,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            $('#ul_plugin .li_plugin[data-plugin_id=sms]').click();
+            $('#ul_plugin .li_plugin[data-plugin_id=mySensors]').click();
         }
     });				
 			}
