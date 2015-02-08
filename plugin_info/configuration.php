@@ -88,8 +88,8 @@ if (!isConnect()) {
 		<label class="col-lg-4 control-label" >Inclusion :</label>
 			<div class="col-lg-2">
 			<select id="select_include" class="configKey form-control" data-l1key="include_mode">
-                    	<option value="on">Activé</option>	
-                    	<option value="off">Désactivé</option>
+                    	<option value="on">Activée</option>	
+                    	<option value="off">Désactivée</option>
                     	</select>
 			</div>
 		</div>
