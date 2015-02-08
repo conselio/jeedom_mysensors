@@ -101,7 +101,14 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
                     	<option value="off">Désactivé</option>
                     	</select>
 			</div>
-		</div>	
+		</div>
+		
+		<div id="div_status" class="form-group">
+		<label class="col-lg-4 control-label">Redémarrage</label>
+			<div class="col-lg-2">
+			<a class="btn btn-warning" id="bt_restartmySensors"><i class='fa fa-stop'></i> Arrêter/Redemarrer le service NodeJS</a>
+			</div>
+		</div>		
 				
 				<script>
 				$( "#select_port" ).change(function() {
@@ -142,14 +149,34 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 							}
 						});
 				});
-
+				$('#bt_restartmySensors').on('click', function () {
+					$.ajax({// fonction permettant de faire de l'ajax
+						type: "POST", // methode de transmission des données au fichier php
+						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
+						data: {
+							action: "restartNode",
+						},
+						dataType: 'json',
+						error: function (request, status, error) {
+							handleAjaxError(request, status, error);
+						},
+						success: function (data) { // si l'appel a bien fonctionné
+							if (data.state != 'ok') {
+								$('#div_alert').showAlert({message: data.result, level: 'danger'});
+								return;
+							}
+						$('#div_alert').showAlert({message: 'Le nodejs a été correctement arrêté : il se relancera automatiquement dans 1 minute', level: 'success'});
+						$('#ul_plugin .li_plugin[data-plugin_id=mySensors]').click();
+						}
+					});
+				});
 				
      function mySensors_postSaveConfiguration(){
              $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
             url: "plugins/sms/core/ajax/mySensors.ajax.php", // url du fichier php
             data: {
-                action: "postSave",
+                action: "restartDeamon",
             },
             dataType: 'json',
             error: function (request, status, error) {

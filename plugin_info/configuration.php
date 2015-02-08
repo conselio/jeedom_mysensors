@@ -28,8 +28,8 @@ if (!isConnect()) {
 <form class="form-horizontal">
     <fieldset>
     <?php
-    $statusNode = config::byKey('gateway','mySensors');
-    $statusGateway = mySensors::deamonRunning();
+    $statusGateway = config::byKey('gateway','mySensors');
+    $statusNode = mySensors::deamonRunning();
 	if ($statusGateway != 1 || !mySensors::deamonRunning()) {
 		echo '<div class="alert alert-danger">';
 	} else {
@@ -102,13 +102,6 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
                     	</select>
 			</div>
 		</div>
-		
-		<div id="div_status" class="form-group">
-		<label class="col-lg-4 control-label">Redémarrage</label>
-			<div class="col-lg-2">
-			<a class="btn btn-warning" id="bt_restartmySensors"><i class='fa fa-stop'></i> Arrêter/Redemarrer le service NodeJS</a>
-			</div>
-		</div>		
 				
 				<script>
 				$( "#select_port" ).change(function() {
@@ -137,38 +130,15 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 						 $("#div_local").show();
 						 $("#div_status").show();
 						 $("#div_node").show();
-						 $("#div_inclusion").show();
 						 $("#div_slave").hide();
 						}
 						else{
 							$("#div_local").hide();
 							$("#div_status").hide();
 							$("#div_node").hide();
-							$("#div_inclusion").hide();
 							$("#div_slave").show();
 							}
 						});
-				});
-				$('#bt_restartmySensors').on('click', function () {
-					$.ajax({// fonction permettant de faire de l'ajax
-						type: "POST", // methode de transmission des données au fichier php
-						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
-						data: {
-							action: "restartNode",
-						},
-						dataType: 'json',
-						error: function (request, status, error) {
-							handleAjaxError(request, status, error);
-						},
-						success: function (data) { // si l'appel a bien fonctionné
-							if (data.state != 'ok') {
-								$('#div_alert').showAlert({message: data.result, level: 'danger'});
-								return;
-							}
-						$('#div_alert').showAlert({message: 'Le nodejs a été correctement arrêté : il se relancera automatiquement dans 1 minute', level: 'success'});
-						$('#ul_plugin .li_plugin[data-plugin_id=mySensors]').click();
-						}
-					});
 				});
 				
      function mySensors_postSaveConfiguration(){
