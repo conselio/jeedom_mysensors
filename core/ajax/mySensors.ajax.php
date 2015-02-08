@@ -25,7 +25,7 @@ try {
     }
 
     
-    if (init('action') == 'restartNode') {
+    if (init('action') == 'postSave') {
         mySensors::stopDeamon();
         ajax::success();
     }

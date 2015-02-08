@@ -26,13 +26,23 @@
 
 
     if ($jsonrpc->getMethod() == 'getConfig') {
-       log::add('mySensors','debug','Envoi des ids à tous les demons')
+       log::add('mySensors','debug','Récupération de la configuration')
        mySensors::getConfig();
     }
     
-    if ($jsonrpc->getMethod() == 'runningSlave') {
-       log::add('mySensors','debug','Envoi des ids à tous les demons')
-       mySensors::runningSlave();
+    if ($jsonrpc->getMethod() == 'runningDaemon') {
+       log::add('mySensors','debug','Vérification du statut du service')
+       mySensors::runningDaemon();
+    }
+    
+    if ($jsonrpc->getMethod() == 'svcNode') {
+       log::add('mySensors','debug','Envoi de la conf aux esclaves')
+       mySensors::svcNode();
+    }
+    
+     if ($jsonrpc->getMethod() == 'listUSB') {
+       log::add('mySensors','debug','Récupération des périphériques USB')
+       mySensors::listUSB();
     }
 
     throw new Exception(__('Aucune methode correspondante pour le plugin mySensors : ' . $jsonrpc->getMethod(), __FILE__));

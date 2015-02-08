@@ -2,13 +2,13 @@
 <info>
     <id>mySensors</id>
     <name>mySensors</name>
-    <description>Plugin pour gerer des équipements mySensors</description>
+    <description>Permet de gérer des équipements mySensors</description>
     <icon>fa fa-tablet</icon>
     <licence>AGPL</licence>
     <author>CONSELIO SA</author>
     <installation>Le module serialport pour nodejs est nécessaire pour ce plugin. La configuration réseau Jeedom doit également être remplie.</installation>
     <require>1.152</require>
-    <version>1.9.8</version>
+    <version>1.9.9</version>
     <category>automation protocol</category>
     <allowRemote>1</allowRemote>
 </info>
