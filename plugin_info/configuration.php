@@ -70,12 +70,12 @@ if (!isConnect()) {
             <label class="col-lg-4 control-label">Adresse de la Gateway :</label>
             <div class="col-lg-4">
                 <select id="select_port" class="configKey form-control" data-l1key="nodeGateway">
-                    <option value="">Aucun</option>
                     <?php
-                    foreach (jeedom::getUsbMapping() as $name => $value) {
+                    $jeeNetwork = jeeNetwork::byId('1');
+                    foreach ($jeeNetwork->sendRawRequest('jeedom::getUsbMapping') as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
                     }
-					echo '<option value="serie">Modem Série non listé (port manuel)</option>';
+					echo '<option value="serie">Port série non listé (port manuel)</option>';
                     ?>
                 </select>
 				
