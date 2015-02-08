@@ -107,6 +107,8 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 			</div>
 		</div>
 				
+				<div class="alert alert-success">La sauvegarde de la configuration redémarre automatiquement le service, il faut attendre environ 1 minute pour qu'il soit joignable</div> 
+				
 				<script>
 				$( "#select_port" ).change(function() {
 					$( "#select_port option:selected" ).each(function() {
