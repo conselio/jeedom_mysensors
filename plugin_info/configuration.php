@@ -36,9 +36,9 @@ if (!isConnect()) {
 		echo '<div class="alert alert-success">';
 	}
     if (!mySensors::deamonRunning()) {
-		echo 'Le service mySensors(nodejs) n\'est pas démarré ';
+		echo 'Le service mySensors (nodejs) n\'est pas démarré ';
 	} else {
-		echo 'Le service mySensors(nodejs) est en marche ';
+		echo 'Le service mySensors (nodejs) est en marche ';
 	}
 	if ($statusGateway != 1) {
 		echo 'et la Gateway est non connectée</div>';
@@ -160,7 +160,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
             $('#ul_plugin .li_plugin[data-plugin_id=sms]').click();
         }
     });				
-				
+			}
 				
 			</script>
 
