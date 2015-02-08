@@ -51,12 +51,16 @@ if (!isConnect()) {
 	}
     ?>
         <div class="form-group">
-            <label class="col-lg-4 control-label">Mode : </label>
+            <label class="col-lg-4 control-label">Connexion à la Gateway : </label>
             <div class="col-lg-4">
 				<select class="configKey form-control" id="select_mode" data-l1key="externalDeamon">
-                    <option value="0">Local</option>
-                    <option value="2">Gateway sur un Jeedom Esclave</option>
-					<option value="1">Jeedom Esclave (Envoyer les données sur le jeedom Master)</option>
+                    <option value="master">Jeedom maître</option>
+                    <?php
+                    foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
+						echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . ' (' . $jeeNetwork->getId(). ')</option>';
+					}
+                    ?>
+                    <option value="network">Réseau</option>
                 </select>
             </div>
         </div>
@@ -76,7 +80,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
         </div>
         
 <div id="div_local" class="form-group">
-            <label class="col-lg-4 control-label">Port Gateway :</label>
+            <label class="col-lg-4 control-label">Adresse de la Gateway :</label>
             <div class="col-lg-4">
                 <select id="select_port" class="configKey form-control" data-l1key="usbGateway">
                     <option value="">Aucun</option>
@@ -89,7 +93,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
                 </select>
 				
 				<input id="port_serie" class="configKey form-control" data-l1key="modem_serie_addr" style="margin-top:5px;display:none" placeholder="Renseigner le port série (ex : /dev/ttyS0)"/>
-				<input id="network_address" class="configKey form-control" data-l1key="gateway_addr" style="margin-top:5px;display:none" placeholder="Renseigner l'e port série'adresse de la gateway (ex : 192.168.1.1:5003"/>
+				<input id="network_address" class="configKey form-control" data-l1key="gateway_addr" style="margin-top:5px;display:none" placeholder="Renseigner l'adresse de la gateway (ex : 192.168.1.1:5003"/>
 				            </div>
         </div>
 		
