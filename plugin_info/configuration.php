@@ -53,7 +53,7 @@ if (!isConnect()) {
         <div class="form-group">
             <label class="col-lg-4 control-label">Connexion à la Gateway : </label>
             <div class="col-lg-4">
-				<select class="configKey form-control" id="select_mode" data-l1key="externalDeamon">
+				<select class="configKey form-control" id="select_mode" data-l1key="nodeHost">
                     <option value="master">Jeedom maître</option>
                     <?php
                     foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
@@ -82,7 +82,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 <div id="div_local" class="form-group">
             <label class="col-lg-4 control-label">Adresse de la Gateway :</label>
             <div class="col-lg-4">
-                <select id="select_port" class="configKey form-control" data-l1key="usbGateway">
+                <select id="select_port" class="configKey form-control" data-l1key="nodeGateway">
                     <option value="">Aucun</option>
                     <?php
                     foreach (jeedom::getUsbMapping() as $name => $value) {
@@ -114,22 +114,23 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 					$( "#select_port option:selected" ).each(function() {
 						if($( this ).val() == "serie"){
 						 $("#port_serie").show();
-						 
-						 $("#network_address").hide();
 						}
-						else if($( this ).val() == "network"){
-							$("#port_serie").hide();
-							
-							$("#network_address").show();
-							}
 						else {
 							$("#port_serie").hide();
-							
-							$("#network_address").hide();
 						}
 						});
 					
 				});
+				$( "#select_mode" ).change(function() {
+					$( "#select_port option:selected" ).each(function() {
+						if($( this ).val() == "network"){
+							$("#network_address").show();
+							}
+						else {							
+							$("#network_address").hide();
+						}
+						});
+				});				
 				$( "#select_mode" ).change(function() {
 					$( "#select_mode option:selected" ).each(function() {
 						if($( this ).val() == "0" || $( this ).val() == "1"){
