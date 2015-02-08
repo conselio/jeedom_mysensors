@@ -34,9 +34,9 @@ echo '<div class="alert alert-danger">';
 echo '<div class="alert alert-success">';
 }
  if (!mySensors::deamonRunning()) {
-echo 'Le service mySensors(nodejs) ne tourne pas';
+echo 'Le service mySensors(nodejs) ne tourne pas ';
 } else {
-echo 'Le service mySensors(nodejs) est en marche';
+echo 'Le service mySensors(nodejs) est en marche ';
 }
 if (config::byKey('gateway','mySensors') != 1) {
 echo 'et Gateway non connectée</div>';
@@ -168,6 +168,28 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 						}
 					});
 				});
+				
+     function mySensors_postSaveConfiguration(){
+             $.ajax({// fonction permettant de faire de l'ajax
+            type: "POST", // methode de transmission des données au fichier php
+            url: "plugins/sms/core/ajax/mySensors.ajax.php", // url du fichier php
+            data: {
+                action: "restartDeamon",
+            },
+            dataType: 'json',
+            error: function (request, status, error) {
+                handleAjaxError(request, status, error);
+            },
+            success: function (data) { // si l'appel a bien fonctionné
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            }
+            $('#ul_plugin .li_plugin[data-plugin_id=sms]').click();
+        }
+    });				
+				
+				
 			</script>
 
     </fieldset>
