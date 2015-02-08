@@ -28,14 +28,24 @@ if (!isConnect()) {
 <form class="form-horizontal">
     <fieldset>
     <?php
+if (config::byKey('gateway','mySensors') != 1 || !mySensors::deamonRunning()) {
+echo '<div class="alert alert-danger">';
+} else {
+echo '<div class="alert alert-success">';
+}
+ if (!mySensors::deamonRunning()) {
+echo 'Le service mySensors(nodejs) ne tourne pas';
+} else {
+echo 'Le service mySensors(nodejs) est en marche';
+}
 if (config::byKey('gateway','mySensors') != 1) {
-echo '<div class="alert alert-danger">Gateway non connectée</div>';
+echo 'et Gateway non connectée</div>';
 } else {
 $libVer = config::byKey('gateLib','mySensors');
 if ($libVer=='') {
 $libVer = 'inconnue';
 }
-echo '<div class="alert alert-success">Gateway connectée (version mySensors ' . $libVer . ')</div>';
+echo 'et Gateway connectée (version mySensors ' . $libVer . ')</div>';
 }
 ?>
         <div class="form-group">
@@ -97,13 +107,7 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 			<a class="btn btn-warning" id="bt_restartmySensors"><i class='fa fa-stop'></i> Arrêter/Redemarrer le service NodeJS</a>
 			</div>
 		</div>		
- <?php
- if (!mySensors::deamonRunning()) {
-echo '<div id="div_node" class="alert alert-danger">Le service NodeJS ne tourne pas</div>';
-} else {
-echo '<div id="div_node" class="alert alert-success">Le service NodeJS est en marche</div>';
-}
-?>				
+				
 				<script>
 				$( "#select_port" ).change(function() {
 					$( "#select_port option:selected" ).each(function() {
