@@ -65,20 +65,7 @@ if (!isConnect()) {
             </div>
         </div>
         
-        <div id="div_slave" class="form-group">
-            <label class="col-lg-4 control-label">Esclave Jeedom :</label>
-            <div class="col-lg-4">
-                        <select id="select_slave" class="configKey form-control" data-l1key="jeeSlave">
-                    <option value="">Aucun</option>
-                    <?php
-                    foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
-echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . ' (' . $jeeNetwork->getId(). ')</option>';
-}
-                    ?>
-                </select>
-                    </div>
-        </div>
-        
+       
 <div id="div_local" class="form-group">
             <label class="col-lg-4 control-label">Adresse de la Gateway :</label>
             <div class="col-lg-4">
@@ -92,8 +79,8 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
                     ?>
                 </select>
 				
-				<input id="port_serie" class="configKey form-control" data-l1key="modem_serie_addr" style="margin-top:5px;display:none" placeholder="Renseigner le port série (ex : /dev/ttyS0)"/>
-				<input id="network_address" class="configKey form-control" data-l1key="gateway_addr" style="margin-top:5px;display:none" placeholder="Renseigner l'adresse de la gateway (ex : 192.168.1.1:5003"/>
+				<input id="serial_port" class="configKey form-control" data-l1key="nodeSerial" style="margin-top:5px;display:none" placeholder="Renseigner le port série (ex : /dev/ttyS0)"/>
+				<input id="network_address" class="configKey form-control" data-l1key="nodeNetwork" style="margin-top:5px;display:none" placeholder="Renseigner l'adresse de la gateway (ex : 192.168.1.1:5003"/>
 				            </div>
         </div>
 		
@@ -113,37 +100,23 @@ echo '<option value="' . $jeeNetwork->getId(). '">' . $jeeNetwork->getName() . '
 				$( "#select_port" ).change(function() {
 					$( "#select_port option:selected" ).each(function() {
 						if($( this ).val() == "serie"){
-						 $("#port_serie").show();
+						 $("#serial_port").show();
 						}
 						else {
-							$("#port_serie").hide();
+							$("#serial_port").hide();
 						}
 						});
 					
-				});
-				$( "#select_mode" ).change(function() {
-					$( "#select_port option:selected" ).each(function() {
-						if($( this ).val() == "network"){
-							$("#network_address").show();
-							}
-						else {							
-							$("#network_address").hide();
-						}
-						});
-				});				
+				});			
 				$( "#select_mode" ).change(function() {
 					$( "#select_mode option:selected" ).each(function() {
-						if($( this ).val() == "0" || $( this ).val() == "1"){
-						 $("#div_local").show();
-						 $("#div_status").show();
-						 $("#div_node").show();
-						 $("#div_slave").hide();
+						if($( this ).val() == "network"){
+							$("#network_address").show();
+							$("#select_port").hide();
 						}
 						else{
-							$("#div_local").hide();
-							$("#div_status").hide();
-							$("#div_node").hide();
-							$("#div_slave").show();
+							$("#select_port").show();							
+							$("#network_address").hide();
 							}
 						});
 				});
