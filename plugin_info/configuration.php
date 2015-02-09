@@ -140,7 +140,7 @@ if (!isConnect()) {
 				function(key,value) {
 				options += '<option value="' + key + '">' + key + ' (' + value + ')</option>';
 			})
-			$("#select_mode").html(options);
+			$("select#select_mode").html(options);
         }
     });							
 							}
