@@ -135,14 +135,12 @@ if (!isConnect()) {
                 return;
             }
             $('.mySensorsInfo').value('');
-            for (var i in data.result) {
-                var value = data.result[i]['value'];
-                if (isset(data.result[i]['unite'])) {
-                    value += ' ' + data.result[i]['unite'];
-                }
-                $('.mySensorsInfo[data-l1key=' + i + ']').value(value);
-                $('.mySensorsInfo[data-l1key=' + i + ']').attr('title', data.result[i]['datetime']);
-            }
+			var options = '';
+			$.each(response.results,
+				function(key,value) {
+				options += '<option value="' + key + '">' + key + ' (' + value + ')</option>';
+			})
+			$("#select_mode").html(options);
         }
     });							
 							}
