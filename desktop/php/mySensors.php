@@ -137,7 +137,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <div class="form-group">
                     		<label class="col-md-2 control-label">{{ID du Node}}</label>
                     		<div class="col-md-3">
-                    		 <span class="mySensorsInfo tooltips label label-default" id="selectNode" data-l1key="nodeId"></span>
+                    		 <span class="mySensorsInfo tooltips label label-default" id="nodeId" data-l1key="nodeId"></span>
                     		</div>
                     		
                     		<label class="col-md-2 control-label">{{Version mySensors}}</label>
@@ -199,7 +199,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
         		<script>
 				$('#bt_restartEq').on('click', function () {
-					nodeId = document.getElementById('selectNode');
+					nodeId = document.getElementById('nodeId');
 					$.ajax({// fonction permettant de faire de l'ajax
 						type: "POST", // methode de transmission des données au fichier php
 						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
