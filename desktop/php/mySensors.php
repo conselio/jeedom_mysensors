@@ -180,7 +180,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     		
                     		<label class="col-md-2 control-label">{{Redémarrer le Node}}</label>
                     		<div class="col-md-3">
-				<a class="btn btn-default" id="bt_restartNode" ><i class="fa fa-power-off"></i> Redémarrer</a>
+				<a class="btn btn-default" id="bt_restartEq" ><i class="fa fa-power-off"></i> Redémarrer</a>
 				</div>
                 	</div>                 
 

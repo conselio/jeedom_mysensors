@@ -44,10 +44,9 @@ try {
     
     if (init('action') == 'getUSB') {
         if (init('id') == 'master' || init('id') == 'network') {
-			$jeeNetwork = jeeNetwork::byId('1');
-			ajax::success(jeedom::getUsbMapping);
+			ajax::success(jeedom::getUsbMapping());
         } else {
-			$jeeNetwork = jeeNetwork::byId('1');
+			$jeeNetwork = jeeNetwork::byId(init('id'));
 			ajax::success($jeeNetwork->sendRawRequest('jeedom::getUsbMapping'));
 		}
     }

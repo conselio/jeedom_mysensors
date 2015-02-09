@@ -140,7 +140,7 @@ if (!isConnect()) {
 			$.each(data.result, function(item) {
 				options.append($("<option />").val(item.key).text(item.value));
 			});
-			$("select#select_mode").html(options);
+			$("select#select_port").html(options);
         }
     });							
 							}
