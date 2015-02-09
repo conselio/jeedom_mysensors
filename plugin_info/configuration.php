@@ -117,6 +117,7 @@ if (!isConnect()) {
 						else{
 							$("#select_port").show();							
 							$("#network_address").hide();
+
     $.ajax({// fonction permettant de faire de l'ajax
         type: "POST", // méthode de transmission des données au fichier php
         url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
@@ -134,12 +135,11 @@ if (!isConnect()) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            $('.mySensorsInfo').value('');
-			var options = '';
-			$.each(response.results,
-				function(key,value) {
-				options += '<option value="' + key + '">' + key + ' (' + value + ')</option>';
-			})
+            $('#select_port').value('');
+			var options = $("#select_port");
+			$.each(result, function(item) {
+				options.append($("<option />").val(item.key).text(item.value));
+			});
 			$("select#select_mode").html(options);
         }
     });							
