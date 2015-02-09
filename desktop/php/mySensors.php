@@ -137,7 +137,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                         <div class="form-group">
                     		<label class="col-md-2 control-label">{{ID du Node}}</label>
                     		<div class="col-md-3">
-                    		 <span class="mySensorsInfo tooltips label label-default" data-l1key="nodeId"></span>
+                    		 <span class="mySensorsInfo tooltips label label-default" id="selectNode" data-l1key="nodeId"></span>
                     		</div>
                     		
                     		<label class="col-md-2 control-label">{{Version mySensors}}</label>
@@ -250,17 +250,6 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 
     </div>
 </div>
-
-<script>
-	$( "#selectNode" ).change(function() {
-		if($( "#selectNode" ).val() == "gateway"){
-			$("#infoSketch").hide();
-		}
-		else {
-			$("#infoSketch").show();
-		}
-	});
-</script>
 
 <?php include_file('desktop', 'mySensors', 'js', 'mySensors'); ?>
 <?php include_file('core', 'plugin.template', 'js'); ?>
