@@ -34,6 +34,7 @@ if (!isConnect()) {
     if ($nodeHost == "master" || $nodeHost == "network") {
 		$statusNode = mySensors::deamonRunning();
 	} else {
+		$jeeNetwork = jeeNetwork::byId(1);
 		$jsonrpc = $jeeNetwork->getJsonRpc();
 		if (!$jsonrpc->sendRequest('mySensors::daemonRunning', array())) {
 			throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
