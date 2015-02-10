@@ -1,7 +1,9 @@
 [panel,danger]
 .Aucun équipement ne se créé
 --
-Sur la page de configuration vous pouvez vérifier le service du plugin et voir dans les logs si des informations sont recues
+Sur la page de configuration vous pouvez vérifier que le service du plugin est démarré et connecter.
+
+Allez voir dans la section logs de Jeedom la catégorie mySensors et API
 --
 
 [panel,danger]
@@ -11,13 +13,50 @@ Au démarrage d'un noeud, celui-ci se présente sur le réseau, un équipement l
 --
 
 [panel,danger]
-.Je suspect un problème de connexion sur le réseau
+.Je suspect un problème de connexion avec ma gateway
 --
-L'équipement gateway dispose de deux informations qui peuvent être utile pour les alertes de connexions, le premier vous donne l'état de la gateway, le deuxième vous donne des alertes sur des noeuds inactifs
+Sur la page de configuration du plugin, vous avez une note d'information qui donne le statut du service du plugin Jeedom et également le statut de connecion à celui-ci à la gateway
 --
 
 [panel,danger]
-.Mes logs montrent que j'ai bien de la communication, mais rien dans Jeedom n'apparait
+.Mes logs montrent que j'ai bien de la communication de noeuds, mais je n'ai pas d'équipement qui apparait dans Jeedom
 --
-Vérifier votre configuration réseau dans Jeedom. Vous devez bien avoir un /jeedom de présent dans votre adresse interne.
+Vérifier votre configuration réseau dans Jeedom. Vous devez bien avoir rempli tous les champs de votre adresse interne. Protocole, adresse et complément url surtout (si vous êtes sur une intstallation Jeedom DIY, vous devez avoir /jeedom dans cette section)
+--
+
+[panel,danger]
+.Jeedom n'arrive pas à se connecter à ma gateway réseau
+--
+Vérifier par étapes que votre passerelle est fonctionnelle.
+  1-est-ce qu'elle répond à un ping
+  2-est-ce qu'elle répond à un telnet sur son port 5003 (le port par défaut dans les sketchs de gateway réseau)
+  
+Si un de ces 2 points ne fonctionnent pas, la passerelle a un problème. Revérifiez votre montage et votre sketch (attention aux différences entres l'ENC28J60 et le W5100)
+--
+
+[panel,danger]
+.La page de configuration indique que le service n'est pas démarré et j'ai dans les logs un message "nice: node: Aucun fichier ou dossier de ce type"
+--
+Votre installation nodejs ne dispose pas du binaire node, mais nodejs.
+
+Il faut créer un lien symbolique de nodejs vers node.
+  ln -s /usr/bin/nodejs /usr/bin/node
+--
+
+[panel,danger]
+.La page de configuration indique que le service n'est pas démarré et j'ai dans les logs un message sur le module "serialport" manquant
+--
+L'installation du plugin lance normalement l'installation de ce module nodejs pour vous.
+
+Si il faut la faire à la main, en tant qu'utilisateur www-data, rendez vous dans le répertoire du plugin. Depuis le répertoire node, éxécuter "npm install" simplement.
+  su - www-data
+  cd /usr/share/nginx/wwww/jeedom/plugins/mySensors/node
+  npm install
+
+--
+
+[panel,danger]
+.Je suis sur Synology, et mon service ne démarre pas
+--
+Le module serialport n'a pas réussi à être installé sur Synology (npm exactement ne peut pas être installé). Il faut soit utiliser une esclave avec une gateway série ou directement une gateway réseau.
 --

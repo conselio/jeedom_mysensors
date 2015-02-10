@@ -1,3 +1,11 @@
+*en cours* Ajout de la possibilité de récupérer des valeurs depuis Jeedom
+*en cours* Ajout de la fonction reboot du node
+*en cours* Ajout de la fonctionnalité OTA
+
+==== Version 1.9.8
+
+Refonte de la page de configuration du plugin
+
 ==== Version 1.9.8
 
 Correction d'un bug sur la batterie
