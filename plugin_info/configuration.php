@@ -31,10 +31,14 @@ if (!isConnect()) {
     $statusGateway = config::byKey('gateway','mySensors');
     $nodeHost = config::byKey('nodeHost','mySensors');
     $nodeHost = 1;
-    if ($nodeHost == "master") {
+    if ($nodeHost == "master" || $nodeHost == "network") {
 		$statusNode = mySensors::deamonRunning();
 	} else {
-		$statusNode = mySensors::deamonRunning();
+		$jsonrpc = $jeeNetwork->getJsonRpc();
+		if (!$jsonrpc->sendRequest('mySensors::daemonRunning', array())) {
+			throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
+		}
+		$statusNode = $jsonrpc->getResult();
 	}
     $statusNode = mySensors::deamonRunning();
 	if ($statusGateway != 1 || $statusNode != 1) {
@@ -142,9 +146,9 @@ if (!isConnect()) {
                 return;
             }
 			var options = $("#select_port");
-			options.selectmenu("index", 0);
+			options.reset();
 			for (var i in data.result) {
-				options.append('<option value="'+i+'">'+i+'('+data.result[i]+')</option>');
+				options.append('<option value='+i+'>'+i+'('+data.result[i]+')</option>');
 			}
 			options.append('<option value="serie">Port série non listé (port manuel)</option>');
         }
