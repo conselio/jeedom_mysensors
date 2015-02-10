@@ -205,7 +205,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
 						data: {
 							action: "restartEq",
-							node: ,
+							node: $nodeId,
 						},
 						dataType: 'json',
 						error: function (request, status, error) {

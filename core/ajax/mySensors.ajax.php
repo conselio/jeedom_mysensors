@@ -43,16 +43,12 @@ try {
     }
     
     if (init('action') == 'getUSB') {
-		$return = array();
         if (init('id') == 'master' || init('id') == 'network') {
 			ajax::success(jeedom::getUsbMapping());
         } else {
 			$jeeNetwork = jeeNetwork::byId(init('id'));
-			foreach ($jeeNetwork->sendRawRequest('jeedom::getUsbMapping') as $name => $value) {
-                  $return[$name] = $value;
-            }
+            ajax::succes($jeeNetwork->sendRawRequest('jeedom::getUsbMapping'));
 		}
-		ajax::succes($return);
     }
 
     if (init('action') == 'restartEq') {
