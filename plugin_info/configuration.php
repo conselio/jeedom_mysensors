@@ -71,7 +71,6 @@ if (!isConnect()) {
             <div class="col-lg-4">
                 <select id="select_port" class="configKey form-control" data-l1key="nodeGateway">
                     <?php
-                    $jeeNetwork = jeeNetwork::byId('1');
                     foreach ($jeeNetwork->sendRawRequest('jeedom::getUsbMapping') as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
                     }
