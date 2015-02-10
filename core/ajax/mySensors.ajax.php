@@ -49,7 +49,7 @@ try {
         } else {
 			$jeeNetwork = jeeNetwork::byId(init('id'));
 			foreach ($jeeNetwork->sendRawRequest('jeedom::getUsbMapping') as $name => $value) {
-                  $return[$name] => $value;
+                  $return[$name] = $value;
             }
 		}
 		ajax::succes($return);
