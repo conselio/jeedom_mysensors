@@ -134,13 +134,12 @@ if (!isConnect()) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            $('#select_port').value('');
 			var options = $("#select_port");
 			options.value('');
-			/*$.each(data.result, function(item) {
+			$.each(data.result, function(item) {
 				options.append("<option value="+item.id+">"+item.id+"("+item.value+")</option>");
-			});*/
-			options.append(data.result);
+			});
+			//options.append(data.result);
         }
     });							
 							}
