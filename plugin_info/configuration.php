@@ -35,11 +35,12 @@ if (!isConnect()) {
 		$statusNode = mySensors::deamonRunning();
 	} else {
 		$jeeNetwork = jeeNetwork::byId(1);
-		$jsonrpc = $jeeNetwork->getJsonRpc();
-		if (!$jsonrpc->sendRequest('mySensors::daemonRunning', array())) {
-			throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
-		}
-		$statusNode = $jsonrpc->getResult();
+		//$jsonrpc = $jeeNetwork->getJsonRpc();
+		//if (!$jsonrpc->sendRequest('mySensors::daemonRunning', array())) {
+			//throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
+		//}
+		//$statusNode = $jsonrpc->getResult();
+		$statusNode = 1;
 	}
     $statusNode = mySensors::deamonRunning();
 	if ($statusGateway != 1 || $statusNode != 1) {
@@ -47,7 +48,7 @@ if (!isConnect()) {
 	} else {
 		echo '<div class="alert alert-success"><b>Connexion : </b>';
 	}
-    if (!mySensors::deamonRunning()) {
+    if ($statusNode != 1) {
 		echo 'Le service mySensors (nodejs) n\'est pas démarré ';
 	} else {
 		echo 'Le service mySensors (nodejs) est en marche ';
