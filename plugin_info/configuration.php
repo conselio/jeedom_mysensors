@@ -31,9 +31,9 @@ if (!isConnect()) {
     $statusGateway = config::byKey('gateway','mySensors');
     $statusNode = mySensors::deamonRunning();
 	if ($statusGateway != 1 || !mySensors::deamonRunning()) {
-		echo '<div class="alert alert-danger">';
+		echo '<div class="alert alert-danger"><b>Connexion : </b>';
 	} else {
-		echo '<div class="alert alert-success">';
+		echo '<div class="alert alert-success"><b>Connexion : </b>';
 	}
     if (!mySensors::deamonRunning()) {
 		echo 'Le service mySensors (nodejs) n\'est pas démarré ';
@@ -94,7 +94,7 @@ if (!isConnect()) {
 			</div>
 		</div>
 				
-				<div class="alert alert-success">La sauvegarde de la configuration redémarre automatiquement le service, il faut attendre environ 1 minute pour qu'il soit joignable</div> 
+				<div class="alert alert-success"><b>Sauvegarde : </b>La sauvegarde de la configuration redémarre automatiquement le service, il faut attendre environ 1 minute pour qu'il soit joignable</div> 
 				
 				<script>
 				$( "#select_port" ).change(function() {
@@ -138,7 +138,7 @@ if (!isConnect()) {
             $('#select_port').value('');
 			var options = $("#select_port");
 			$.each(data.result, function(item) {
-				options.append($("<option />").val(item.key).text(item.value));
+				options.append($("<option />").val('ok').text('ok'));
 			});
 			$("select#select_port").html(options);
         }
