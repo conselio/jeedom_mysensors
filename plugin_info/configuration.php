@@ -136,8 +136,8 @@ if (!isConnect()) {
             }
 			var options = $("#select_port");
 			options.value('');
-			$.each(data.result, function(item) {
-				options.append("<option value="+item.id+">"+item.id+"("+item.value+")</option>");
+			for (vari i in data.result) {
+				options.append("<option value="+i+">"+i+"("+data.result[i]+")</option>");
 			});
 			//options.append(data.result);
         }
