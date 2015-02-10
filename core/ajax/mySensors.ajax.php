@@ -45,19 +45,11 @@ try {
     if (init('action') == 'getUSB') {
 		$return = "";
         if (init('id') == 'master' || init('id') == 'network') {
-			/*foreach (jeedom::getUsbMapping() as $name => $value) {
-                        $return = $return . '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
-                    }*/
             ajax::success(jeedom::getUsbMapping());
         } else {
 			$jeeNetwork = jeeNetwork::byId(init('id'));
-			/*foreach ($jeeNetwork->sendRawRequest('jeedom::getUsbMapping') as $name => $value) {
-                        $return = $return . '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
-                    }*/
             ajax::success($jeeNetwork->sendRawRequest('jeedom::getUsbMapping'));
 		}
-		//$return = $return . '<option value="serie">Port série non listé (port manuel)</option>';
-		//ajax::success($return);
     }
 
     if (init('action') == 'restartEq') {

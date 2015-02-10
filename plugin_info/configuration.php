@@ -135,11 +135,11 @@ if (!isConnect()) {
                 return;
             }
 			var options = $("#select_port");
-			options.value('');
+			options.selectedIndex = 0;
 			for (var i in data.result) {
-				options.append("<option value="+i+">"+i+"("+data.result[i]+")</option>");
+				options.append('<option value="'+i+'">'+i+'('+data.result[i]+')</option>');
 			}
-			//options.append(data.result);
+			options.append('<option value="serie">Port série non listé (port manuel)</option>');
         }
     });							
 							}
