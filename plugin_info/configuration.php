@@ -71,7 +71,7 @@ if (!isConnect()) {
             <div class="col-lg-4">
                 <select id="select_port" class="configKey form-control" data-l1key="nodeGateway">
                     <?php
-                    foreach ($jeeNetwork->sendRawRequest('jeedom::getUsbMapping') as $name => $value) {
+                    foreach (jeedom::getUsbMapping() as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
                     }
 					echo '<option value="serie">Port série non listé (port manuel)</option>';
@@ -137,11 +137,10 @@ if (!isConnect()) {
             $('#select_port').value('');
 			var options = $("#select_port");
 			options.value('');
-			$.each(data.result, function(item) {
+			/*$.each(data.result, function(item) {
 				options.append("<option value="+item.id+">"+item.id+"("+item.value+")</option>");
-			});
-			$("select#select_port").html(options);
-			//options.append(data.result);
+			});*/
+			options.append(data.result);
         }
     });							
 							}
