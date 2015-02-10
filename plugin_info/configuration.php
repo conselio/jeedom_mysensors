@@ -29,8 +29,15 @@ if (!isConnect()) {
     <fieldset>
     <?php
     $statusGateway = config::byKey('gateway','mySensors');
+    $nodeHost = config::byKey('nodeHost','mySensors');
+    $nodeHost = 1;
+    if ($nodeHost == "master") {
+		$statusNode = mySensors::deamonRunning();
+	} else {
+		$statusNode = mySensors::deamonRunning();
+	}
     $statusNode = mySensors::deamonRunning();
-	if ($statusGateway != 1 || !mySensors::deamonRunning()) {
+	if ($statusGateway != 1 || $statusNode != 1) {
 		echo '<div class="alert alert-danger"><b>Connexion : </b>';
 	} else {
 		echo '<div class="alert alert-success"><b>Connexion : </b>';
@@ -135,7 +142,7 @@ if (!isConnect()) {
                 return;
             }
 			var options = $("#select_port");
-			options.selectedIndex = 0;
+			options.selectmenu("index", 0);
 			for (var i in data.result) {
 				options.append('<option value="'+i+'">'+i+'('+data.result[i]+')</option>');
 			}

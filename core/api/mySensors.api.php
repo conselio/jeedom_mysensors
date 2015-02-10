@@ -30,9 +30,9 @@
        mySensors::getConfig();
     }
     
-    if ($jsonrpc->getMethod() == 'runningDaemon') {
+    if ($jsonrpc->getMethod() == 'deamonRunning') {
        log::add('mySensors','debug','Vérification du statut du service')
-       mySensors::runningDaemon();
+       mySensors::deamonRunning();
     }
     
     if ($jsonrpc->getMethod() == 'saveNode') {
