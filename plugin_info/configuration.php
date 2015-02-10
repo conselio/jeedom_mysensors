@@ -50,7 +50,7 @@ if (!isConnect()) {
 		echo 'et la Gateway est connectée (version mySensors ' . $libVer . ')</div>';
 	}
     ?>
-        <div class="form-group">
+        <div id=globalSensors class="form-group">
             <label class="col-lg-4 control-label">Connexion à la Gateway : </label>
             <div class="col-lg-4">
 				<select class="configKey form-control" id="select_mode" data-l1key="nodeHost">
@@ -137,10 +137,12 @@ if (!isConnect()) {
             }
             $('#select_port').value('');
 			var options = $("#select_port");
-			$.each(data.result, function(item) {
+			
+			/*$.each(data.result, function(item) {
 				options.append($("<option />").val('ok').text('ok'));
 			});
-			$("select#select_port").html(options);
+			$("select#select_port").html(options);*/
+			options.append(data.result);
         }
     });							
 							}

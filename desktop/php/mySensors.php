@@ -180,7 +180,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
                     		
                     		<label class="col-md-2 control-label">{{Redémarrer le Node}}</label>
                     		<div class="col-md-3">
-				<a class="btn btn-default" id="bt_restartEq" ><i class="fa fa-power-off"></i> Redémarrer</a>
+				<a class="btn btn-default" id="bt_restartEq"><i class="fa fa-power-off"></i> Redémarrer</a>
 				</div>
                 	</div>                 
 
@@ -205,7 +205,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
 						data: {
 							action: "restartEq",
-							node: $nodeId,
+							node: nodeId,
 						},
 						dataType: 'json',
 						error: function (request, status, error) {
