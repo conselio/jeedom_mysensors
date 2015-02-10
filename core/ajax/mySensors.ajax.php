@@ -49,7 +49,7 @@ try {
         } else {
 			$jeeNetwork = jeeNetwork::byId(init('id'));
 			foreach ($jeeNetwork->sendRawRequest('jeedom::getUsbMapping') as $name => $value) {
-                        $return = $return . '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
+                        $return[$name] = $value;
                     }
             //ajax::success($jeeNetwork->sendRawRequest('jeedom::getUsbMapping'));
             ajax::success($return);
