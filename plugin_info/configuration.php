@@ -128,6 +128,11 @@ if (!isConnect()) {
 							$("#select_port").hide();
 							$("#serial_port").hide();
 						}
+						else if($( this ).val() == "none"){
+							$("#network_address").hide();
+							$("#select_port").hide();
+							$("#serial_port").hide();
+						}
 						else{
 							$("#select_port").show();							
 							$("#network_address").hide();
