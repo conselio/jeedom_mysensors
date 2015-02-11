@@ -31,29 +31,29 @@ if (!isConnect()) {
     $statusGateway = config::byKey('gateway','mySensors');
     $nodeHost = config::byKey('nodeHost','mySensors');
     $nodeHost = 1;
-    if ($nodeHost == "master" || $nodeHost == "network") {
+    if (!$nodeHost || $nodeHost == "master" || $nodeHost == "network") {
 		$statusNode = mySensors::deamonRunning();
 	} else {
 		$jeeNetwork = jeeNetwork::byId(1);
-		//$jsonrpc = $jeeNetwork->getJsonRpc();
-		//if (!$jsonrpc->sendRequest('mySensors::daemonRunning', array())) {
-			//throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
-		//}
-		//$statusNode = $jsonrpc->getResult();
-		$statusNode = true;
+		$jsonrpc = $jeeNetwork->getJsonRpc();
+		if (!$jsonrpc->sendRequest('mySensors::deamonRunning', array())) {
+			throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
+		}
+		$statusNode = $jsonrpc->getResult();
+		$statusNode = True;
 	}
-    $statusNode = mySensors::deamonRunning();
-	if ($statusGateway != 1 || $statusNode != 1) {
+    $statusNode = True;
+	if (!$statusGateway || !$statusNode) {
 		echo '<div class="alert alert-danger"><b>Connexion : </b>';
 	} else {
 		echo '<div class="alert alert-success"><b>Connexion : </b>';
 	}
-    if ($statusNode != 1) {
+    if (!$statusNode) {
 		echo 'Le service mySensors (nodejs) n\'est pas démarré ';
 	} else {
 		echo 'Le service mySensors (nodejs) est en marche ';
 	}
-	if ($statusGateway != 1) {
+	if (!$statusGateway) {
 		echo 'et la Gateway est non connectée</div>';
 	} else {
 		$libVer = config::byKey('gateLib','mySensors');
@@ -83,7 +83,7 @@ if (!isConnect()) {
 <div id="div_local" class="form-group">
             <label class="col-lg-4 control-label">Adresse de la Gateway :</label>
             <div class="col-lg-4">
-                <select id="select_port" class="configKey form-control" data-l1key="nodeGateway">
+                <select id="select_port" style="margin-top:5px;display:none" class="configKey form-control" data-l1key="nodeGateway">
                     <?php
                     foreach (jeedom::getUsbMapping() as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
@@ -158,6 +158,9 @@ if (!isConnect()) {
 			var options = '';
 			for (var i in data.result) {
 				options += '<option value='+i+'>'+i+'('+data.result[i]+')</option>';
+			}
+			if (options == '') {
+				$("#serial_port").show();
 			}
 			options += '<option value="serie">Port série non listé (port manuel)</option>';
 			$("select#select_port").html(options);

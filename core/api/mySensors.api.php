@@ -27,22 +27,22 @@
 
     if ($jsonrpc->getMethod() == 'getConfig') {
        log::add('mySensors','debug','Récupération de la configuration')
-       mySensors::getConfig();
+       $jsonrpc->makeSuccess(mySensors::getConfig());
     }
     
     if ($jsonrpc->getMethod() == 'deamonRunning') {
        log::add('mySensors','debug','Vérification du statut du service')
-       mySensors::deamonRunning();
+       $jsonrpc->makeSuccess(mySensors::deamonRunning());
     }
     
     if ($jsonrpc->getMethod() == 'saveNode') {
        log::add('mySensors','debug','Envoi de la conf aux esclaves')
-       mySensors::saveNode();
+       $jsonrpc->makeSuccess(mySensors::saveNode());
     }
     
      if ($jsonrpc->getMethod() == 'listUSB') {
        log::add('mySensors','debug','Récupération des périphériques USB')
-       mySensors::listUSB();
+       $jsonrpc->makeSuccess(mySensors::listUSB());
     }
 
     throw new Exception(__('Aucune methode correspondante pour le plugin mySensors : ' . $jsonrpc->getMethod(), __FILE__));
