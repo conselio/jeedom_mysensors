@@ -40,7 +40,7 @@ if (!isConnect()) {
 			//throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
 		//}
 		//$statusNode = $jsonrpc->getResult();
-		$statusNode = 1;
+		$statusNode = true;
 	}
     $statusNode = mySensors::deamonRunning();
 	if ($statusGateway != 1 || $statusNode != 1) {
@@ -67,6 +67,7 @@ if (!isConnect()) {
             <label class="col-lg-4 control-label">Connexion à la Gateway : </label>
             <div class="col-lg-4">
 				<select class="configKey form-control" id="select_mode" data-l1key="nodeHost">
+					<option value="none">Aucun</option>
                     <option value="master">Jeedom maître</option>
                     <?php
                     foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
@@ -91,7 +92,7 @@ if (!isConnect()) {
                     ?>
                 </select>
 				
-				<input id="serial_port" class="configKey form-control" data-l1key="nodeSerial" style="margin-top:5px" placeholder="ex : /dev/ttyS0"/>
+				<input id="serial_port" class="configKey form-control" data-l1key="nodeSerial" style="margin-top:5px;display:none" placeholder="ex : /dev/ttyS0"/>
 				<input id="network_address" class="configKey form-control" data-l1key="nodeNetwork" style="margin-top:5px;display:none" placeholder="ex : 192.168.1.1:5003"/>
 				            </div>
         </div>
