@@ -43,8 +43,7 @@ try {
     }
     
     if (init('action') == 'getUSB') {
-		$return = "";
-        if (init('id') == 'master' || init('id') == 'network') {
+        if (init('id') == 'master' || init('id') == 'network' || init('id') == 'none') {
             ajax::success(jeedom::getUsbMapping());
         } else {
 			$jeeNetwork = jeeNetwork::byId(init('id'));

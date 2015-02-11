@@ -149,7 +149,6 @@ if (!isConnect()) {
                 return;
             }
 			var options = $("#select_port");
-			options.reset();
 			for (var i in data.result) {
 				options.append('<option value='+i+'>'+i+'('+data.result[i]+')</option>');
 			}
