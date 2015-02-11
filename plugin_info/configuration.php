@@ -148,11 +148,12 @@ if (!isConnect()) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-			var options = $("#select_port");
+			var options = '';
 			for (var i in data.result) {
-				options.append('<option value='+i+'>'+i+'('+data.result[i]+')</option>');
+				options += '<option value='+i+'>'+i+'('+data.result[i]+')</option>';
 			}
-			options.append('<option value="serie">Port série non listé (port manuel)</option>');
+			options += '<option value="serie">Port série non listé (port manuel)</option>';
+			$("select#select_port").html(options);
         }
     });							
 							}
