@@ -126,10 +126,12 @@ if (!isConnect()) {
 						if($( this ).val() == "network"){
 							$("#network_address").show();
 							$("#select_port").hide();
+							$("#serial_port").hide();
 						}
 						else{
 							$("#select_port").show();							
 							$("#network_address").hide();
+							$("#serial_port").hide();
 
     $.ajax({// fonction permettant de faire de l'ajax
         type: "POST", // méthode de transmission des données au fichier php
