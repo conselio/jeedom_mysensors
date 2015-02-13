@@ -201,7 +201,11 @@ class mySensors extends eqLogic {
 		if (config::byKey('jeeNetwork::mode') == 'slave') { //Je suis l'esclave
 			$url  = config::byKey('jeeNetwork::master::ip') . '/core/api/jeeApi.php?api=' . config::byKey('jeeNetwork::master::apikey');
 		} else {
-			$url = 'http://127.0.0.1' . config::byKey('internalPort') . config::byKey('internalComplement') . '/core/api/jeeApi.php?api=' . config::byKey('api');
+			if (!config::byKey('internalPort')) {
+				$url = 'http://127.0.0.1' . config::byKey('internalComplement') . '/core/api/jeeApi.php?api=' . config::byKey('api');
+			} else {
+				$url = 'http://127.0.0.1:' . config::byKey('internalPort') . config::byKey('internalComplement') . '/core/api/jeeApi.php?api=' . config::byKey('api');
+			}
 		}
 	
 	$inclusion = config::byKey('include_mode', 'mySensors');

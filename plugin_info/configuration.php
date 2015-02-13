@@ -30,25 +30,22 @@ if (!isConnect()) {
     <?php
     $statusGateway = config::byKey('gateway','mySensors');
     $nodeHost = config::byKey('nodeHost','mySensors');
-    $nodeHost = 1;
     if (!$nodeHost || $nodeHost == "master" || $nodeHost == "network") {
 		$statusNode = mySensors::deamonRunning();
 	} else {
-		$jeeNetwork = jeeNetwork::byId(1);
+		$jeeNetwork = jeeNetwork::byId($nodeHost);
 		$jsonrpc = $jeeNetwork->getJsonRpc();
-		if (!$jsonrpc->sendRequest('mySensors::deamonRunning', array('plugin' => 'mySensors'))) {
+		if (!$jsonrpc->sendRequest('deamonRunning', array('plugin' => 'mySensors'))) {
 			throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
 		}
 		$statusNode = $jsonrpc->getResult();
-		$statusNode = True;
 	}
-    $statusNode = True;
-	if (!$statusGateway || !$statusNode) {
+	if (!$statusGateway || $statusNode != 'ok' ) {
 		echo '<div class="alert alert-danger"><b>Connexion : </b>';
 	} else {
 		echo '<div class="alert alert-success"><b>Connexion : </b>';
 	}
-    if (!$statusNode) {
+    if ($statusNode != 'ok' ) {
 		echo 'Le service mySensors (nodejs) n\'est pas démarré ';
 	} else {
 		echo 'Le service mySensors (nodejs) est en marche ';

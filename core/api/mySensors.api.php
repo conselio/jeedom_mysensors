@@ -32,6 +32,11 @@
 		   $jsonrpc->makeSuccess('ko');
 		}
     }
+    
+    if ($jsonrpc->getMethod() == 'saveConfig') {
+       log::add('mySensors','debug','Vérification du statut du service');
+		mySensors::stopDeamon();
+    }   
 
     throw new Exception(__('Aucune methode correspondante pour le plugin mySensors : ' . $jsonrpc->getMethod(), __FILE__));
     ?>
