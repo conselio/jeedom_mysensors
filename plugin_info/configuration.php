@@ -36,7 +36,7 @@ if (!isConnect()) {
 	} else {
 		$jeeNetwork = jeeNetwork::byId(1);
 		$jsonrpc = $jeeNetwork->getJsonRpc();
-		if (!$jsonrpc->sendRequest('mySensors::deamonRunning', array())) {
+		if (!$jsonrpc->sendRequest('mySensors::deamonRunning', array('plugin' => 'mySensors'))) {
 			throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
 		}
 		$statusNode = $jsonrpc->getResult();
