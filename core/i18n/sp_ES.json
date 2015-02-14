@@ -1,0 +1,27 @@
+{
+    "plugins\/mySensors\/desktop\/php\/mySensors.php": {
+        "Ajouter un équipement": "Ajouter un équipement",
+        "Mes mySensors": "Mes mySensors",
+        "Général": "Général",
+        "Nom du Node": "Nom du Node",
+        "Nom de l'équipement mySensors": "Nom de l'équipement mySensors",
+        "Délai max entre 2 messages": "Délai max entre 2 messages",
+        "Commentaire": "Commentaire",
+        "Informations": "Informations",
+        "ID du Node": "ID du Node",
+        "Version mySensors": "Version mySensors",
+        "Nom du Sketch": "Nom du Sketch",
+        "Version du Sketch": "Version du Sketch",
+        "Dernière Activité": "Dernière Activité",
+        "Documentation": "Documentation",
+        "Redémarrer le Node": "Redémarrer le Node",
+        "Paramètres du Sketch": "Paramètres du Sketch",
+        "mySensors": "mySensors",
+        "Ajouter une info": "Ajouter une info",
+        "Ajouter une commande": "Ajouter une commande",
+        "Sous-Type": "Sous-Type",
+        "N° Sensor": "N° Sensor",
+        "Unité": "Unité",
+        "Paramètres": "Paramètres"
+    }
+}
