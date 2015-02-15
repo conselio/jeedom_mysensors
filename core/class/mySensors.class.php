@@ -158,6 +158,7 @@ class mySensors extends eqLogic {
         log::add('mySensors', 'info', 'Lancement du démon mySensors');
         
         if (config::byKey('nodeRun', 'mySensors', 0) == '1') { //je suis le maitre
+			$nodeHost = config::byKey('nodeHost', 'mySensors');
 			$nodeGateway = config::byKey('nodeGateway', 'mySensors');
 			$nodeSerial = config::byKey('nodeSerial', 'mySensors');
 			$nodeNetwork = config::byKey('nodeNetwork', 'mySensors');
@@ -180,16 +181,19 @@ class mySensors extends eqLogic {
 		$gatePort = "0";
 		$inclusion = $include_mode;
         
-		if($nodeGateway == "serie") {
-			$usbGateway = $nodeSerial;
-		} else if($nodeGateway == "network") {
+        if($nodeHost == "network") {
 			$gateMode = "Network";
 			$netAd = explode(":",$nodeNetwork);
 			$usbGateway = $netAd[0];
 			$gatePort = $netAd[1];	
 		} else {
-			$usbGateway = jeedom::getUsbMapping($nodeGateway);
+			if($nodeGateway == "serie") {
+				$usbGateway = $nodeSerial;
+			} else {
+				$usbGateway = jeedom::getUsbMapping($nodeGateway);
+			}
 		}
+		
 		
 		log::add('mySensors','info','Configuration utilisée : Gateway ' . $usbGateway . ' Mode ' . $gateMode . ' Port ' . $gatePort . ' Inclusion ' . $inclusion);		
 		

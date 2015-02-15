@@ -28,9 +28,14 @@ if (!isConnect()) {
 <form class="form-horizontal">
     <fieldset>
     <?php
+    
+    if (config::byKey('jeeNetwork::mode') == 'slave') {
+		echo '<div class="alert alert-danger"><b>La configuration du plugin se fait uniquement sur le Jeedom principal</b></div>';
+	} else {
+    
     $statusGateway = config::byKey('gateway','mySensors');
     $nodeHost = config::byKey('nodeHost','mySensors');
-    if (!$nodeHost || $nodeHost == "master" || $nodeHost == "network") {
+    if (!$nodeHost || $nodeHost == "master" || $nodeHost == "network" || $nodeHost == "none" ) {
 		$statusNode = mySensors::deamonRunning();
 	} else {
 		$jeeNetwork = jeeNetwork::byId($nodeHost);
@@ -59,19 +64,21 @@ if (!isConnect()) {
 		}
 		echo 'et la Gateway est connectée (version mySensors ' . $libVer . ')</div>';
 	}
-    ?>
-        <div id=globalSensors class="form-group">
+	
+
+    
+    echo '    <div id=globalSensors class="form-group">
             <label class="col-lg-4 control-label">Connexion à la Gateway : </label>
             <div class="col-lg-4">
 				<select class="configKey form-control" id="select_mode" data-l1key="nodeHost">
 					<option value="none">Aucun</option>
-                    <option value="master">Jeedom maître</option>
-                    <?php
+                    <option value="master">Jeedom maître</option>';
+                    
                     foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
 						echo '<option value="' . $jeeNetwork->getId(). '">Jeedom esclave ' . $jeeNetwork->getName() . ' (' . $jeeNetwork->getId(). ')</option>';
 					}
-                    ?>
-                    <option value="network">Gateway Réseau</option>
+                    
+    echo'                <option value="network">Gateway Réseau</option>
                 </select>
             </div>
         </div>
@@ -80,14 +87,14 @@ if (!isConnect()) {
 <div id="div_local" class="form-group">
             <label class="col-lg-4 control-label">Adresse de la Gateway :</label>
             <div class="col-lg-4">
-                <select id="select_port" style="margin-top:5px;display:none" class="configKey form-control" data-l1key="nodeGateway">
-                    <?php
+                <select id="select_port" style="margin-top:5px;display:none" class="configKey form-control" data-l1key="nodeGateway">';
+                    
                     foreach (jeedom::getUsbMapping() as $name => $value) {
                         echo '<option value="' . $name . '">' . $name . ' (' . $value . ')</option>';
                     }
 					echo '<option value="serie">Port série non listé (port manuel)</option>';
-                    ?>
-                </select>
+                    
+       echo '         </select>
 				
 				<input id="serial_port" class="configKey form-control" data-l1key="nodeSerial" style="margin-top:5px;display:none" placeholder="ex : /dev/ttyS0"/>
 				<input id="network_address" class="configKey form-control" data-l1key="nodeNetwork" style="margin-top:5px;display:none" placeholder="ex : 192.168.1.1:5003"/>
@@ -104,7 +111,9 @@ if (!isConnect()) {
 			</div>
 		</div>
 				
-				<div class="alert alert-success"><b>Sauvegarde : </b>La sauvegarde de la configuration redémarre automatiquement le service, il faut attendre environ 1 minute pour qu'il soit joignable</div> 
+				<div class="alert alert-success"><b>Sauvegarde : </b>La sauvegarde de la configuration redémarre automatiquement le service, il faut attendre environ 1 minute pour qu\'il soit joignable</div>' ;
+			}	
+				?>
 				
 				<script>
 				$( "#select_port" ).change(function() {
