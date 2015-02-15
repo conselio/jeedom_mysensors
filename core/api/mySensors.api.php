@@ -25,7 +25,7 @@
     $params = $jsonrpc->getParams();
     
     if ($jsonrpc->getMethod() == 'deamonRunning') {
-       log::add('mySensors','debug','Vérification du statut du service');
+       log::add('mySensors','info','Vérification du statut du service');
        if (mySensors::deamonRunning()) {
 		   $jsonrpc->makeSuccess('ok');
        } else {
@@ -34,9 +34,17 @@
     }
     
     if ($jsonrpc->getMethod() == 'saveConfig') {
-       log::add('mySensors','debug','Vérification du statut du service');
-		mySensors::stopDeamon();
+		$nodeRun = $params['nodeRun'];
+       log::add('mySensors','info','Sauvegarde de la configuration' . $nodeRun);
+       mySensors::saveConfig($nodeRun);
+       mySensors::stopDeamon();
+       $jsonrpc->makeSuccess('ok');
     }   
+    
+    if ($jsonrpc->getMethod() == 'getConfig') {
+       log::add('mySensors','info','Récupération de la configuration');
+       $jsonrpc->makeSuccess(array('nodeHost' => config::byKey('nodeHost', 'mySensors', 0), 'nodeGateway' => config::byKey('nodeGateway', 'mySensors', 0), 'nodeSerial' => config::byKey('nodeSerial', 'mySensors', 0), 'nodeNetwork' => config::byKey('nodeNetwork', 'mySensors', 0), 'include_mode' => config::byKey('include_mode', 'mySensors', 0)));
+    }      
 
     throw new Exception(__('Aucune methode correspondante pour le plugin mySensors : ' . $jsonrpc->getMethod(), __FILE__));
     ?>

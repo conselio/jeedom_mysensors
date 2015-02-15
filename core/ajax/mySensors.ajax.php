@@ -26,7 +26,26 @@ try {
 
     
     if (init('action') == 'postSave') {
-        mySensors::stopDeamon();
+					$nodeHost = config::byKey('nodeHost', 'mySensors');
+          foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
+						$jsonrpc = $jeeNetwork->getJsonRpc();
+						if ($jeeNetwork->getId() == $nodeHost) {
+							if (!$jsonrpc->sendRequest('saveConfig', array('plugin' => 'mySensors', 'nodeRun' => '1'))) {
+								throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
+							}
+						} else {
+							if (!$jsonrpc->sendRequest('saveConfig', array('plugin' => 'mySensors', 'nodeRun' => '0'))) {
+								throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
+							}							
+						}
+					}
+					if ($nodeHost == 'master' || $nodeHost == 'network') {
+						config::save('nodeRun', '1',  'mySensors');
+						mySensors::stopDeamon();
+					} else {
+						config::save('nodeRun', '0',  'mySensors');
+						mySensors::stopDeamon();
+					}
         ajax::success();
     }
 

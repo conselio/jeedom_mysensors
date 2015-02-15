@@ -147,29 +147,10 @@ class mySensors extends eqLogic {
     /************************Methode static*************************** */
 
 	public static function cron() {
-        
-        if (config::byKey('externalDeamon', 'mySensors', 0) != 2) {
-		$modem_serie_addr = config::byKey('usbGateway', 'mySensors');
-		log::add('mySensors', 'info', $modem_serie_addr);
-		if($modem_serie_addr == "serie") {
-			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
-		} else {
-			if ($modem_serie_addr == "network") {
-				$usbGateway = config::byKey('gateway_addr', 'mySensors');
-				log::add('mySensors', 'info', $usbGateway);
-			} else {
-				$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
-			}
-		}
-
-		if ($usbGateway != '') {
-            		if (!self::deamonRunning()) {
+        if (config::byKey('nodeRun', 'mySensors', 0) == '1') {
+            if (!self::deamonRunning()) {
                 		self::runDeamon();
             		}
-            	message::removeAll('mySensors', 'noMySensorsPort');
-        	} else {
-            		log::add('mySensors', 'error', __('Le port du mySensors est vide ou n\'éxiste pas', __FILE__), 'noMySensorsPort');
-        	}
         }
     }
 	
@@ -252,6 +233,7 @@ class mySensors extends eqLogic {
 		}
 		
         exec('kill ' . $pid);
+        log::add('mySensors', 'info', 'Arrêt du service mySensors');
         $check = self::deamonRunning();
         $retry = 0;
         while ($check) {
@@ -275,16 +257,14 @@ class mySensors extends eqLogic {
                 sleep(1);
             }
         }
-		config::save(gateway, '0',  mySensors);
+		config::save('gateway', '0',  'mySensors');
 
         return self::deamonRunning();
     }
     
- 	public static function saveDaemon() {
-		$status = init('status');
-		config::save(running, $status,  mySensors);
-		
-		self::stopDaemon();
+ 	public static function saveConfig( $config ) {
+		config::save('nodeRun', $config,  'mySensors');
+	    log::add('mySensors','info','Sauvegarde de la configuration' . $config);
     }   
 	
 	/**
@@ -306,8 +286,9 @@ class mySensors extends eqLogic {
 	
 	
 	public static function sendToController( $destination, $sensor, $command, $acknowledge, $type, $payload ) {
-		if (config::byKey('externalDeamon', 'mySensors', 0) == 2) {
-			$jeeSlave = jeeNetwork::byId(config::byKey('jeeSlave', 'mySensors'));
+		$nodeHost = config::byKey('nodeHost', 'mySensors', 0);
+		if ($nodeHost != 'master' && $nodeHost != 'network') {
+			$jeeSlave = jeeNetwork::byId($nodeHost);
 			$urlNode = getIpFromString($jeeSlave->getIp());
 		} else {
 			$urlNode = "127.0.0.1";
@@ -392,7 +373,7 @@ class mySensors extends eqLogic {
 	
 	public static function saveGateway() {
 		$status = init('status');
-		config::save(gateway, $status,  mySensors);
+		config::save('gateway', $status,  'mySensors');
 	}	
 
 	public static function saveSketchVersion() {
@@ -413,8 +394,8 @@ class mySensors extends eqLogic {
 		$nodeid = init('id');
 		$value = init('value');
 		if ($nodeid == '0') {
-			config::save(gateLib, $value,  mySensors);
-			log::add('mySensors', 'info', 'Gateway Lib ' . $value . config::byKey(gateLib,mySensors));			
+			config::save('gateLib', $value,  'mySensors');
+			log::add('mySensors', 'info', 'Gateway Lib ' . $value . config::byKey('gateLib','mySensors'));			
 		}
 		$elogic = self::byLogicalId($nodeid, 'mySensors');
 		if (is_object($elogic)) { 
