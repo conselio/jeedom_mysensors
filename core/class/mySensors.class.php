@@ -147,7 +147,7 @@ class mySensors extends eqLogic {
     /************************Methode static*************************** */
 
 	public static function cron() {
-        if (config::byKey('nodeRun', 'mySensors', 0) == '1') {
+        if (config::byKey('nodeRun', 'mySensors', 0) != '0') {
             if (!self::deamonRunning()) {
                 		self::runDeamon();
             		}
@@ -157,29 +157,47 @@ class mySensors extends eqLogic {
 	public static function runDeamon() {
         log::add('mySensors', 'info', 'Lancement du démon mySensors');
         
-		$modem_serie_addr = config::byKey('usbGateway', 'mySensors');
-		if($modem_serie_addr == "serie") {
-			$usbGateway = config::byKey('modem_serie_addr', 'mySensors');
+        if (config::byKey('nodeRun', 'mySensors', 0) == '1') { //je suis le maitre
+			$nodeGateway = config::byKey('nodeGateway', 'mySensors');
+			$nodeSerial = config::byKey('nodeSerial', 'mySensors');
+			$nodeNetwork = config::byKey('nodeNetwork', 'mySensors');
+			$include_mode = config::byKey('include_mode', 'mySensors');
+			log::add('mySensors','info','Récupération de la configuration : Host ' . $nodeHost . ' Port ' . $nodeGateway . ' Serie ' . $nodeSerial . ' Network ' . $nodeNetwork . ' Inclusion ' . $include_mode);
+		} else if (config::byKey('nodeRun', 'mySensors', 0) == '2') { //je suis esclave
+			$jsonrpc = jeeNetwork::getJsonRpcMaster();
+			$jsonrpc->sendRequest('getConfig',array('plugin' => 'mySensors'));
+			$result = $jsonrpc->getResult();
+			$nodeGateway = $result['nodeGateway'];
+			$nodeSerial = $result['nodeSerial'];
+			$nodeNetwork = $result['nodeNetwork'];
+			$include_mode = $result['include_mode'];	
+			log::add('mySensors','info','Récupération de la configuration : Port ' . $nodeGateway . ' Serie ' . $nodeSerial . ' Network ' . $nodeNetwork . ' Inclusion ' . $include_mode);		
 		} else {
-			$usbGateway = jeedom::getUsbMapping(config::byKey('usbGateway', 'mySensors'));
+			return false;
 		}
 		
-		if($modem_serie_addr == "network") {
+		$gateMode = "Serial";
+		$gatePort = "0";
+		$inclusion = $include_mode;
+        
+		if($nodeGateway == "serie") {
+			$usbGateway = $nodeSerial;
+		} else if($nodeGateway == "network") {
 			$gateMode = "Network";
-			$netAd = explode(":",config::byKey('gateway_addr', 'mySensors'));
+			$netAd = explode(":",$nodeNetwork);
 			$usbGateway = $netAd[0];
 			$gatePort = $netAd[1];	
-			log::add('mySensors', 'info', $usbGateway);
 		} else {
-			$gateMode = "Serial";
-			$gatePort = "0";	
+			$usbGateway = jeedom::getUsbMapping($nodeGateway);
 		}
+		
+		log::add('mySensors','info','Configuration utilisée : Gateway ' . $usbGateway . ' Mode ' . $gateMode . ' Port ' . $gatePort . ' Inclusion ' . $inclusion);		
 		
 		if ($usbGateway == '' ) {
 			throw new Exception(__('Le port : ', __FILE__) . $port . __(' n\'éxiste pas', __FILE__));
 		}
 		
-		if (config::byKey('jeeNetwork::mode') == 'slave') { //Je suis l'esclave
+		if (config::byKey('nodeRun', 'mySensors', 0) == '2') { //Je suis l'esclave
 			$url  = config::byKey('jeeNetwork::master::ip') . '/core/api/jeeApi.php?api=' . config::byKey('jeeNetwork::master::apikey');
 		} else {
 			if (!config::byKey('internalPort')) {
@@ -189,7 +207,6 @@ class mySensors extends eqLogic {
 			}
 		}
 	
-	$inclusion = config::byKey('include_mode', 'mySensors');
 	$sensor_path = realpath(dirname(__FILE__) . '/../../node');	
         $cmd = 'nice -n 19 node ' . $sensor_path . '/mysensors.js ' . $url . ' ' . $usbGateway . ' ' . $gateMode . ' ' . $gatePort . ' ' . $inclusion;
 		

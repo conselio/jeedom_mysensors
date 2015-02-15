@@ -154,7 +154,7 @@ if (!isConnect()) {
             }
 			var options = '';
 			for (var i in data.result) {
-				options += '<option value='+i+'>'+i+'('+data.result[i]+')</option>';
+				options += '<option value="'+i+'">'+i+'('+data.result[i]+')</option>';
 			}
 			if (options == '') {
 				$("#serial_port").show();

@@ -30,7 +30,7 @@ try {
           foreach (jeeNetwork::byPlugin('mySensors') as $jeeNetwork) {
 						$jsonrpc = $jeeNetwork->getJsonRpc();
 						if ($jeeNetwork->getId() == $nodeHost) {
-							if (!$jsonrpc->sendRequest('saveConfig', array('plugin' => 'mySensors', 'nodeRun' => '1'))) {
+							if (!$jsonrpc->sendRequest('saveConfig', array('plugin' => 'mySensors', 'nodeRun' => '2'))) {
 								throw new Exception($jsonrpc->getError(), $jsonrpc->getErrorCode());
 							}
 						} else {

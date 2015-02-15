@@ -42,8 +42,19 @@
     }   
     
     if ($jsonrpc->getMethod() == 'getConfig') {
-       log::add('mySensors','info','Récupération de la configuration');
-       $jsonrpc->makeSuccess(array('nodeHost' => config::byKey('nodeHost', 'mySensors', 0), 'nodeGateway' => config::byKey('nodeGateway', 'mySensors', 0), 'nodeSerial' => config::byKey('nodeSerial', 'mySensors', 0), 'nodeNetwork' => config::byKey('nodeNetwork', 'mySensors', 0), 'include_mode' => config::byKey('include_mode', 'mySensors', 0)));
+       $nodeHost = config::byKey('nodeHost', 'mySensors');
+       $nodeGateway = config::byKey('nodeGateway', 'mySensors');
+       $nodeSerial = config::byKey('nodeSerial', 'mySensors');
+       if ($nodeSerial == '') {
+		   $nodeSerial == '0';
+		}
+       $nodeNetwork = config::byKey('nodeNetwork', 'mySensors');
+       if ($nodeNetwork == '') {
+		   $nodeNetwork == '0';
+		}
+       $include_mode = config::byKey('include_mode', 'mySensors');
+       log::add('mySensors','info','Récupération de la configuration : Host ' . $nodeHost . ' Port ' . $nodeGateway . ' Serie ' . $nodeSerial . ' Network ' . $nodeNetwork . ' Inclusion ' . $include_mode);
+       $jsonrpc->makeSuccess(array('nodeHost' => $nodeHost, 'nodeGateway' => $nodeGateway, 'nodeSerial' => $nodeSerial, 'nodeNetwork' => $nodeNetwork, 'include_mode' => $include_mode));
     }      
 
     throw new Exception(__('Aucune methode correspondante pour le plugin mySensors : ' . $jsonrpc->getMethod(), __FILE__));
