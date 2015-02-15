@@ -2,9 +2,10 @@
 *en cours* Ajout de la fonction reboot du node
 *en cours* Ajout de la fonctionnalité OTA
 
-==== Version 1.9.8
+==== Version 1.9.9
 
 Refonte de la page de configuration du plugin
+Prise en compte d'un port non standard sur le jeedom principal (retour d'installation sur Synology)
 
 ==== Version 1.9.8
 
