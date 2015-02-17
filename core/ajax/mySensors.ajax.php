@@ -69,9 +69,13 @@ try {
             ajax::success($jeeNetwork->sendRawRequest('jeedom::getUsbMapping'));
 		}
     }
+    
+    if (init('action') == 'confUSB') {
+        ajax::success(config::byKey('nodeGateway', 'mySensors'));
+    }
 
     if (init('action') == 'restartEq') {
-        ajax::success(mySensors::sendToController( '32', '0', '13', '0', '3', '0' ));
+        ajax::success(mySensors::sendToController( init('id'), '0', '3', '0', '13', '0' ));
     }    
 
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));

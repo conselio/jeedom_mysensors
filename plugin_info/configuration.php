@@ -171,7 +171,9 @@ if (!isConnect()) {
 			options += '<option value="serie">Port série non listé (port manuel)</option>';
 			$("select#select_port").html(options);
         }
-    });							
+    });				
+
+        			
 							}
 						});
 				});

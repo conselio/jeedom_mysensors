@@ -199,7 +199,7 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
         <a class="btn btn-default btn-sm" id="bt_addmySensorsAction"><i class="fa fa-plus-circle"></i> {{Ajouter une commande}}</a><br/><br/>
         		<script>
 				$('#bt_restartEq').on('click', function () {
-					nodeId = document.getElementById('nodeId');
+					//nodeId = document.getElementById('nodeId');
 					$.ajax({// fonction permettant de faire de l'ajax
 						type: "POST", // methode de transmission des données au fichier php
 						url: "plugins/mySensors/core/ajax/mySensors.ajax.php", // url du fichier php
@@ -217,7 +217,6 @@ sendVarToJS('mySensorDico', mySensors::$_dico);
 								return;
 							}
 						$('#div_alert').showAlert({message: 'Le node a été relancé', level: 'success'});
-						$('#ul_plugin .li_plugin[data-plugin_id=mySensors]').click();
 						}
 					});
 				});

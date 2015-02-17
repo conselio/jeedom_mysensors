@@ -2,10 +2,14 @@
 *en cours* Ajout de la fonction reboot du node
 *en cours* Ajout de la fonctionnalité OTA
 
+* bug créé : mauvais périphérique sélectionné par défaut
+* champ série apparait en plus du champ réseau
+
 ==== Version 1.9.9
 
 Refonte de la page de configuration du plugin
 Prise en compte d'un port non standard sur le jeedom principal (retour d'installation sur Synology)
+Passage à nodejs en binaire au lieu d'un appel de node
 
 ==== Version 1.9.8
 

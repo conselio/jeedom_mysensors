@@ -212,7 +212,7 @@ class mySensors extends eqLogic {
 		}
 	
 	$sensor_path = realpath(dirname(__FILE__) . '/../../node');	
-        $cmd = 'nice -n 19 node ' . $sensor_path . '/mysensors.js ' . $url . ' ' . $usbGateway . ' ' . $gateMode . ' ' . $gatePort . ' ' . $inclusion;
+        $cmd = 'nice -n 19 nodejs ' . $sensor_path . '/mysensors.js ' . $url . ' ' . $usbGateway . ' ' . $gateMode . ' ' . $gatePort . ' ' . $inclusion;
 		
         log::add('mySensors', 'info', 'Lancement démon mySensors : ' . $cmd);
         $result = exec('nohup ' . $cmd . ' >> ' . log::getPathToLog('mySensors') . ' 2>&1 &');
